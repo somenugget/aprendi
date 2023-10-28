@@ -1,0 +1,42 @@
+<%= form_with(model: study_set) do |form| %>
+  <% if study_set.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(study_set.errors.count, "error") %> prohibited this study_set from being saved:</h2>
+
+      <ul>
+        <% study_set.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :folder_id, style: "display: block" %>
+    <%= form.text_field :folder_id %>
+  </div>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :term_lang, style: "display: block" %>
+    <%= form.text_field :term_lang %>
+  </div>
+
+  <div>
+    <%= form.label :definition_lang, style: "display: block" %>
+    <%= form.text_field :definition_lang %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

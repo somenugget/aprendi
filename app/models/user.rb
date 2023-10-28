@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :omniauthable, omniauth_providers: %i[google_oauth2 facebook twitter]
 
   has_many :authorizations, dependent: :destroy
+  has_many :folders, dependent: :destroy
 
   class << self
     def from_omniauth(auth)

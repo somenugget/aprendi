@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Study configs</h1>
+
+<div id="study_configs">
+  <% @study_configs.each do |study_config| %>
+    <%= render study_config %>
+    <p>
+      <%= link_to "Show this study config", study_config %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New study config", new_study_config_path %>

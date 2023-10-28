@@ -1,0 +1,47 @@
+<%= form_with(model: term_progress) do |form| %>
+  <% if term_progress.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(term_progress.errors.count, "error") %> prohibited this term_progress from being saved:</h2>
+
+      <ul>
+        <% term_progress.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :term_id, style: "display: block" %>
+    <%= form.text_field :term_id %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :learnt, style: "display: block" %>
+    <%= form.check_box :learnt %>
+  </div>
+
+  <div>
+    <%= form.label :tests_count, style: "display: block" %>
+    <%= form.number_field :tests_count %>
+  </div>
+
+  <div>
+    <%= form.label :success_percentage, style: "display: block" %>
+    <%= form.number_field :success_percentage %>
+  </div>
+
+  <div>
+    <%= form.label :next_test_date, style: "display: block" %>
+    <%= form.datetime_field :next_test_date %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

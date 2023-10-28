@@ -1,0 +1,32 @@
+<%= form_with(model: study_config) do |form| %>
+  <% if study_config.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(study_config.errors.count, "error") %> prohibited this study_config from being saved:</h2>
+
+      <ul>
+        <% study_config.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :configurable_id, style: "display: block" %>
+    <%= form.text_field :configurable_id %>
+  </div>
+
+  <div>
+    <%= form.label :term_lang, style: "display: block" %>
+    <%= form.text_field :term_lang %>
+  </div>
+
+  <div>
+    <%= form.label :definition_lang, style: "display: block" %>
+    <%= form.text_field :definition_lang %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

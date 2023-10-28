@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Term progresses</h1>
+
+<div id="term_progresses">
+  <% @term_progresses.each do |term_progress| %>
+    <%= render term_progress %>
+    <p>
+      <%= link_to "Show this term progress", term_progress %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New term progress", new_term_progress_path %>

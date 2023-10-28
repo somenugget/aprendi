@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :term_progresses
+  resources :test_steps
+  resources :tests
+  resources :terms
+  resources :study_configs
+  resources :study_sets
+  resources :folders
   root 'home#index'
 
   get :auth, to: 'auth#index'

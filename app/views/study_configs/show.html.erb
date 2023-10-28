@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @study_config %>
+
+<div>
+  <%= link_to "Edit this study config", edit_study_config_path(@study_config) %> |
+  <%= link_to "Back to study configs", study_configs_path %>
+
+  <%= button_to "Destroy this study config", @study_config, method: :delete %>
+</div>

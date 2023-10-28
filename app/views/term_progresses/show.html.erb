@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @term_progress %>
+
+<div>
+  <%= link_to "Edit this term progress", edit_term_progress_path(@term_progress) %> |
+  <%= link_to "Back to term progresses", term_progresses_path %>
+
+  <%= button_to "Destroy this term progress", @term_progress, method: :delete %>
+</div>
