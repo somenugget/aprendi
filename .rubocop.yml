@@ -1,0 +1,32 @@
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+
+Layout/LineLength:
+  Exclude:
+    - 'config/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
