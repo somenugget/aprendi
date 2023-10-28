@@ -1,12 +1,5 @@
-<div id="<%= dom_id folder %>">
-  <p>
-    <strong>User:</strong>
-    <%= folder.user_id %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
+<%= link_to folder, id: dom_id(folder), class: "border-2 h-32 p-4 rounded-xl block hover:bg-zinc-50 transition" do %>
+  <h4 class="font-semibold">
     <%= folder.name %>
-  </p>
-
-</div>
+  </h4>
+<% end %>

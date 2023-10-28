@@ -21,7 +21,7 @@ class FoldersController < ApplicationController
 
   # POST /folders
   def create
-    @folder = Folder.new(folder_params)
+    @folder = current_user.folders.build(folder_params)
 
     if @folder.save
       redirect_to @folder, notice: "Folder was successfully created."
@@ -48,11 +48,11 @@ class FoldersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_folder
-      @folder = Folder.find(params[:id])
+      @folder = current_user.folders.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def folder_params
-      params.require(:folder).permit(:user_id, :name)
+      params.require(:folder).permit(:name)
     end
 end
