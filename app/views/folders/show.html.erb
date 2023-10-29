@@ -18,10 +18,8 @@
   </div>
 </div>
 
-<div>
+<div class="grid grid-cols-3 gap-3">
   <% @folder.study_sets.each do |study_set| %>
-    <div>
-      <%= link_to study_set.name, folder_study_set_path(@folder, study_set) %>
-    </div>
+    <%= render partial: 'study_sets/card', locals: { study_set: study_set, folder: @folder } %>
   <% end %>
 </div>

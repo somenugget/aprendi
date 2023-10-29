@@ -7,12 +7,8 @@
         </div>
         <div class="hidden md:block">
           <div class="ml-10 flex items-baseline space-x-4">
-            <!-- Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" -->
-            <a href="#" class="bg-indigo-700 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-            <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md px-3 py-2 text-sm font-medium">Team</a>
-            <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md px-3 py-2 text-sm font-medium">Projects</a>
-            <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md px-3 py-2 text-sm font-medium">Calendar</a>
-            <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 rounded-md px-3 py-2 text-sm font-medium">Reports</a>
+            <%= link_to 'Dashboard', dashboard_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'dashboard', action: 'index')) %>
+            <%= link_to 'Folders', folders_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'folders')) %>
           </div>
         </div>
       </div>
@@ -72,12 +68,8 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="hidden md:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-      <!-- Current: "bg-indigo-700 text-white", Default: "text-white hover:bg-indigo-500 hover:bg-opacity-75" -->
-      <a href="#" class="bg-indigo-700 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
-      <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md px-3 py-2 text-base font-medium">Team</a>
-      <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md px-3 py-2 text-base font-medium">Projects</a>
-      <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
-      <a href="#" class="text-white hover:bg-indigo-500 hover:bg-opacity-75 block rounded-md px-3 py-2 text-base font-medium">Reports</a>
+      <%= link_to 'Dashboard', dashboard_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'dashboard', action: 'index')) %>
+      <%= link_to 'Folders', folders_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'folders')) %>
     </div>
     <div class="border-t border-indigo-700 pb-3 pt-4">
       <div class="flex items-center px-5">
