@@ -1,27 +1,17 @@
 <div id="<%= dom_id study_set %>">
   <p>
-    <strong>User:</strong>
-    <%= study_set.user_id %>
-  </p>
-
-  <p>
-    <strong>Folder:</strong>
-    <%= study_set.folder_id %>
-  </p>
-
-  <p>
     <strong>Name:</strong>
     <%= study_set.name %>
   </p>
 
   <p>
     <strong>Term lang:</strong>
-    <%= study_set.term_lang %>
+    <%= study_set.study_config.term_lang %>
   </p>
 
   <p>
     <strong>Definition lang:</strong>
-    <%= study_set.definition_lang %>
+    <%= study_set.study_config.definition_lang %>
   </p>
 
 </div>

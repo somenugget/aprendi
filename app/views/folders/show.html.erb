@@ -1,3 +1,27 @@
-<h2 class="font-bold text-xl">
-  <%= @folder.name %>
-</h2>
+<div class="flex justify-between">
+  <h2 class="font-bold text-xl">
+    <%= @folder.name %>
+  </h2>
+
+  <div class="flex gap-2">
+    <%= link_to "Add study set",
+                new_folder_study_set_path(@folder),
+                class: 'rounded-md bg-emerald-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600' %>
+    <%= link_to "Edit",
+                edit_folder_path(@folder),
+                class: 'rounded-md bg-cyan-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600' %>
+    <%= link_to "Delete",
+                folder_path(@folder),
+                class: 'rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600',
+                method: :delete,
+                data: { confirm: "Are you sure?" } %>
+  </div>
+</div>
+
+<div>
+  <% @folder.study_sets.each do |study_set| %>
+    <div>
+      <%= link_to study_set.name, folder_study_set_path(@folder, study_set) %>
+    </div>
+  <% end %>
+</div>
