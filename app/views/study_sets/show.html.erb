@@ -2,7 +2,15 @@
 
 <%= render @study_set %>
 
-<div>
+<div id="study-set_terms">
+  <% @study_set.terms.each do |term| %>
+    <%= render partial: 'terms/term_form', locals: { term: term } %>
+  <% end %>
+</div>
+
+<%= render partial: 'terms/term_form', locals: { term: @study_set.terms.build } %>
+
+<div class="mt-10">
   <%= link_to "Edit this study set", edit_folder_study_set_path(@folder, @study_set) %> |
   <%= link_to "Back to folder", @folder %>
 

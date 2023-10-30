@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   resources :term_progresses
   resources :test_steps
   resources :tests
-  resources :terms
   resources :study_configs
   resources :folders do
-    resources :study_sets
+    resources :study_sets do
+      resources :terms
+    end
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

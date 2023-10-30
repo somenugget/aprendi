@@ -1,0 +1,36 @@
+<turbo-frame id=<%= dom_id(term, 'form') %>>
+  <%= form_with(model: term, url: [term.study_set.folder, term.study_set, term]) do |form| %>
+    <div class="flex gap-3">
+      <div>
+        <%= form.label :term, style: "display: block" %>
+        <%= form.text_field :term, autofocus: term.persisted? ? nil : true %>
+        <% if term.errors[:term].any? %>
+          <div class="text-red-500">
+            <%= term.errors[:term].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.label :definition, style: "display: block" %>
+        <%= form.text_field :definition %>
+        <% if term.errors[:definition].any? %>
+          <div class="text-red-500">
+            <%= term.errors[:definition].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= form.submit class: 'btn-success' %>
+    </div>
+
+    <div class="text-red-500">
+      <% term.errors.each do |error| %>
+        <% next if error.attribute.in? [:term, :definition] %>
+        <%= error.full_message %>
+      <% end %>
+    </div>
+
+    <%= rand(1..111) %>
+  <% end %>
+</turbo-frame>

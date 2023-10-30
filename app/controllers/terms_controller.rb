@@ -1,4 +1,8 @@
 class TermsController < ApplicationController
+  include ActionView::RecordIdentifier
+
+  before_action :set_folder
+  before_action :set_study_set
   before_action :set_term, only: %i[show edit update destroy]
 
   # GET /terms
@@ -19,12 +23,17 @@ class TermsController < ApplicationController
 
   # POST /terms
   def create
-    @term = Term.new(term_params)
+    @term = @study_set.terms.build(term_params.merge(folder_id: @folder.id))
 
     if @term.save
-      redirect_to @term, notice: 'Term was successfully created.'
+      new_term = @study_set.terms.build
+      render turbo_stream: [
+        turbo_stream.append('study-set_terms', partial: 'terms/term_form', locals: { term: @term }),
+        turbo_stream.replace(dom_id(new_term, 'form'), partial: 'terms/term_form', locals: { term: new_term })
+      ]
     else
-      render :new, status: :unprocessable_entity
+      # debugger
+      render turbo_stream: turbo_stream.replace('term-form', partial: 'terms/term_form', locals: { term: @term })
     end
   end
 
@@ -53,5 +62,13 @@ class TermsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def term_params
     params.require(:term).permit(:folder_id, :study_set_id, :term, :definition)
+  end
+
+  def set_folder
+    @folder = current_user.folders.find(params[:folder_id])
+  end
+
+  def set_study_set
+    @study_set = @folder.study_sets.find(params[:study_set_id])
   end
 end

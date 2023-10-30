@@ -10,5 +10,8 @@
     "vite": "^4.5.0",
     "vite-plugin-full-reload": "^1.0.5",
     "vite-plugin-ruby": "^3.2.2"
+  },
+  "dependencies": {
+    "@hotwired/turbo-rails": "^7.3.0"
   }
 }
