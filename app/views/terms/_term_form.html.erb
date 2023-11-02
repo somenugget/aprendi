@@ -1,9 +1,9 @@
 <turbo-frame id=<%= dom_id(term, 'form') %>>
   <%= form_with(model: term, url: [term.study_set.folder, term.study_set, term]) do |form| %>
-    <div class="flex gap-3">
+    <div class="flex gap-3 mb-2">
       <div>
         <%= form.label :term, style: "display: block" %>
-        <%= form.text_field :term, autofocus: term.persisted? ? nil : true %>
+        <%= form.text_field :term %>
         <% if term.errors[:term].any? %>
           <div class="text-red-500">
             <%= term.errors[:term].join(', ') %>
@@ -30,7 +30,5 @@
         <%= error.full_message %>
       <% end %>
     </div>
-
-    <%= rand(1..111) %>
   <% end %>
 </turbo-frame>

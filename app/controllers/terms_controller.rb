@@ -39,11 +39,11 @@ class TermsController < ApplicationController
 
   # PATCH/PUT /terms/1
   def update
-    if @term.update(term_params)
-      redirect_to @term, notice: 'Term was successfully updated.', status: :see_other
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @term.update(term_params)
+
+    render turbo_stream: [
+      turbo_stream.replace(dom_id(@term, 'form'), partial: 'terms/term_form', locals: { term: @term })
+    ]
   end
 
   # DELETE /terms/1
