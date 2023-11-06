@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   has_many :authorizations, dependent: :destroy
   has_many :folders, dependent: :destroy
+  has_many :tests, dependent: :destroy
 
   class << self
     def from_omniauth(auth)

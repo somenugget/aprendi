@@ -29,7 +29,10 @@ class TermsController < ApplicationController
       new_term = @study_set.terms.build
       render turbo_stream: [
         turbo_stream.append('study-set_terms', partial: 'terms/term_form', locals: { term: @term }),
-        turbo_stream.replace(dom_id(new_term, 'form'), partial: 'terms/term_form', locals: { term: new_term })
+        turbo_stream.replace(
+          dom_id(new_term, 'form'),
+          partial: 'terms/term_form', locals: { term: new_term, autofocus: true }
+        )
       ]
     else
       # debugger

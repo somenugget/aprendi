@@ -6,15 +6,18 @@ Rails.application.routes.draw do
   get :auth, to: 'auth#index'
   get :dashboard, to: 'dashboard#index'
 
-  resources :term_progresses
-  resources :test_steps
-  resources :tests
-  resources :study_configs
   resources :folders do
     resources :study_sets do
       resources :terms
     end
   end
+
+  resources :tests do
+    resources :test_steps
+  end
+
+  resources :study_configs
+  resources :term_progresses
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

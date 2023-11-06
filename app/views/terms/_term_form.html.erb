@@ -3,7 +3,7 @@
     <div class="flex gap-3 mb-2">
       <div>
         <%= form.label :term, style: "display: block" %>
-        <%= form.text_field :term %>
+        <%= form.text_field :term, autofocus: (defined?(autofocus) ? autofocus : false) %>
         <% if term.errors[:term].any? %>
           <div class="text-red-500">
             <%= term.errors[:term].join(', ') %>

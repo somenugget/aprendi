@@ -1,6 +1,23 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @study_set %>
+<div id="<%= dom_id @study_set %>">
+  <p>
+    <strong>Name:</strong>
+    <%= @study_set.name %>
+  </p>
+
+  <p>
+    <strong>Term lang:</strong>
+    <%= @study_set.study_config.term_lang %>
+  </p>
+
+  <p>
+    <strong>Definition lang:</strong>
+    <%= @study_set.study_config.definition_lang %>
+  </p>
+</div>
+
+<%= button_to 'Learn this set', tests_path, method: :post, params: { study_set_id: @study_set.id } %>
 
 <div id="study-set_terms">
   <% @study_set.terms.each do |term| %>

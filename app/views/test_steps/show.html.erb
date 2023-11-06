@@ -1,10 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @test_step %>
+<div id="<%= dom_id @test_step %>">
+  <p>
+    <strong>Test:</strong>
+    <%= @test_step.test_id %>
+  </p>
 
-<div>
-  <%= link_to "Edit this test step", edit_test_step_path(@test_step) %> |
-  <%= link_to "Back to test steps", test_steps_path %>
+  <p>
+    <strong>Term:</strong>
+    <%= @test_step.term_id %>
+  </p>
 
-  <%= button_to "Destroy this test step", @test_step, method: :delete %>
+  <p>
+    <strong>Exercise:</strong>
+    <%= @test_step.exercise %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= @test_step.status %>
+  </p>
+
+  <p>
+    <strong>Position:</strong>
+    <%= @test_step.position %>
+  </p>
 </div>

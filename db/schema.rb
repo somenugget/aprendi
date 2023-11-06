@@ -82,7 +82,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_015952) do
     t.bigint "test_id", null: false
     t.bigint "term_id", null: false
     t.integer "status", default: 0
-    t.integer "type", null: false
+    t.integer "exercise", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,12 +91,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_015952) do
   end
 
   create_table "tests", force: :cascade do |t|
-    t.bigint "study_set_id", null: false
     t.bigint "user_id", null: false
     t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["study_set_id"], name: "index_tests_on_study_set_id"
     t.index ["user_id"], name: "index_tests_on_user_id"
   end
 
@@ -129,6 +127,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_28_015952) do
   add_foreign_key "terms", "study_sets"
   add_foreign_key "test_steps", "terms"
   add_foreign_key "test_steps", "tests"
-  add_foreign_key "tests", "study_sets"
   add_foreign_key "tests", "users"
 end
