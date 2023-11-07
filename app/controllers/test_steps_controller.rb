@@ -1,4 +1,6 @@
 class TestStepsController < ApplicationController
+  include ActionView::RecordIdentifier
+
   before_action :set_test
   before_action :set_test_step, only: %i[show edit update destroy]
 
@@ -31,11 +33,35 @@ class TestStepsController < ApplicationController
 
   # PATCH/PUT /test_steps/1
   def update
-    if @test_step.update(test_step_params)
-      redirect_to @test_step, notice: 'Test step was successfully updated.', status: :see_other
-    else
-      render :edit, status: :unprocessable_entity
+    streams = []
+
+    Test.transaction do
+      @test.touch
+
+      if @test_step.pick_term?
+        answer_term = Term.find(params[:answer_term_id])
+        correct_term = @test_step.term
+
+        if correct_term.id == answer_term.id
+          @test_step.update!(status: :successful)
+
+          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), partial: 'test_steps/answer_label', locals: { result: 'success', term: answer_term })
+        else
+          @test_step.update!(status: :failed)
+
+          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), partial: 'test_steps/answer_label', locals: { result: 'error', term: answer_term })
+          streams << turbo_stream.replace(dom_id(correct_term, 'answer'), partial: 'test_steps/answer_label', locals: { result: 'success', term: correct_term })
+        end
+      end
     end
+
+    next_step = @test.test_steps.pending.where('id > ?', @test_step.id).order(:id).first
+    if next_step
+      next_step.update(status: :in_progress)
+      streams << turbo_stream.update('next_step', partial: 'test_steps/next_step', locals: { test_step: next_step })
+    end
+
+    render(turbo_stream: streams)
   end
 
   # DELETE /test_steps/1

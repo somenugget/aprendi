@@ -1,11 +1,16 @@
 // Import and register all your controllers from the importmap under controllers/*
 
-import { application } from "controllers/application"
+import { Application } from "@hotwired/stimulus"
 
-// Eager load all controllers defined in the import map under controllers/**/*_controller
-import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
-eagerLoadControllersFrom("controllers", application)
+const application = Application.start()
 
-// Lazy load controllers as they appear in the DOM (remember not to preload controllers in import map!)
-// import { lazyLoadControllersFrom } from "@hotwired/stimulus-loading"
-// lazyLoadControllersFrom("controllers", application)
+// Configure Stimulus development experience
+application.debug = false
+window.Stimulus   = application
+
+export { application }
+
+import { registerControllers } from 'stimulus-vite-helpers'
+
+const controllers = import.meta.globEager('./**/*_controller.js')
+registerControllers(application, controllers)

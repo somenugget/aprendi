@@ -1,0 +1,12 @@
+<% modifier_class = '' %>
+<% modifier_class = '!bg-green-50 !border-green-600 !text-green-600' if local_assigns[:result] == 'success' %>
+<% modifier_class = '!bg-red-100 !border-red-600 !text-red-600' if local_assigns[:result] == 'error' %>
+
+<label
+  class="<%= class_names("peer-checked/checkbox:border-indigo-500 peer-checked/checkbox:bg-indigo-50 peer-checked/:text-indigo-500 w-full p-5 border border-indigo-200 block rounded-lg enabled:hover:bg-indigo-50", modifier_class) %>"
+  role="button"
+  for="<%= term.id %>"
+  id="<%= dom_id term, :answer %>"
+>
+  <%= term.term %>
+</label>
