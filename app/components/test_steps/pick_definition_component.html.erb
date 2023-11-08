@@ -1,0 +1,31 @@
+<%= form_with model: [test_step.test, test_step], data: { controller: 'pick-term' } do |f| %>
+  <%= test_step.as_json %>
+
+  <h3 class="text-4xl text-center font-semibold mt-5">
+    <%= test_step.term.term %>
+  </h3>
+  <div class="grid grid-rows-2 grid-cols-2 gap-5 mt-4">
+    <% test_step.terms_to_pick.each do |term| %>
+      <div>
+        <input
+          data-pick-term-target="answer"
+          data-action="pick-term#toggleSubmitButton"
+          type="radio"
+          name="answer_term_id"
+          id="<%= term.id %>"
+          value="<%= term.id %>"
+          class="peer/checkbox hidden"
+        />
+
+        <%= render(TestSteps::AnswerLabelComponent.new(term: term, label: term.definition)) %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.submit 'Check', class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
+                   'data-pick-term-target' => "submit" %>
+    </div>
+
+    <div id="next_step" class="flex justify-end"></div>
+  </div>
+<% end %>

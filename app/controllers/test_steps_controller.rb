@@ -45,17 +45,31 @@ class TestStepsController < ApplicationController
         if correct_term.id == answer_term.id
           @test_step.update!(status: :successful)
 
-          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), partial: 'test_steps/answer_label', locals: { result: 'success', term: answer_term })
+          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'success')))
         else
           @test_step.update!(status: :failed)
 
-          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), partial: 'test_steps/answer_label', locals: { result: 'error', term: answer_term })
-          streams << turbo_stream.replace(dom_id(correct_term, 'answer'), partial: 'test_steps/answer_label', locals: { result: 'success', term: correct_term })
+          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'error')))
+          streams << turbo_stream.replace(dom_id(correct_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.term, result: 'success')))
+        end
+      elsif @test_step.pick_definition?
+        answer_term = Term.find(params[:answer_term_id])
+        correct_term = @test_step.term
+
+        if correct_term.id == answer_term.id
+          @test_step.update!(status: :successful)
+
+          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition, result: 'success')))
+        else
+          @test_step.update!(status: :failed)
+
+          streams << turbo_stream.replace(dom_id(answer_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition, result: 'error')))
+          streams << turbo_stream.replace(dom_id(correct_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.definition, result: 'success')))
         end
       end
     end
 
-    next_step = @test.test_steps.pending.where('id > ?', @test_step.id).order(:id).first
+    next_step = @test.test_steps.not_finished.where('id > ?', @test_step.id).order(:id).first
     if next_step
       next_step.update(status: :in_progress)
       streams << turbo_stream.update('next_step', partial: 'test_steps/next_step', locals: { test_step: next_step })

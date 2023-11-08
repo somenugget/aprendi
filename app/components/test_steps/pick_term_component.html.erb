@@ -1,5 +1,3 @@
-<% terms = (test_step.test.terms.reject { |term| term.id == test_step.term.id }.sample(3) + [test_step.term]).shuffle %>
-
 <%= form_with model: [test_step.test, test_step], data: { controller: 'pick-term' } do |f| %>
   <%= test_step.as_json %>
 
@@ -7,7 +5,7 @@
     <%= test_step.term.definition %>
   </h3>
   <div class="grid grid-rows-2 grid-cols-2 gap-5 mt-4">
-    <% terms.each do |term| %>
+    <% test_step.terms_to_pick.each do |term| %>
       <div>
         <input
           data-pick-term-target="answer"
@@ -17,14 +15,14 @@
           id="<%= term.id %>"
           value="<%= term.id %>"
           class="peer/checkbox hidden"
-        />
+          />
 
-        <%= render partial: 'test_steps/answer_label', locals: { term: term } %>
+        <%= render(TestSteps::AnswerLabelComponent.new(term: term, label: term.term)) %>
       </div>
     <% end %>
 
     <div>
-      <%= f.submit class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
+      <%= f.submit 'Check', class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
                    'data-pick-term-target' => "submit" %>
     </div>
 

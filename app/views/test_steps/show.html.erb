@@ -28,11 +28,11 @@
 </div>
 
 <% if @test_step.pick_term? %>
-  <%= render(partial: 'test_steps/pick_term', locals: { test_step: @test_step }) %>
+  <%= render(TestSteps::PickTermComponent.new(test_step: @test_step)) %>
 <% end %>
 
 <% if @test_step.pick_definition? %>
-  <%= render(partial: 'test_steps/pick_definition', locals: { test_step: @test_step }) %>
+  <%= render(TestSteps::PickDefinitionComponent.new(test_step: @test_step)) %>
 <% end %>
 
 <% if @test_step.letters? %>

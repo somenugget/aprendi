@@ -9,6 +9,11 @@ Layout/LineLength:
   Exclude:
     - 'config/**/*'
 
+Lint/MissingSuper:
+  Exclude:
+    - 'app/components/**/*'
+    - 'spec/**/*'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
@@ -18,6 +23,9 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Max: 15
+
+Style/ClassAndModuleChildren:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false

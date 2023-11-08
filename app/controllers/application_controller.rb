@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     @recent_test_step_in_progress ||= if recent_test_in_progress
                                         recent_test_in_progress
                                           .test_steps
-                                          .where(status: %i[in_progress pending])
+                                          .not_finished
                                           .order(:id)
                                           .first
                                       end
