@@ -36,7 +36,7 @@
 <% end %>
 
 <% if @test_step.letters? %>
-  <%= render(partial: 'test_steps/letters', locals: { test_step: @test_step }) %>
+  <%= render(TestSteps::LettersComponent.new(test_step: @test_step)) %>
 <% end %>
 
 <% if @test_step.write_term? %>

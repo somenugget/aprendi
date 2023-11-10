@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   def recent_test_in_progress
-    @recent_test_in_progress ||= current_user.tests.in_progress.where(updated_at: 1.day.ago..).order(:id).first
+    @recent_test_in_progress ||= current_user.tests.in_progress.order(:id).first
   end
   helper_method :recent_test_in_progress
 
