@@ -1,1 +1,43 @@
-<div>Add TestSteps::Letters template here</div>
+<%= form_with model: [test_step.test, test_step],
+              data: {
+                controller: 'letters',
+                'letters-term-value' => chars_to_guess,
+                'letters-wrong-letter-class' => 'bg-red-100 border-red-300 hover:bg-red-100',
+                'letters-correct-letter-class' => 'bg-green-50 border-green-600 text-green-600'
+              } do |f| %>
+  <%= f.hidden_field :failed, value: false, data: { 'letters-target' => 'failed' } %>
+  <h1 class="text-3xl font-bold text-center">
+    <%= test_step.term.definition %>
+  </h1>
+
+  <div class="mt-10">
+    <div class="flex justify-center gap-2">
+      <% chars.each_with_index do |char, i| %>
+        <% if char_to_guess?(char) %>
+          <div data-letters-target="cell"
+               data-current="<%= i.zero? ? true : nil %>"
+               class="border w-12 h-12 border-zinc-600 text-xl font-bold rounded flex items-center justify-center"
+          ></div>
+        <% else %>
+          <div><%= char %></div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="flex gap-2 justify-center mt-9">
+      <% chars_to_guess.shuffle.each do |char| %>
+        <button
+          data-action="letters#select"
+          data-letters-char-param="<%= char %>"
+          class="flex justify-center items-center w-10 h-10 m-1 text-xl font-bold text-center border border-zinc-700 rounded transition hover:bg-zinc-100 disabled:pointer-events-none disabled:opacity-25 disabled:select-none"
+        >
+          <span class="pb-0.5"><%= char.downcase %></span>
+        </button>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="justify-end hidden" data-letters-target="nextStep">
+    <%= f.submit 'Next step', class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer' %>
+  </div>
+<% end %>

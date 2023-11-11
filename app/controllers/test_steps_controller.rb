@@ -49,6 +49,8 @@ class TestStepsController < ApplicationController
         else
           @test_step.update!(status: :failed)
 
+          # TODO: add step to the end
+
           streams << turbo_stream.replace(dom_id(answer_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'error')))
           streams << turbo_stream.replace(dom_id(correct_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.term, result: 'success')))
         end
@@ -63,8 +65,19 @@ class TestStepsController < ApplicationController
         else
           @test_step.update!(status: :failed)
 
+          # TODO: add step to the end
+
           streams << turbo_stream.replace(dom_id(answer_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition, result: 'error')))
           streams << turbo_stream.replace(dom_id(correct_term, 'answer'), render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.definition, result: 'success')))
+        end
+      elsif @test_step.letters?
+        failed = ActiveModel::Type::Boolean.new.cast(params[:test_step][:failed])
+
+        if failed
+          @test_step.update!(status: :failed)
+          # TODO: add step to the end
+        else
+          @test_step.update!(status: :successful)
         end
       end
     end
@@ -72,7 +85,14 @@ class TestStepsController < ApplicationController
     next_step = @test.test_steps.not_finished.where('id > ?', @test_step.id).order(:id).first
     if next_step
       next_step.update(status: :in_progress)
-      streams << turbo_stream.update('next_step', partial: 'test_steps/next_step', locals: { test_step: next_step })
+
+      if @test_step.exercise.in? %w[pick_term pick_definition]
+        streams << turbo_stream.update('next_step', partial: 'test_steps/next_step', locals: { test_step: next_step })
+      else
+        return redirect_to test_test_step_path(@test, next_step)
+      end
+    else
+      # TODO: redirect to finish
     end
 
     render(turbo_stream: streams)
