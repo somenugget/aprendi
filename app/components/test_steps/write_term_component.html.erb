@@ -1,0 +1,26 @@
+<%= form_with model: [test_step.test, test_step],
+              id: 'write-term' do |f| %>
+  <h1 class="text-3xl font-bold text-center">
+    <%= test_step.term.definition %>
+  </h1>
+
+  <div class="flex justify-center mt-5">
+    <%= f.text_field :answer_term,
+                     value: answer_term,
+                     class: class_names('rounded w-64', {
+                       'border-red-600 text-red-600' => error?,
+                       'border-green-500 text-green-500' => success?
+                     })
+    %>
+  </div>
+
+  <div class="text-green-800 text-center text-xl my-3 h-10">
+    <% if error? %>
+      <%= test_step.term.term %>
+    <% end %>
+  </div>
+
+  <div class="justify-end flex" id="next_step">
+    <%= f.submit 'Submit', class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer' %>
+  </div>
+<% end %>

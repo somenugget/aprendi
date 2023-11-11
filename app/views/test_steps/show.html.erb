@@ -40,5 +40,5 @@
 <% end %>
 
 <% if @test_step.write_term? %>
-  <%= render(partial: 'test_steps/write_term', locals: { test_step: @test_step }) %>
+  <%= render(TestSteps::WriteTermComponent.new(test_step: @test_step)) %>
 <% end %>
