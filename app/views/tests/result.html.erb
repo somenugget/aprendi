@@ -1,0 +1,10 @@
+<h1 class="text-3xl text-center font-bold mt-4">
+  Test results
+</h1>
+
+<%= content_tag :div, class: class_names('text-xl font-bold text-center mt-4',
+                                         'text-green-500' => @percentage > 80,
+                                         'text-orange-500' => (50..80).include?(@percentage),
+                                         'text-red-600' => @percentage < 50) do %>
+  <%= @successful %> / <%= @total %>
+<% end %>

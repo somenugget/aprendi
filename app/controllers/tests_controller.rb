@@ -1,5 +1,5 @@
 class TestsController < ApplicationController
-  before_action :set_test, only: %i[show edit destroy]
+  before_action :set_test, only: %i[show result edit destroy]
 
   # GET /tests
   def index
@@ -8,6 +8,12 @@ class TestsController < ApplicationController
 
   # GET /tests/1
   def show; end
+
+  def result
+    @total = @test.test_steps.count
+    @successful = @test.test_steps.successful.count
+    @percentage = @successful.to_f / @total * 100
+  end
 
   # GET /tests/new
   def new

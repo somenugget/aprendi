@@ -127,9 +127,8 @@ class TestStepsController < ApplicationController
       end
 
       streams << turbo_stream.update('next_step', partial: 'test_steps/next_step', locals: { test_step: next_step })
-
     else
-      # TODO: redirect to finish
+      return redirect_to result_test_path(@test)
     end
 
     render(turbo_stream: streams)

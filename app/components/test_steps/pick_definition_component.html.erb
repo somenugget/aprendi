@@ -15,17 +15,16 @@
           id="<%= term.id %>"
           value="<%= term.id %>"
           class="peer/checkbox hidden"
-        />
+          />
 
         <%= render(TestSteps::AnswerLabelComponent.new(term: term, label: term.definition)) %>
       </div>
     <% end %>
 
-    <div>
-      <%= f.submit 'Check', class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
-                   'data-pick-term-target' => "submit" %>
-    </div>
+  </div>
 
-    <div id="next_step" class="flex justify-end"></div>
+  <div id="next_step" class="flex justify-end mt-4">
+    <%= f.submit 'Check', class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
+                 'data-pick-term-target' => "submit" %>
   </div>
 <% end %>

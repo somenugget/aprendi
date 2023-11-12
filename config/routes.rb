@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   resources :tests do
     resources :test_steps
+
+    member do
+      get :result
+    end
   end
 
   resources :study_configs
