@@ -1,0 +1,30 @@
+<%= content_tag :div, class: class_names('text-xl font-bold mt-4 flex justify-between items-center') do %>
+  <p class=<%= class_names(result_color) %>>
+    <%= successful %> or <%= total %> tests passed without errors
+  </p>
+
+  <%= link_to 'Back to folders', folders_path, class: 'btn-success' %>
+<% end %>
+
+<div class="mt-6">
+  <% if failed_terms.load.any? %>
+    <div class="text-lg mb-2">
+      <% if failed_terms.count == 1 %>
+        This term
+      <% else %>
+        These terms
+      <% end %>
+      require your attention
+    </div>
+
+
+    <ul>
+      <% failed_terms.each do |term| %>
+        <li class="text-lg">
+          <span class="font-bold"><%= term.term %></span>: <%= term.definition %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+</div>

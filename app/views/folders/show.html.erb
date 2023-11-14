@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<div class="grid grid-cols-3 gap-3">
+<div class="grid grid-cols-3 gap-3 mt-4">
   <% @folder.study_sets.each do |study_set| %>
     <%= render partial: 'study_sets/card', locals: { study_set: study_set, folder: @folder } %>
   <% end %>

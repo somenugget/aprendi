@@ -19,12 +19,12 @@
                class="border w-12 h-12 border-zinc-600 text-xl font-bold rounded flex items-center justify-center"
           ></div>
         <% else %>
-          <div><%= char %></div>
+          <div class="mx-2"><%= char %></div>
         <% end %>
       <% end %>
     </div>
 
-    <div class="flex gap-2 justify-center mt-9">
+    <div class="flex gap-2 justify-center mt-9 mb-3">
       <% chars_to_guess.shuffle.each do |char| %>
         <button
           data-action="letters#select"

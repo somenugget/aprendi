@@ -10,4 +10,12 @@ class TestStep < ApplicationRecord
   def terms_to_pick
     (test.terms.reject { |term| term.id == term_id }.sample(3) + [term]).shuffle
   end
+
+  def register_failure!
+    ApplicationRecord.transaction(requires_new: true) do
+      update!(status: :failed)
+
+      test.test_steps.create!(term: term, exercise: exercise, status: :pending)
+    end
+  end
 end

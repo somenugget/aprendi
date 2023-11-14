@@ -1,5 +1,6 @@
 class Test < ApplicationRecord
   belongs_to :user
+  belongs_to :study_set
 
   has_many :test_steps, dependent: :destroy, inverse_of: :test
 

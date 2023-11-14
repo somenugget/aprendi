@@ -49,16 +49,20 @@ class TestStepsController < ApplicationController
                                           render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term,
                                                                                                label: answer_term.term, result: 'success')))
         else
-          @test_step.update!(status: :failed)
+          @test_step.register_failure!
 
-          # TODO: add step to the end
-
-          streams << turbo_stream.replace(dom_id(answer_term, 'answer'),
-                                          render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term,
-                                                                                               label: answer_term.term, result: 'error')))
-          streams << turbo_stream.replace(dom_id(correct_term, 'answer'),
-                                          render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term,
-                                                                                               label: correct_term.term, result: 'success')))
+          streams << turbo_stream.replace(
+            dom_id(answer_term, 'answer'),
+            render_to_string(
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'error')
+            )
+          )
+          streams << turbo_stream.replace(
+            dom_id(correct_term, 'answer'),
+            render_to_string(
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.term, result: 'success')
+            )
+          )
         end
       elsif @test_step.pick_definition?
         answer_term = Term.find(params[:answer_term_id])
@@ -71,9 +75,7 @@ class TestStepsController < ApplicationController
                                           render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition,
                                                                                                result: 'success')))
         else
-          @test_step.update!(status: :failed)
-
-          # TODO: add step to the end
+          @test_step.register_failure!
 
           streams << turbo_stream.replace(dom_id(answer_term, 'answer'),
                                           render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition,
@@ -86,8 +88,7 @@ class TestStepsController < ApplicationController
         failed = ActiveModel::Type::Boolean.new.cast(params[:test_step][:failed])
 
         if failed
-          @test_step.update!(status: :failed)
-          # TODO: add step to the end
+          @test_step.register_failure!
         else
           @test_step.update!(status: :successful)
         end
@@ -105,7 +106,7 @@ class TestStepsController < ApplicationController
             )
           ))
         else
-          @test_step.update!(status: :failed)
+          @test_step.register_failure!
 
           streams << turbo_stream.replace('write-term', render_to_string(
             TestSteps::WriteTermComponent.new(
