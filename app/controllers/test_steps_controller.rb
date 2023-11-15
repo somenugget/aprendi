@@ -129,6 +129,8 @@ class TestStepsController < ApplicationController
 
       streams << turbo_stream.update('next_step', partial: 'test_steps/next_step', locals: { test_step: next_step })
     else
+      UpdateTermProgressAfterTestJob.perform_later(@test.id)
+
       return redirect_to result_test_path(@test)
     end
 
