@@ -1,5 +1,6 @@
 <%= form_with model: [test_step.test, test_step],
-              id: 'write-term' do |f| %>
+              id: 'write-term',
+              data: { controller: 'write-term', action: 'keydown.enter@window->write-term#submit' } do |f| %>
   <h1 class="text-3xl font-bold text-center">
     <%= test_step.term.definition %>
   </h1>
@@ -22,6 +23,9 @@
   </div>
 
   <div class="justify-end flex" id="next_step">
-    <%= f.submit 'Submit', class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer' %>
+    <%= f.submit 'Submit',
+                 class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer',
+                 id: 'next-step-button'
+    %>
   </div>
 <% end %>

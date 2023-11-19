@@ -1,9 +1,10 @@
 <%= form_with model: [test_step.test, test_step],
               data: {
                 controller: 'letters',
+                action: 'keydown.enter@window->letters#goToNextStep',
                 'letters-term-value' => chars_to_guess,
                 'letters-wrong-letter-class' => 'bg-red-100 border-red-300 hover:bg-red-100',
-                'letters-correct-letter-class' => 'bg-green-50 border-green-600 text-green-600'
+                'letters-correct-letter-class' => 'bg-green-50 border-green-600 text-green-600',
               } do |f| %>
   <%= f.hidden_field :failed, value: false, data: { 'letters-target' => 'failed' } %>
   <h1 class="text-3xl font-bold text-center">
@@ -38,6 +39,9 @@
   </div>
 
   <div class="justify-end hidden" data-letters-target="nextStep">
-    <%= f.submit 'Next step', class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer' %>
+    <%= f.submit 'Next step',
+                 class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer',
+                 id: 'next-step-button'
+    %>
   </div>
 <% end %>

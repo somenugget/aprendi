@@ -11,9 +11,6 @@ export default class extends Controller {
 
   connect() {
     this.selectedChars = []
-    console.log('connected')
-    console.log(this.wrongLetterClasses)
-    console.log(this.cellTargets)
   }
 
   select(e) {
@@ -25,7 +22,7 @@ export default class extends Controller {
 
       currentTarget.setAttribute('disabled', 'disabled')
 
-      if (this.termValue.length === this.selectedChars.length) {
+      if (this.stepCompleted()) {
         this.nextStepTarget.classList.remove('hidden')
         this.nextStepTarget.classList.add('flex')
       }
@@ -37,7 +34,15 @@ export default class extends Controller {
         currentTarget.classList.remove(...this.wrongLetterClasses)
       }, 500)
     }
+  }
 
-    console.log(this.selectedChars)
+  stepCompleted() {
+    return this.termValue.length === this.selectedChars.length
+  }
+
+  goToNextStep() {
+    if (this.stepCompleted()) {
+      document.getElementById('next-step-button').click()
+    }
   }
 }
