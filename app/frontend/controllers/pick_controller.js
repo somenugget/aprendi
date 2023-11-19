@@ -8,12 +8,26 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.completedValue)
     this.element.addEventListener('turbo:submit-end', this.submitEnd.bind(this))
   }
 
   toggleSubmitButton() {
     this.submitTarget.classList.remove('hidden')
+  }
+
+  selectAnswerWithKeyboard(e) {
+    if (!['1', '2', '3', '4'].includes(e.key)) {
+      return
+    }
+
+    const answerIndex = parseInt(e.key) - 1
+    const answerInput = this.answerTargets[answerIndex]
+
+    if (!answerInput) {
+      return
+    }
+
+    answerInput.checked = true
   }
 
   submit() {

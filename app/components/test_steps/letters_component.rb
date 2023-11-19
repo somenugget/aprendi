@@ -12,7 +12,7 @@ class TestSteps::LettersComponent < ApplicationComponent
   end
 
   def char_to_guess?(char)
-    char.match?(/^[a-zA-Z]+$/)
+    char.match?(/\p{L}/)
   end
 
   def chars_to_guess

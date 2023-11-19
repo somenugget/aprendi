@@ -1,9 +1,9 @@
 <%= form_with model: [test_step.test, test_step],
               data: {
                 controller: 'letters',
-                action: 'keydown.enter@window->letters#goToNextStep',
+                action: 'keydown.enter@window->letters#goToNextStep keydown@window->letters#selectWithKeyboard',
                 'letters-term-value' => chars_to_guess,
-                'letters-wrong-letter-class' => 'bg-red-100 border-red-300 hover:bg-red-100',
+                'letters-wrong-letter-class' => 'bg-red-100 border-red-900',
                 'letters-correct-letter-class' => 'bg-green-50 border-green-600 text-green-600',
               } do |f| %>
   <%= f.hidden_field :failed, value: false, data: { 'letters-target' => 'failed' } %>
@@ -16,7 +16,6 @@
       <% chars.each_with_index do |char, i| %>
         <% if char_to_guess?(char) %>
           <div data-letters-target="cell"
-               data-current="<%= i.zero? ? true : nil %>"
                class="border w-12 h-12 border-zinc-600 text-xl font-bold rounded flex items-center justify-center"
           ></div>
         <% else %>
@@ -29,7 +28,10 @@
       <% chars_to_guess.shuffle.each do |char| %>
         <button
           data-action="letters#select"
+          data-letters-target="letter"
           data-letters-char-param="<%= char %>"
+          data-char="<%= char %>"
+          type="button"
           class="flex justify-center items-center w-10 h-10 m-1 text-xl font-bold text-center border border-zinc-700 rounded transition hover:bg-zinc-100 disabled:pointer-events-none disabled:opacity-25 disabled:select-none"
         >
           <span class="pb-0.5"><%= char.downcase %></span>
