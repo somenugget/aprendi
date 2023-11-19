@@ -25,7 +25,7 @@ export default class extends Controller {
     const currentCell = this.currentCell()
     const currentChar = this.currentChar()
 
-    if (char.toLowerCase() === this.normalizeString(currentChar)) {
+    if (this.normalizeString(char) === this.normalizeString(currentChar)) {
       currentCell.classList.add(...this.correctLetterClasses)
       currentCell.innerHTML = currentChar
       this.selectedChars.push(currentChar)

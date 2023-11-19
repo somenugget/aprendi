@@ -93,9 +93,8 @@ class TestStepsController < ApplicationController
           @test_step.update!(status: :successful)
         end
       elsif @test_step.write_term?
-        # TODO: more advanced answer validation
         answer_term = params[:test_step][:answer_term]
-        if answer_term.strip.downcase == @test_step.term.term.downcase.strip
+        if TestSteps::ValidateWord.result(test_step: @test_step, answer: answer_term)
           @test_step.update!(status: :successful)
 
           streams << turbo_stream.replace('write-term', render_to_string(
