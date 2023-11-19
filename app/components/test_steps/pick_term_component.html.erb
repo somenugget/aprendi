@@ -1,8 +1,8 @@
 <%= form_with model: [test_step.test, test_step],
               data: {
-                controller: 'pick-term',
-                action: 'keydown.enter@window->pick-term#submit',
-                'pick-term-completed-value': false
+                controller: 'pick',
+                action: 'keydown.enter@window->pick#submit',
+                'pick-completed-value': false
               } do |f| %>
   <%= test_step.as_json %>
 
@@ -13,8 +13,8 @@
     <% test_step.terms_to_pick.each do |term| %>
       <div>
         <input
-          data-pick-term-target="answer"
-          data-action="pick-term#toggleSubmitButton"
+          data-pick-target="answer"
+          data-action="pick#toggleSubmitButton"
           type="radio"
           name="answer_term_id"
           id="<%= term.id %>"
@@ -29,6 +29,6 @@
 
   <div id="next_step" class="flex justify-end mt-4">
     <%= f.submit 'Check', class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
-                 'data-pick-term-target' => "submit" %>
+                 'data-pick-target' => "submit" %>
   </div>
 <% end %>
