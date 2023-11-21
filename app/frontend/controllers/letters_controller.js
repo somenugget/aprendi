@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['failed', 'cell', 'letter', 'nextStep']
@@ -6,7 +6,7 @@ export default class extends Controller {
   static classes = ['wrongLetter', 'correctLetter']
 
   static values = {
-    term: Array
+    term: Array,
   }
 
   connect() {
@@ -65,20 +65,26 @@ export default class extends Controller {
   }
 
   selectWithKeyboard(e) {
-    const key = e.key.toLowerCase();
-    const keyCode = e.keyCode;
-    const isUppercaseLetter = (keyCode >= 65 && keyCode <= 90);
-    const isLowercaseLetter = (keyCode >= 97 && keyCode <= 122);
+    const key = e.key.toLowerCase()
+    const keyCode = e.keyCode
+    const isUppercaseLetter = keyCode >= 65 && keyCode <= 90
+    const isLowercaseLetter = keyCode >= 97 && keyCode <= 122
 
     if (!isUppercaseLetter && !isLowercaseLetter) {
       return
     }
 
-    const availableLetters = this.letterTargets.filter((target) => !target.disabled)
+    const availableLetters = this.letterTargets.filter(
+      (target) => !target.disabled,
+    )
 
-    const exactMatchLetter = availableLetters.find((target) => target.dataset.char.toLowerCase() === key)
+    const exactMatchLetter = availableLetters.find(
+      (target) => target.dataset.char.toLowerCase() === key,
+    )
     const normalizedKey = this.normalizeString(key)
-    const normalizedMatchLetter = availableLetters.find((target) => this.normalizeString(target.dataset.char) === normalizedKey)
+    const normalizedMatchLetter = availableLetters.find(
+      (target) => this.normalizeString(target.dataset.char) === normalizedKey,
+    )
 
     this.selectChar(key, () => {
       if (exactMatchLetter) {
@@ -90,6 +96,9 @@ export default class extends Controller {
   }
 
   normalizeString(string) {
-    return string.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    return string
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
   }
 }

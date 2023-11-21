@@ -3,7 +3,7 @@
     <%= successful %> or <%= total %> tests passed without errors
   </p>
 
-  <%= link_to 'Back to folders', folders_path, class: 'btn-success' %>
+  <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: folders_path })) %>
 <% end %>
 
 <div class="mt-6">

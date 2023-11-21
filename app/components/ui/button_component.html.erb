@@ -1,0 +1,7 @@
+<%= content_tag as, **{ **options, class: html_class } do %>
+  <% if icon.present? %>
+    <%= heroicon icon %>
+  <% end %>
+
+  <%= content? ? content : text %>
+<% end %>

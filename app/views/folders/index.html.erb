@@ -1,7 +1,9 @@
-<%= link_to "New folder", new_folder_path, class: 'px-3 py-2 transition rounded hover:bg-zinc-50 mb-3 inline-block' %>
+<%= render(UI::ButtonComponent.new(text: "New folder", options: { as: :a, href: new_folder_path })) %>
 
-<div id="folders" class="grid grid-cols-3 gap-3 mt-3">
-  <% 5.times.map { @folders }.flatten.each do |folder| %>
-    <%= render folder %>
+<div id="folders" class="grid grid-cols-4 gap-3 mt-4">
+  <% @folders.each do |folder| %>
+    <%= render(UI::CardComponent.new(as: :a, href: folder_path(folder))) do %>
+      <%= folder.name %>
+    <% end %>
   <% end %>
 </div>

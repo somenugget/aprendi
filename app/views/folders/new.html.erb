@@ -1,7 +1,8 @@
 <div>
   <div class="mb-6">
-    <%= link_to "Back", folders_path %>
+    <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: folders_path })) %>
   </div>
+
 
   <%= render "form", folder: @folder %>
 </div>

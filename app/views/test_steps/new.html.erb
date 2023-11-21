@@ -5,5 +5,5 @@
 <br>
 
 <div>
-  <%= link_to "Back to test steps", test_steps_path %>
+  <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: test_steps_path })) %>
 </div>

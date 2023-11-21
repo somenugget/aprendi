@@ -17,6 +17,7 @@ gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
 
+gem 'heroicon'
 gem 'view_component'
 gem 'vite_rails'
 
@@ -33,6 +34,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-twitter'
 
+gem 'dry-initializer'
 gem 'good_job'
 gem 'service_actor'
 
@@ -58,6 +60,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 
+  gem 'lookbook'
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 end
