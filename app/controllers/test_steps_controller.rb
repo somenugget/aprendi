@@ -94,7 +94,9 @@ class TestStepsController < ApplicationController
         end
       elsif @test_step.write_term?
         answer_term = params[:test_step][:answer_term]
-        if TestSteps::ValidateWord.result(test_step: @test_step, answer: answer_term)
+        result = TestSteps::ValidateWord.result(test_step: @test_step, answer: answer_term)
+
+        if result.success?
           @test_step.update!(status: :successful)
 
           streams << turbo_stream.replace('write-term', render_to_string(

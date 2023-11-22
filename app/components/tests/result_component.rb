@@ -8,6 +8,8 @@ class Tests::ResultComponent < ApplicationComponent
     @test = test
   end
 
+  private
+
   def total
     @test.test_steps.count
   end
@@ -22,7 +24,7 @@ class Tests::ResultComponent < ApplicationComponent
 
   def result_color
     if percentage >= 85
-      'text-green-500'
+      'text-lime-500'
     elsif percentage >= 60
       'text-orange-500'
     else

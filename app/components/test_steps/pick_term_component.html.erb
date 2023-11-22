@@ -4,12 +4,11 @@
                 action: 'keydown.enter@window->pick#submit keydown@window->pick#selectAnswerWithKeyboard',
                 'pick-completed-value': false
               } do |f| %>
-  <%= test_step.as_json %>
 
   <h3 class="text-4xl text-center font-semibold mt-5">
     <%= test_step.term.definition %>
   </h3>
-  <div class="grid grid-rows-2 grid-cols-2 gap-5 mt-4">
+  <div class="grid grid-rows-2 grid-cols-2 gap-5 mt-6">
     <% test_step.terms_to_pick.each_with_index do |term, i| %>
       <div class="relative">
         <span class="absolute left-2 top-1 text-sm text-indigo-200"><%= i + 1 %></span>
@@ -29,7 +28,7 @@
     <% end %>
   </div>
 
-  <div id="next_step" class="flex justify-end mt-4">
+  <div id="next_step" class="flex justify-end mt-4 h-9">
     <%= f.submit 'Check', class: 'hidden peer-checked/checkbox:block text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500 cursor-pointer',
                  'data-pick-target' => "submit" %>
   </div>

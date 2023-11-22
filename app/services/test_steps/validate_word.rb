@@ -10,6 +10,12 @@ module TestSteps
 
     # @return [Boolean]
     def call
+      fail!(error: "\"#{answer.strip}\" does not match \"#{test_step.term.term.strip}\"") unless words_match?
+    end
+
+    private
+
+    def words_match?
       I18n.transliterate(answer.strip).downcase == I18n.transliterate(test_step.term.term.strip).downcase
     end
   end

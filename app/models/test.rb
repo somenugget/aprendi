@@ -8,14 +8,30 @@ class Test < ApplicationRecord
   class << self
     # @param [StudySet] study_set
     # @param [User] user
-    def create_from_study_set(study_set, user)
+    def create_from_study_set!(study_set, user)
       raise ArgumentError, 'Study set should have terms' if study_set.terms.empty?
 
       Test.transaction do
         Test.create!(user: user, status: :in_progress).tap do |test|
-          study_set.terms.each do |term|
-            TestStep.exercises.each_value do |exercise|
+          TestStep.exercises.each_value do |exercise|
+            study_set.terms.each do |term|
               test.test_steps.create!(term: term, exercise: exercise)
+            end
+          end
+
+          test.reload
+        end
+      end
+    end
+
+    # @param [Enumerable<Integer>] terms_ids
+    # @param [User] user
+    def create_from_terms_ids!(terms_ids, user)
+      Test.transaction do
+        Test.create!(user: user, status: :in_progress).tap do |test|
+          TestStep.exercises.each_value do |exercise|
+            terms_ids.each do |term_id|
+              test.test_steps.create!(term_id: term_id, exercise: exercise)
             end
           end
 
@@ -25,6 +41,7 @@ class Test < ApplicationRecord
     end
   end
 
+  # @return [ActiveRecord::Relation<Term>]
   def terms
     Term.where(id: test_steps.select(:term_id))
   end

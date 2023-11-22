@@ -32,6 +32,8 @@ class UI::ButtonComponent < ApplicationComponent
     xl: 'gap-2 px-6 py-3.5 text-lg'
   }.freeze
 
+  private
+
   def render?
     raise ArgumentError, 'Text or block must be provided' if text.blank? && !content?
 

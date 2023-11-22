@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title>Aprendi</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,9 +10,9 @@
     <%= vite_javascript_tag 'application' %>
   </head>
 
-  <body>
+  <body class="h-full">
     <%= render('application/navbar') %>
-    <main class="container mx-auto pt-20">
+    <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 h-full">
       <%= yield %>
     </main>
   </body>

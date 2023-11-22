@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-10">
+<div class="flex flex-col gap-10 mb-10">
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-4">
       <h3 class="">
@@ -18,7 +18,10 @@
       </div>
     </div>
 
-    <%= render(UI::ButtonComponent.new(text: 'Learn this set', options: { as: :a, href: tests_path, method: :post, params: { study_set_id: @study_set.id } })) %>
+    <%= form_with url: tests_path, method: :post do |form| %>
+      <%= form.hidden_field :study_set_id, value: @study_set.id %>
+      <%= render(UI::ButtonComponent.new(text: 'Learn this set', options: { type: :submit })) %>
+    <% end %>
   </div>
 
   <div>
@@ -32,8 +35,8 @@
   </div>
 
   <div class="flex gap-2">
-    <%= render(UI::ButtonComponent.new(text: 'Edit this study set', options: { as: :a, href: edit_folder_study_set_path(@folder, @study_set) })) %>
     <%= render(UI::ButtonComponent.new(text: 'Back to folder', variant: 'neutral', options: { as: :a, href: folder_path(@folder) })) %>
+    <%= render(UI::ButtonComponent.new(text: 'Edit this study set', options: { as: :a, href: edit_folder_study_set_path(@folder, @study_set) })) %>
     <%= render(UI::ButtonComponent.new(text: 'Destroy this study set', variant: 'danger', options: { as: :a, 'data-turbo-method' => :delete, 'data-turbo-confirm' => 'Are you sure?', href: folder_study_set_path(@folder, @study_set) })) %>
   </div>
 </div>

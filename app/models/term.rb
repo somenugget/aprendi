@@ -4,4 +4,6 @@ class Term < ApplicationRecord
 
   validates :term, presence: true
   validates :definition, presence: true
+
+  normalizes :term, :definition, with: -> { _1.downcase.strip.squish }
 end

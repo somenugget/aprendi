@@ -12,7 +12,7 @@ class StudySetsController < ApplicationController
 
   # GET /study_sets/new
   def new
-    @study_set = StudySet.new
+    @study_set = @folder.study_sets.build
   end
 
   # GET /study_sets/1/edit

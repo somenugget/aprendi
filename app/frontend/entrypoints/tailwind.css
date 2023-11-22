@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply text-gray-900;
+}
+
 button {
   @apply transition;
 }
 
 a {
   @apply transition;
+}
+
+p, li {
+  @apply text-gray-800 dark:text-gray-400;
 }
 
 h1 {

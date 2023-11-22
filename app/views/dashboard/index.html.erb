@@ -1,16 +1,69 @@
-<div class="mb-5">
-  <% @new_terms_to_learn.each do |term| %>
-    <p><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %> <%= term.next_test_date %></p>
+<h2 class="mb-10">Your words for today</h2>
+
+<% if @new_terms_to_learn.any? || @ripe_terms_to_learn.any? %>
+  <div class="flex items-stretch gap-6 mb-6">
+    <% if @new_terms_to_learn.any? %>
+      <%= form_with url: tests_path, method: :post, class: 'flex items-stretch jus w-full' do |form| %>
+        <%= render(UI::CardComponent.new(as: :button,
+                                         type: :submit,
+                                         class: 'text-left flex flex-col w-full max-w-full text-blue-900',
+                                         title: 'Learn new words',
+                                         variant: :secondary)) do %>
+          <h6 class="mb-3">New words to learn</h6>
+          <div class="flex flex-col gap-1">
+            <% @new_terms_to_learn.each do |term| %>
+              <%= form.hidden_field 'terms_ids[]', value: term.id %>
+              <p class="mb-1"><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %> <%= term.next_test_date %></p>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <% if @ripe_terms_to_learn.any? %>
+      <%= form_with url: tests_path, method: :post, class: 'flex items-stretch w-full' do |form| %>
+        <%= render(UI::CardComponent.new(as: :button,
+                                         type: :submit,
+                                         class: 'text-left flex flex-col w-full max-w-full  text-green-900',
+                                         title: 'Review the words',
+                                         variant: :success)) do %>
+          <h6 class="mb-3">Ready for review</h6>
+          <div class="flex flex-col gap-1">
+            <% @ripe_terms_to_learn.each do |term| %>
+              <%= form.hidden_field 'terms_ids[]', value: term.id %>
+              <p class="mb-1"><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %> <%= term.next_test_date %></p>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-lg mb-10 format max-w-full">
+    <p class="mb-1">
+      You've learnt everything you had to learn for today 🎉 Good job 💪🏻
+    </p>
+    <p class="mt-1">
+      Come back tomorrow or add some new words to learn
+      <% @latest_folders.each_with_index do |folder, i| %>
+        <%= ',' if i > 0 %>
+        to <%= link_to folder.name, new_folder_study_set_path(folder) %>
+      <% end %>
+      or to
+      <%= link_to 'any other folder', folders_path %>.
+    </p>
+  </div>
+  <h6>
+  </h6>
+<% end %>
+
+<% if @ripening_terms.any? %>
+  <%= render(UI::CardComponent.new(class: '!w-full !max-w-full opacity-75')) do %>
+    <h6 class="mb-3">Ripening</h6>
+    <div class="flex flex-col gap-1">
+      <% @ripening_terms.each do |term| %>
+        <p><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %></p>
+      <% end %>
+    </div>
   <% end %>
-</div>
-
-<div class="mb-5">
-  <% @ripe_terms_to_learn.each do |term| %>
-    <p><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %> <%= term.next_test_date %></p>
-  <% end %>
-</div>
-
-
-<% @ripening_terms.each do |term| %>
-  <p><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %></p>
 <% end %>

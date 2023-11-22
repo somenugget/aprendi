@@ -8,13 +8,17 @@ class DashboardController < ApplicationController
 
     @ripe_terms_to_learn = terms_base.where("DATE_TRUNC('day', term_progresses.next_test_date) <= NOW() AND term_progresses.learnt = FALSE")
                                      .where.not(id: @new_terms_to_learn.map(&:id))
-                                     .order('term_progresses.next_test_date NULLS FIRST, terms.created_at')
+                                     .order('term_progresses.success_percentage NULLS FIRST, term_progresses.next_test_date NULLS FIRST, terms.created_at')
                                      .limit(5)
                                      .load
 
     @ripening_terms = terms_base.where.not(id: @new_terms_to_learn.map(&:id))
                                 .where.not(id: @ripe_terms_to_learn.map(&:id))
                                 .order(created_at: :desc)
+                                .limit(5)
+                                .load
+
+    @latest_folders = current_user.folders.order(created_at: :desc).limit(3).load
   end
 
   private

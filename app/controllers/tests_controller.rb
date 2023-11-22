@@ -25,16 +25,17 @@ class TestsController < ApplicationController
 
   # POST /tests
   def create
-    return redirect_back fallback_location: root_path, alert: 'Study set not found.' if params[:study_set_id].blank?
+    # TODO: show flash message instead
 
-    @test = Test.create_from_study_set(StudySet.find(params[:study_set_id]), current_user)
-
-    if @test.save
-      redirect_to test_test_step_path(@test, @test.test_steps.order(:id).first),
-                  notice: 'Test was successfully created.'
+    if params[:study_set_id].present?
+      @test = Test.create_from_study_set!(StudySet.find(params[:study_set_id]), current_user)
+    elsif params[:terms_ids].present?
+      @test = Test.create_from_terms_ids!(params[:terms_ids].to_a, current_user)
     else
-      render :new, status: :unprocessable_entity
+      return redirect_back fallback_location: root_path, alert: 'Can\'t create a test'
     end
+
+    redirect_to test_test_step_path(@test, @test.test_steps.order(:id).first), notice: 'Test was successfully created.'
   end
 
   # DELETE /tests/1

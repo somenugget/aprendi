@@ -1,44 +1,46 @@
-<p style="color: green"><%= notice %></p>
+<!--<p style="color: green"><%#= notice %></p>-->
 
-<div id="<%= dom_id @test_step %>">
-  <p>
-    <strong>Test:</strong>
-    <%= @test_step.test_id %>
-  </p>
+<!--<div id="<%#= dom_id @test_step %>">-->
+<!--  <p>-->
+<!--    <strong>Test:</strong>-->
+<%#= @test_step.test_id %>
+<!--  </p>-->
 
-  <p>
-    <strong>Term:</strong>
-    <%= @test_step.term_id %>
-  </p>
+<!--  <p>-->
+<!--    <strong>Term:</strong>-->
+<%#= @test_step.term_id %>
+<!--  </p>-->
 
-  <p>
-    <strong>Exercise:</strong>
-    <%= @test_step.exercise %>
-  </p>
+<!--  <p>-->
+<!--    <strong>Exercise:</strong>-->
+<%#= @test_step.exercise %>
+<!--  </p>-->
 
-  <p>
-    <strong>Status:</strong>
-    <%= @test_step.status %>
-  </p>
+<!--  <p>-->
+<!--    <strong>Status:</strong>-->
+<%#= @test_step.status %>
+<!--  </p>-->
 
-  <p>
-    <strong>Position:</strong>
-    <%= @test_step.position %>
-  </p>
+<!--  <p>-->
+<!--    <strong>Position:</strong>-->
+<%#= @test_step.position %>
+<!--  </p>-->
+<!--</div>-->
+
+<div class="flex flex-col h-full justify-center pb-44">
+  <% if @test_step.pick_term? %>
+    <%= render(TestSteps::PickTermComponent.new(test_step: @test_step)) %>
+  <% end %>
+
+  <% if @test_step.pick_definition? %>
+    <%= render(TestSteps::PickDefinitionComponent.new(test_step: @test_step)) %>
+  <% end %>
+
+  <% if @test_step.letters? %>
+    <%= render(TestSteps::LettersComponent.new(test_step: @test_step)) %>
+  <% end %>
+
+  <% if @test_step.write_term? %>
+    <%= render(TestSteps::WriteTermComponent.new(test_step: @test_step)) %>
+  <% end %>
 </div>
-
-<% if @test_step.pick_term? %>
-  <%= render(TestSteps::PickTermComponent.new(test_step: @test_step)) %>
-<% end %>
-
-<% if @test_step.pick_definition? %>
-  <%= render(TestSteps::PickDefinitionComponent.new(test_step: @test_step)) %>
-<% end %>
-
-<% if @test_step.letters? %>
-  <%= render(TestSteps::LettersComponent.new(test_step: @test_step)) %>
-<% end %>
-
-<% if @test_step.write_term? %>
-  <%= render(TestSteps::WriteTermComponent.new(test_step: @test_step)) %>
-<% end %>

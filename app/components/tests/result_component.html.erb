@@ -1,30 +1,32 @@
-<%= content_tag :div, class: class_names('text-xl font-bold mt-4 flex justify-between items-center') do %>
-  <p class=<%= class_names(result_color) %>>
-    <%= successful %> or <%= total %> tests passed without errors
-  </p>
-
-  <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: folders_path })) %>
-<% end %>
-
-<div class="mt-6">
-  <% if failed_terms.load.any? %>
-    <div class="text-lg mb-2">
-      <% if failed_terms.count == 1 %>
-        This term
-      <% else %>
-        These terms
-      <% end %>
-      require your attention
-    </div>
-
-
-    <ul>
-      <% failed_terms.each do |term| %>
-        <li class="text-lg">
-          <span class="font-bold"><%= term.term %></span>: <%= term.definition %>
-        </li>
-      <% end %>
-    </ul>
+<div class="my-6 w-1/2 mx-auto flex flex-col gap-6">
+  <%= content_tag :div, class: class_names('text-xl font-bold mt-4') do %>
+    <h3 class=<%= class_names(result_color) %>>
+      <%= successful %> of <%= total %> exercises passed without errors
+    </h3>
   <% end %>
 
+  <div class="my-6">
+    <% if failed_terms.load.any? %>
+      <p class="text-lg mb-2">
+        <% if failed_terms.count == 1 %>
+          This term needs
+        <% else %>
+          These terms need
+        <% end %>
+        some extra attention
+      </p>
+
+      <ul>
+        <% failed_terms.each do |term| %>
+          <li class="text-lg">
+            <strong><%= term.term %></strong> - <%= term.definition %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div>
+    <%= render(UI::ButtonComponent.new(text: 'Go to dashboard', variant: 'neutral', options: { as: :a, href: dashboard_path })) %>
+  </div>
 </div>

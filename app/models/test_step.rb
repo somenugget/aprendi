@@ -8,10 +8,12 @@ class TestStep < ApplicationRecord
   scope :finished, -> { where(status: %i[successful failed]) }
   scope :not_finished, -> { where.not(id: finished) }
 
+  # @return [Array<Term>]
   def terms_to_pick
     (test.terms.reject { |term| term.id == term_id }.sample(3) + [term]).shuffle
   end
 
+  # @raise [ActiveRecord::RecordInvalid]
   def register_failure!
     ApplicationRecord.transaction(requires_new: true) do
       update!(status: :failed)
