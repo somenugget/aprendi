@@ -35,6 +35,12 @@ Style/Documentation:
 
 Style/DocumentationMethod:
   Enabled: true
+  Include:
+    - 'app/models/**/*.rb'
+    - 'app/services/**/*.rb'
+    - 'app/components/**/*.rb'
+    - 'app/jobs/**/*.rb'
+    - 'app/mailers/**/*.rb'
 
 Style/HashSyntax:
   Enabled: false
