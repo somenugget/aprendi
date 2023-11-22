@@ -5,6 +5,6 @@
 <br>
 
 <div>
-  <%= link_to "Show this folder", @folder %> |
-  <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: folders_path })) %>
+  <%= render(UI::ButtonComponent.new(text: 'Back to this folder', variant: :secondary, options: { as: :a, href: folder_path(@folder) })) %>
+  <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: :neutral, options: { as: :a, href: folders_path })) %>
 </div>

@@ -5,7 +5,7 @@ class UI::ButtonComponent < ApplicationComponent
 
   option :variant, default: proc { :primary }
 
-  option :text, default: proc { 'Click me' }
+  option :text, default: proc {}
 
   option :size, default: proc { :md }
 
@@ -14,8 +14,6 @@ class UI::ButtonComponent < ApplicationComponent
   option :icon_position, default: proc { :left }
 
   option :options, default: proc { {} }
-
-  option :link_options, default: proc {}
 
   COLOR_CLASSES = {
     primary: 'transition text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
@@ -33,6 +31,12 @@ class UI::ButtonComponent < ApplicationComponent
     lg: 'gap-2 px-5 py-3 text-base',
     xl: 'gap-2 px-6 py-3.5 text-lg'
   }.freeze
+
+  def render?
+    raise ArgumentError, 'Text or block must be provided' if text.blank? && !content?
+
+    true
+  end
 
   def as
     options[:as] || :button

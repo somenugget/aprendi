@@ -37,7 +37,7 @@ class StudySetsController < ApplicationController
   # PATCH/PUT /study_sets/1
   def update
     if @study_set.update(study_set_params)
-      redirect_to @study_set, notice: 'Study set was successfully updated.', status: :see_other
+      redirect_to folder_study_set_path(@folder, @study_set), notice: 'Study set was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -46,7 +46,7 @@ class StudySetsController < ApplicationController
   # DELETE /study_sets/1
   def destroy
     @study_set.destroy!
-    redirect_to study_sets_url, notice: 'Study set was successfully destroyed.', status: :see_other
+    redirect_to folder_path(@folder), notice: 'Study set was successfully destroyed.', status: :see_other
   end
 
   private

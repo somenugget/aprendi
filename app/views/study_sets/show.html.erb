@@ -27,9 +27,8 @@
 
 <%= render partial: 'terms/term_form', locals: { term: @study_set.terms.build } %>
 
-<div class="mt-10">
-  <%= render(UI::ButtonComponent.new(text: 'Edit this study set', variant: 'success', options: { as: :a, href: edit_folder_study_set_path(@folder, @study_set) })) %>
+<div class="flex gap-2 mt-10">
+  <%= render(UI::ButtonComponent.new(text: 'Edit this study set', options: { as: :a, href: edit_folder_study_set_path(@folder, @study_set) })) %>
   <%= render(UI::ButtonComponent.new(text: 'Back to folder', variant: 'neutral', options: { as: :a, href: folder_path(@folder) })) %>
-
-  <%= button_to "Destroy this study set", folder_study_set_path(@folder, @study_set), method: :delete %>
+  <%= render(UI::ButtonComponent.new(text: 'Destroy this study set', variant: 'danger', options: { as: :a, 'data-turbo-method' => :delete, 'data-turbo-confirm' => 'Are you sure?',  href: folder_study_set_path(@folder, @study_set) })) %>
 </div>
