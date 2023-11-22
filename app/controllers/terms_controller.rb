@@ -35,8 +35,7 @@ class TermsController < ApplicationController
         )
       ]
     else
-      # debugger
-      render turbo_stream: turbo_stream.replace('term-form', partial: 'terms/term_form', locals: { term: @term })
+      render turbo_stream: turbo_stream.replace('form_term', partial: 'terms/term_form', locals: { term: @term })
     end
   end
 

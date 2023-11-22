@@ -33,6 +33,9 @@ Style/ClassAndModuleChildren:
 Style/Documentation:
   Enabled: false
 
+Style/DocumentationMethod:
+  Enabled: true
+
 Style/HashSyntax:
   Enabled: false
 

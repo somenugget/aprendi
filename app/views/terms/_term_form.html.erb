@@ -1,27 +1,30 @@
 <turbo-frame id=<%= dom_id(term, 'form') %>>
   <%= form_with(model: term, url: [term.study_set.folder, term.study_set, term]) do |form| %>
-    <div class="flex gap-3 mb-2">
+    <div class="flex gap-3 mb-2 items-end">
       <div>
-        <%= form.label :term, style: "display: block" %>
-        <%= form.text_field :term, autofocus: (defined?(autofocus) ? autofocus : false) %>
-        <% if term.errors[:term].any? %>
-          <div class="text-red-500">
-            <%= term.errors[:term].join(', ') %>
-          </div>
-        <% end %>
+        <%= render(UI::Form::InputComponent.new(
+          form: form,
+          attribute: :term,
+          errors: term.errors[:term],
+          options: { autofocus: (defined?(autofocus) ? autofocus : false) }
+        )) %>
       </div>
 
       <div>
-        <%= form.label :definition, style: "display: block" %>
-        <%= form.text_field :definition %>
-        <% if term.errors[:definition].any? %>
-          <div class="text-red-500">
-            <%= term.errors[:definition].join(', ') %>
-          </div>
-        <% end %>
+        <%= render(UI::Form::InputComponent.new(
+          form: form,
+          attribute: :definition,
+          errors: term.errors[:definition],
+        )) %>
       </div>
 
-      <%= form.submit class: 'btn-success' %>
+      <div>
+        <%= render(UI::ButtonComponent.new(
+          text: term.persisted? ? 'Update' : 'Create',
+          variant: term.persisted? ? :secondary : :success,
+          options: { type: :submit }
+        )) %>
+      </div>
     </div>
 
     <div class="text-red-500">

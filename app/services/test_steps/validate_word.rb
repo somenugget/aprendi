@@ -8,6 +8,7 @@ module TestSteps
     #   @return [String]
     input :answer, type: String
 
+    # @return [Boolean]
     def call
       I18n.transliterate(answer.strip).downcase == I18n.transliterate(test_step.term.term.strip).downcase
     end

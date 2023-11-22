@@ -1,0 +1,8 @@
+<%= form.label attribute, class: label_class %>
+<%= form.text_field attribute, { **options, class: input_class } %>
+
+<% if errors.any? %>
+  <div class="<%= error_class %>">
+    <%= errors.join(', ') %>
+  </div>
+<% end %>
