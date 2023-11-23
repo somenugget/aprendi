@@ -1,4 +1,4 @@
-<div class="flex flex-col gap-10 mb-10">
+<div class="flex flex-col gap-10 pb-6">
   <div class="flex items-center justify-between">
     <div class="flex items-center gap-4">
       <h3 class="">
@@ -13,15 +13,20 @@
         </div>
 
         <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
-      <%= pluralize(@study_set.terms.count, 'term') %>
-    </span>
+          <%= pluralize(@study_set.terms.count, 'term') %>
+        </span>
       </div>
     </div>
 
-    <%= form_with url: tests_path, method: :post do |form| %>
-      <%= form.hidden_field :study_set_id, value: @study_set.id %>
-      <%= render(UI::ButtonComponent.new(text: 'Learn this set', options: { type: :submit })) %>
-    <% end %>
+    <div class="flex gap-2">
+      <%= form_with url: tests_path, method: :post do |form| %>
+        <%= form.hidden_field :study_set_id, value: @study_set.id %>
+        <%= render(UI::ButtonComponent.new(text: 'Learn this set', options: { type: :submit })) %>
+      <% end %>
+      <%= render(UI::ButtonComponent.new(text: 'Back to folder', variant: 'neutral', options: { as: :a, href: folder_path(@folder) })) %>
+      <%= render(UI::ButtonComponent.new(text: 'Edit', variant: :secondary, options: { as: :a, href: edit_folder_study_set_path(@folder, @study_set) })) %>
+      <%= render(UI::ButtonComponent.new(text: 'Delete', variant: 'danger', options: { as: :a, 'data-turbo-method' => :delete, 'data-turbo-confirm' => 'Are you sure?', href: folder_study_set_path(@folder, @study_set) })) %>
+    </div>
   </div>
 
   <div>
@@ -32,11 +37,5 @@
     </div>
 
     <%= render partial: 'terms/term_form', locals: { term: @study_set.terms.build } %>
-  </div>
-
-  <div class="flex gap-2">
-    <%= render(UI::ButtonComponent.new(text: 'Back to folder', variant: 'neutral', options: { as: :a, href: folder_path(@folder) })) %>
-    <%= render(UI::ButtonComponent.new(text: 'Edit this study set', options: { as: :a, href: edit_folder_study_set_path(@folder, @study_set) })) %>
-    <%= render(UI::ButtonComponent.new(text: 'Destroy this study set', variant: 'danger', options: { as: :a, 'data-turbo-method' => :delete, 'data-turbo-confirm' => 'Are you sure?', href: folder_study_set_path(@folder, @study_set) })) %>
   </div>
 </div>

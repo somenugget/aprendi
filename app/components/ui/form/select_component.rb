@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UI::Form::InputComponent < ApplicationComponent
+class UI::Form::SelectComponent < ApplicationComponent
   extend Dry::Initializer
 
   # @!method initialize(form:, attribute:, options: {}, label_options: {}, errors: [])
@@ -12,6 +12,10 @@ class UI::Form::InputComponent < ApplicationComponent
   # @!method attribute
   #  @return [Symbol]
   option :attribute
+
+  # @!method values
+  #  @return [Array]
+  option :values, default: proc { [] }
 
   # @!method options
   #  @return [Hash]

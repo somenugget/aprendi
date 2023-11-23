@@ -1,4 +1,4 @@
-<%= form_with(model: study_set, url: [@folder, study_set]) do |form| %>
+<%= form_with(model: study_set, url: [@folder, study_set], class: 'my-4 flex flex-col gap-8') do |form| %>
   <% if study_set.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(study_set.errors.count, "error") %> prohibited this study_set from being saved:</h2>
@@ -11,24 +11,25 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="w-1/2">
+    <%= render(UI::Form::InputComponent.new(form: form, attribute: :name)) %>
   </div>
 
-  <%= fields_for :study_config do |study_config_fields| %>
-    <div>
-      <%= study_config_fields.label :term_lang, style: "display: block" %>
-      <%= study_config_fields.select :term_lang, StudyConfig::LANGUAGES %>
+  <%= fields_for :study_config, @study_set.study_config do |study_config_fields| %>
+    <div class="w-1/2">
+      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :term_lang, values: StudyConfig::LANGUAGES)) %>
     </div>
 
-    <div>
-      <%= study_config_fields.label :definition_lang, style: "display: block" %>
-      <%= study_config_fields.select :definition_lang, StudyConfig::LANGUAGES %>
+    <div class="w-1/2">
+      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :definition_lang, values: StudyConfig::LANGUAGES)) %>
     </div>
   <% end %>
 
   <div>
-    <%= form.submit class: 'btn-success' %>
+    <%= render(UI::ButtonComponent.new(
+      text: study_set.persisted? ? 'Update' : 'Create',
+      variant: study_set.persisted? ? :secondary : :success,
+      options: { type: :submit }
+    )) %>
   </div>
 <% end %>

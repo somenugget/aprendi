@@ -37,6 +37,8 @@ class StudySetsController < ApplicationController
   # PATCH/PUT /study_sets/1
   def update
     if @study_set.update(study_set_params)
+      @study_set.study_config.update(study_config_params)
+
       redirect_to folder_study_set_path(@folder, @study_set), notice: 'Study set was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity

@@ -1,8 +1,10 @@
 <div>
-  <div class="mb-6">
+  <div class="flex justify-between">
+    <h3>
+      New folder
+    </h3>
     <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: folders_path })) %>
   </div>
-
 
   <%= render "form", folder: @folder %>
 </div>

@@ -1,10 +1,9 @@
-<h1>Editing study set</h1>
+<div class="flex justify-between">
+  <h3>Editing study set</h3>
+
+  <div>
+    <%= render(UI::ButtonComponent.new(text: 'Back to this study set', variant: :neutral, options: { as: :a, href: folder_study_set_path(@folder, @study_set) })) %>
+  </div>
+</div>
 
 <%= render "form", study_set: @study_set %>
-
-<br>
-
-<div>
-  <%= link_to "Show this study set", folder_study_set_path(@folder, @study_set) %> |
-  <%= render(UI::ButtonComponent.new(text: 'Back to folder', variant: 'neutral', options: { as: :a, href: folder_path(@folder) })) %>
-</div>

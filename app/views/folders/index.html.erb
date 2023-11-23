@@ -1,4 +1,10 @@
-<%= render(UI::ButtonComponent.new(text: "New folder", options: { as: :a, href: new_folder_path })) %>
+<div class="flex justify-between">
+  <h3>
+    Your folders
+  </h3>
+
+  <%= render(UI::ButtonComponent.new(text: "New folder", options: { as: :a, href: new_folder_path })) %>
+</div>
 
 <div id="folders" class="grid grid-cols-4 gap-3 mt-4">
   <% @folders.each do |folder| %>

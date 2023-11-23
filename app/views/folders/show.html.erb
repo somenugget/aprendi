@@ -5,8 +5,9 @@
 
   <div class="flex gap-2">
     <%= render(UI::ButtonComponent.new(text: 'Add study set', options: { as: :a, href: new_folder_study_set_path(@folder) })) %>
+    <%= render(UI::ButtonComponent.new(text: 'Back to folders', variant: 'neutral', options: { as: :a, href: folders_path })) %>
     <%= render(UI::ButtonComponent.new(variant: :secondary, text: 'Edit', options: { as: :a, href: edit_folder_path(@folder) })) %>
-    <%= render(UI::ButtonComponent.new(variant: :danger, text: 'Delete', options: { as: :a, href: folder_path(@folder), method: :delete, data: { confirm: "Are you sure?" } })) %>
+    <%= render(UI::ButtonComponent.new(variant: :danger, text: 'Delete', options: { as: :a, href: folder_path(@folder), 'data-turbo-method' => :delete, 'data-turbo-confirm' => "Are you sure?" })) %>
   </div>
 </div>
 
