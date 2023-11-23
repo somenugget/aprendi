@@ -3,6 +3,8 @@
 class UI::ButtonComponent < ApplicationComponent
   extend Dry::Initializer
 
+  # @!method initialize(variant: :primary, text: nil, size: :md, icon: nil, icon_position: :left, options: {})
+
   option :variant, default: proc { :primary }
 
   option :text, default: proc {}
