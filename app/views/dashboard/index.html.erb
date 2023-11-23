@@ -1,4 +1,4 @@
-<h2 class="mb-10">Your words for today</h2>
+<h2 class="mb-6">Your words for today</h2>
 
 <% if @new_terms_to_learn.any? || @ripe_terms_to_learn.any? %>
   <div class="flex items-stretch gap-6 mb-6">
@@ -13,7 +13,11 @@
           <div class="flex flex-col gap-1">
             <% @new_terms_to_learn.each do |term| %>
               <%= form.hidden_field 'terms_ids[]', value: term.id %>
-              <p class="mb-1"><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %> <%= term.next_test_date %></p>
+              <%= render(TermProgress::DashboardRowComponent.new(
+                term: term.term,
+                success_percentage: term.success_percentage,
+                tests_count: term.tests_count
+              )) %>
             <% end %>
           </div>
         <% end %>
@@ -31,7 +35,11 @@
           <div class="flex flex-col gap-1">
             <% @ripe_terms_to_learn.each do |term| %>
               <%= form.hidden_field 'terms_ids[]', value: term.id %>
-              <p class="mb-1"><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %> <%= term.next_test_date %></p>
+              <%= render(TermProgress::DashboardRowComponent.new(
+                term: term.term,
+                success_percentage: term.success_percentage,
+                tests_count: term.tests_count
+              )) %>
             <% end %>
           </div>
         <% end %>
@@ -62,7 +70,11 @@
     <h6 class="mb-3">Ripening</h6>
     <div class="flex flex-col gap-1">
       <% @ripening_terms.each do |term| %>
-        <p><%= term.term %>  <%= term.success_percentage %> <%= term.tests_count %></p>
+        <%= render(TermProgress::DashboardRowComponent.new(
+          term: term.term,
+          success_percentage: term.success_percentage,
+          tests_count: term.tests_count
+        )) %>
       <% end %>
     </div>
   <% end %>

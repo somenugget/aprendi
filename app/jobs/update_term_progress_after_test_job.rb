@@ -1,6 +1,7 @@
 class UpdateTermProgressAfterTestJob < ApplicationJob
   queue_as :default
 
+  # @param [Integer] test_id
   def perform(test_id)
     test = Test.find_by(id: test_id)
 

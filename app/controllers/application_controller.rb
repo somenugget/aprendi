@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
                                       end
   end
   helper_method :recent_test_step_in_progress
+
+  def after_sign_in_path_for(user)
+    if user.term_progresses.any?
+      dashboard_path
+    else
+      folders_path
+    end
+  end
 end

@@ -23,9 +23,9 @@ class Tests::ResultComponent < ApplicationComponent
   end
 
   def result_color
-    if percentage >= 85
+    if percentage >= TermProgress::PERCENTAGE_THRESHOLD[:good]
       'text-lime-500'
-    elsif percentage >= 60
+    elsif percentage >= TermProgress::PERCENTAGE_THRESHOLD[:medium]
       'text-orange-500'
     else
       'text-red-600'
