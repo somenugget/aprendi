@@ -3,7 +3,7 @@ class TestsController < ApplicationController
 
   # GET /tests
   def index
-    @tests = Test.all
+    @tests = current_user.tests
   end
 
   # GET /tests/1
@@ -17,7 +17,7 @@ class TestsController < ApplicationController
 
   # GET /tests/new
   def new
-    @test = Test.new
+    @test = current_user.tests.build
   end
 
   # GET /tests/1/edit

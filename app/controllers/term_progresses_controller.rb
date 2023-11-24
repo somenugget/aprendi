@@ -3,7 +3,7 @@ class TermProgressesController < ApplicationController
 
   # GET /term_progresses
   def index
-    @term_progresses = TermProgress.all
+    @term_progresses = current_user.term_progresses
   end
 
   # GET /term_progresses/1
@@ -11,7 +11,7 @@ class TermProgressesController < ApplicationController
 
   # GET /term_progresses/new
   def new
-    @term_progress = TermProgress.new
+    @term_progress = current_user.term_progresses.build
   end
 
   # GET /term_progresses/1/edit

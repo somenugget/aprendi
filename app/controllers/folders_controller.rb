@@ -3,7 +3,7 @@ class FoldersController < ApplicationController
 
   # GET /folders
   def index
-    @folders = Folder.all
+    @folders = current_user.folders
   end
 
   # GET /folders/1
@@ -11,7 +11,7 @@ class FoldersController < ApplicationController
 
   # GET /folders/new
   def new
-    @folder = Folder.new
+    @folder = current_user.folders.build
   end
 
   # GET /folders/1/edit

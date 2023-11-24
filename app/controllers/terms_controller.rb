@@ -7,7 +7,7 @@ class TermsController < ApplicationController
 
   # GET /terms
   def index
-    @terms = Term.all
+    @terms = study_set.terms
   end
 
   # GET /terms/1

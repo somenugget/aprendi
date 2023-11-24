@@ -1,5 +1,7 @@
 class BaseService
   module DefaultOutput
+    # save service call output to the `output` attribute
+    # to not define output variable in every service
     def _call
       self.output = super
     end

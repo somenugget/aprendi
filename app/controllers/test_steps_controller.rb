@@ -6,7 +6,7 @@ class TestStepsController < ApplicationController
 
   # GET /test_steps
   def index
-    @test_steps = TestStep.all
+    @test_steps = current_user.test_steps
   end
 
   # GET /test_steps/1
@@ -14,7 +14,7 @@ class TestStepsController < ApplicationController
 
   # GET /test_steps/new
   def new
-    @test_step = TestStep.new
+    @test_step = current_user.test_steps.build
   end
 
   # GET /test_steps/1/edit
@@ -22,7 +22,7 @@ class TestStepsController < ApplicationController
 
   # POST /test_steps
   def create
-    @test_step = TestStep.new(test_step_params)
+    @test_step = current_user.test_steps.build(test_step_params)
 
     if @test_step.save
       redirect_to @test_step, notice: 'Test step was successfully created.'

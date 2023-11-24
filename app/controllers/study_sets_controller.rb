@@ -4,7 +4,7 @@ class StudySetsController < ApplicationController
 
   # GET /study_sets
   def index
-    @study_sets = StudySet.all
+    @study_sets = current_user.study_sets
   end
 
   # GET /study_sets/1
