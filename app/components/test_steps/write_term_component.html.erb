@@ -8,7 +8,8 @@
   <div class="flex justify-center mt-6">
     <%= f.text_field :answer_term,
                      value: answer_term,
-                     autofocus: true,
+                     autofocus: result.blank?,
+                     disabled: result.present?,
                      class: class_names('rounded w-64', {
                        'border-red-600 text-red-600' => error?,
                        'border-green-500 text-green-500' => success?
