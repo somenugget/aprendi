@@ -1,0 +1,63 @@
+name: CI
+on: [push]
+
+env:
+  RAILS_ENV: test
+  OPENAI_ACCESS_TOKEN: 'sk-xxx'
+  OPENAI_ORGANIZATION_ID: 'org-xxx'
+
+jobs:
+  linters:
+    name: Linters and tests # While test are fast we can have them in one container with linters to save money
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15.3
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - "5432:5432"
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Run Ruby linters
+        run: |
+          bundle exec rubocop
+          bundle exec bundle-audit check --update
+      - name: Run Node linters
+        run: |
+          npm run lint
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+      - name: Run tests
+        run: |
+          cp config/database.github.yml config/database.yml
+          bundle exec rails db:setup
+          bundle exec rails assets:precompile
+          bundle exec rspec
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: screenshots
+          path: tmp/capybara
+          if-no-files-found: ignore
+          retention-days: 7

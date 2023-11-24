@@ -21,6 +21,8 @@
     "stimulus-vite-helpers": "^3.0.1"
   },
   "scripts": {
+    "lint": "eslint app/frontend/** --ext .js,.vue --ignore-path .gitignore",
+    "lintFix": "eslint app/frontend/** --ext .js,.vue --ignore-path .gitignore --fix",
     "build": "vite build --outDir public"
   }
 }

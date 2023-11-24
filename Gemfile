@@ -47,6 +47,7 @@ group :development, :test do
 
   gem 'dotenv-rails'
 
+  gem 'bundle-audit', require: false
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
