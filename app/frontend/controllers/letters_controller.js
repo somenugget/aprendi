@@ -13,10 +13,10 @@ export default class extends Controller {
     this.selectedChars = []
   }
 
-  select(e) {
-    const currentTarget = e.currentTarget
+  select(event) {
+    const { currentTarget } = event
 
-    this.selectChar(e.params.char, () => {
+    this.selectChar(event.params.char, () => {
       currentTarget.setAttribute('disabled', 'disabled')
     })
   }
@@ -66,7 +66,7 @@ export default class extends Controller {
 
   selectWithKeyboard(e) {
     const key = e.key.toLowerCase()
-    const keyCode = e.keyCode
+    const { keyCode } = e
     const isUppercaseLetter = keyCode >= 65 && keyCode <= 90
     const isLowercaseLetter = keyCode >= 97 && keyCode <= 122
 

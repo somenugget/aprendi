@@ -1,8 +1,10 @@
 import 'flowbite'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as Turbo from '@hotwired/turbo'
-Turbo.start()
 
 import '../controllers'
+
+Turbo.start()
 
 // import ActiveStorage from '@rails/activestorage'
 // ActiveStorage.start()
