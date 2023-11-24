@@ -45,6 +45,11 @@ RUN npm install
 # Copy application code
 COPY --link . .
 
+# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+ENV OPENAI_ACCESS_TOKEN=dummy \
+    OPENAI_ORGANIZATION_ID=dummy \
+    SECRET_KEY_BASE=dummy
+RUN bundle exec rails assets:precompile
 
 # Final stage for app image
 FROM base
