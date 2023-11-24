@@ -6,7 +6,7 @@
           form: form,
           attribute: :term,
           errors: term.errors[:term],
-          options: { autofocus: (defined?(autofocus) ? autofocus : false) }
+          options: { autofocus: term.new_record? }
         )) %>
       </div>
 

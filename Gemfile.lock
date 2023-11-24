@@ -98,6 +98,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.5.12)
+      rails (>= 3.0.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -341,6 +343,11 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    sentry-rails (5.13.0)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.13.0)
+    sentry-ruby (5.13.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     service_actor (3.7.0)
       zeitwerk
     snaky_hash (2.0.1)
@@ -392,6 +399,7 @@ PLATFORMS
 DEPENDENCIES
   debug
   devise
+  dockerfile-rails (>= 1.5)
   dotenv-rails
   dry-initializer
   factory_bot_rails
@@ -412,6 +420,8 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  sentry-rails (~> 5.13)
+  sentry-ruby (~> 5.13)
   service_actor
   stimulus-rails
   turbo-rails

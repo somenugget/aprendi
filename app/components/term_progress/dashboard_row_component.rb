@@ -3,7 +3,7 @@
 class TermProgress::DashboardRowComponent < ApplicationComponent
   extend Dry::Initializer
 
-  # @!method initialize(term:, success_percentage:, tests_count:)
+  # @!method initialize(term:, success_percentage:, tests_count:, definition: nil)
 
   # @!method term
   # @return [String]
@@ -17,10 +17,14 @@ class TermProgress::DashboardRowComponent < ApplicationComponent
   # @return [Integer]
   option :tests_count
 
+  # @!method definition
+  # @return [String, nil]
+  option :definition, optional: true
+
   private
 
   def has_progress?
-    tests_count.positive?
+    tests_count.to_i.positive?
   end
 
   def progress_badge_class

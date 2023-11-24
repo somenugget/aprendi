@@ -14,7 +14,7 @@ class Test < ApplicationRecord
       Test.transaction do
         Test.create!(user: user, status: :in_progress).tap do |test|
           TestStep.exercises.each_value do |exercise|
-            study_set.terms.each do |term|
+            study_set.terms.shuffle.each do |term|
               test.test_steps.create!(term: term, exercise: exercise)
             end
           end
@@ -30,7 +30,7 @@ class Test < ApplicationRecord
       Test.transaction do
         Test.create!(user: user, status: :in_progress).tap do |test|
           TestStep.exercises.each_value do |exercise|
-            terms_ids.each do |term_id|
+            terms_ids.shuffle.each do |term_id|
               test.test_steps.create!(term_id: term_id, exercise: exercise)
             end
           end

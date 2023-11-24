@@ -19,5 +19,8 @@
     "flowbite": "^2.1.1",
     "stimulus-use": "^0.52.1",
     "stimulus-vite-helpers": "^3.0.1"
+  },
+  "scripts": {
+    "build": "vite build --outDir public"
   }
 }

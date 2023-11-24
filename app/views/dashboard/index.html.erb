@@ -57,7 +57,7 @@
         <%= ',' if i > 0 %>
         to <%= link_to folder.name, new_folder_study_set_path(folder) %>
       <% end %>
-      or to
+      or
       <%= link_to 'any other folder', folders_path %>.
     </p>
   </div>
@@ -72,6 +72,7 @@
       <% @ripening_terms.each do |term| %>
         <%= render(TermProgress::DashboardRowComponent.new(
           term: term.term,
+          definition: term.definition,
           success_percentage: term.success_percentage,
           tests_count: term.tests_count
         )) %>
