@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  mount Lookbook::Engine, at: "/lookbook" if Rails.env.development?
+  mount Lookbook::Engine, at: '/lookbook' if Rails.env.development?
 
   get :auth, to: 'auth#index'
   get :dashboard, to: 'dashboard#index'

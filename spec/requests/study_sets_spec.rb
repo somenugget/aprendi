@@ -12,94 +12,91 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/study_sets", type: :request do
-  
+RSpec.describe '/study_sets', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # StudySet. As you add validations to StudySet, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    skip('Add a hash of attributes valid for your model')
+  end
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) do
+    skip('Add a hash of attributes invalid for your model')
+  end
 
-  describe "GET /index" do
-    it "renders a successful response" do
+  describe 'GET /index' do
+    it 'renders a successful response' do
       StudySet.create! valid_attributes
       get study_sets_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
+  describe 'GET /show' do
+    it 'renders a successful response' do
       study_set = StudySet.create! valid_attributes
       get study_set_url(study_set)
       expect(response).to be_successful
     end
   end
 
-  describe "GET /new" do
-    it "renders a successful response" do
+  describe 'GET /new' do
+    it 'renders a successful response' do
       get new_study_set_url
       expect(response).to be_successful
     end
   end
 
-  describe "GET /edit" do
-    it "renders a successful response" do
+  describe 'GET /edit' do
+    it 'renders a successful response' do
       study_set = StudySet.create! valid_attributes
       get edit_study_set_url(study_set)
       expect(response).to be_successful
     end
   end
 
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new StudySet" do
-        expect {
+  describe 'POST /create' do
+    context 'with valid parameters' do
+      it 'creates a new StudySet' do
+        expect do
           post study_sets_url, params: { study_set: valid_attributes }
-        }.to change(StudySet, :count).by(1)
+        end.to change(StudySet, :count).by(1)
       end
 
-      it "redirects to the created study_set" do
+      it 'redirects to the created study_set' do
         post study_sets_url, params: { study_set: valid_attributes }
         expect(response).to redirect_to(study_set_url(StudySet.last))
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new StudySet" do
-        expect {
+    context 'with invalid parameters' do
+      it 'does not create a new StudySet' do
+        expect do
           post study_sets_url, params: { study_set: invalid_attributes }
-        }.to change(StudySet, :count).by(0)
+        end.to change(StudySet, :count).by(0)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post study_sets_url, params: { study_set: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  describe 'PATCH /update' do
+    context 'with valid parameters' do
+      let(:new_attributes) do
+        skip('Add a hash of attributes valid for your model')
+      end
 
-      it "updates the requested study_set" do
+      it 'updates the requested study_set' do
         study_set = StudySet.create! valid_attributes
         patch study_set_url(study_set), params: { study_set: new_attributes }
         study_set.reload
-        skip("Add assertions for updated state")
+        skip('Add assertions for updated state')
       end
 
-      it "redirects to the study_set" do
+      it 'redirects to the study_set' do
         study_set = StudySet.create! valid_attributes
         patch study_set_url(study_set), params: { study_set: new_attributes }
         study_set.reload
@@ -107,26 +104,24 @@ RSpec.describe "/study_sets", type: :request do
       end
     end
 
-    context "with invalid parameters" do
-    
+    context 'with invalid parameters' do
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         study_set = StudySet.create! valid_attributes
         patch study_set_url(study_set), params: { study_set: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
     end
   end
 
-  describe "DELETE /destroy" do
-    it "destroys the requested study_set" do
+  describe 'DELETE /destroy' do
+    it 'destroys the requested study_set' do
       study_set = StudySet.create! valid_attributes
-      expect {
+      expect do
         delete study_set_url(study_set)
-      }.to change(StudySet, :count).by(-1)
+      end.to change(StudySet, :count).by(-1)
     end
 
-    it "redirects to the study_sets list" do
+    it 'redirects to the study_sets list' do
       study_set = StudySet.create! valid_attributes
       delete study_set_url(study_set)
       expect(response).to redirect_to(study_sets_url)

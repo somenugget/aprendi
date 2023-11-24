@@ -1,5 +1,5 @@
 class FoldersController < ApplicationController
-  before_action :set_folder, only: %i[ show edit update destroy ]
+  before_action :set_folder, only: %i[show edit update destroy]
 
   # GET /folders
   def index
@@ -7,8 +7,7 @@ class FoldersController < ApplicationController
   end
 
   # GET /folders/1
-  def show
-  end
+  def show; end
 
   # GET /folders/new
   def new
@@ -16,15 +15,14 @@ class FoldersController < ApplicationController
   end
 
   # GET /folders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /folders
   def create
     @folder = current_user.folders.build(folder_params)
 
     if @folder.save
-      redirect_to @folder, notice: "Folder was successfully created."
+      redirect_to @folder, notice: 'Folder was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +31,7 @@ class FoldersController < ApplicationController
   # PATCH/PUT /folders/1
   def update
     if @folder.update(folder_params)
-      redirect_to @folder, notice: "Folder was successfully updated.", status: :see_other
+      redirect_to @folder, notice: 'Folder was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,17 +40,18 @@ class FoldersController < ApplicationController
   # DELETE /folders/1
   def destroy
     @folder.destroy!
-    redirect_to folders_url, notice: "Folder was successfully destroyed.", status: :see_other
+    redirect_to folders_url, notice: 'Folder was successfully destroyed.', status: :see_other
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_folder
-      @folder = current_user.folders.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def folder_params
-      params.require(:folder).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_folder
+    @folder = current_user.folders.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def folder_params
+    params.require(:folder).permit(:name)
+  end
 end

@@ -75,5 +75,5 @@ Rails.application.configure do
 
   config.lookbook.preview_paths = ['spec/components/previews']
 
-  config.view_component.default_preview_layout = "component_preview"
+  config.view_component.default_preview_layout = 'component_preview'
 end

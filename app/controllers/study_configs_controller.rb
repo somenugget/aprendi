@@ -1,5 +1,5 @@
 class StudyConfigsController < ApplicationController
-  before_action :set_study_config, only: %i[ show edit update destroy ]
+  before_action :set_study_config, only: %i[show edit update destroy]
 
   # GET /study_configs
   def index
@@ -7,8 +7,7 @@ class StudyConfigsController < ApplicationController
   end
 
   # GET /study_configs/1
-  def show
-  end
+  def show; end
 
   # GET /study_configs/new
   def new
@@ -16,15 +15,14 @@ class StudyConfigsController < ApplicationController
   end
 
   # GET /study_configs/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /study_configs
   def create
     @study_config = StudyConfig.new(study_config_params)
 
     if @study_config.save
-      redirect_to @study_config, notice: "Study config was successfully created."
+      redirect_to @study_config, notice: 'Study config was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,7 +31,7 @@ class StudyConfigsController < ApplicationController
   # PATCH/PUT /study_configs/1
   def update
     if @study_config.update(study_config_params)
-      redirect_to @study_config, notice: "Study config was successfully updated.", status: :see_other
+      redirect_to @study_config, notice: 'Study config was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,17 +40,18 @@ class StudyConfigsController < ApplicationController
   # DELETE /study_configs/1
   def destroy
     @study_config.destroy!
-    redirect_to study_configs_url, notice: "Study config was successfully destroyed.", status: :see_other
+    redirect_to study_configs_url, notice: 'Study config was successfully destroyed.', status: :see_other
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_study_config
-      @study_config = StudyConfig.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def study_config_params
-      params.require(:study_config).permit(:configurable_id, :configurable_type, :term_lang, :definition_lang)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_study_config
+    @study_config = StudyConfig.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def study_config_params
+    params.require(:study_config).permit(:configurable_id, :configurable_type, :term_lang, :definition_lang)
+  end
 end

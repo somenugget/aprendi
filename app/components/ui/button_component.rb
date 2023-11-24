@@ -23,7 +23,7 @@ class UI::ButtonComponent < ApplicationComponent
     danger: 'text-white bg-gradient-to-br from-pink-600 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800',
     warning: 'text-white bg-gradient-to-r from-red-500 via-red-400 to-yellow-300 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400',
     success: 'text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700',
-    neutral: 'text-gray-900 bg-gradient-to-r from-indigo-50 to-cyan-50 hover:bg-gradient-to-l hover:from-indigo-50 hover:to-cyan-50 focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-teal-700',
+    neutral: 'text-gray-900 bg-gradient-to-r from-indigo-50 to-cyan-50 hover:bg-gradient-to-l hover:from-indigo-50 hover:to-cyan-50 focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-teal-700'
   }.freeze
 
   SIZE_CLASSES = {
