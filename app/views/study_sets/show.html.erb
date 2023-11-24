@@ -31,7 +31,7 @@
 
   <div>
     <div id="study-set_terms">
-      <% @study_set.terms.each do |term| %>
+      <% @study_set.terms.order(:created_at).each do |term| %>
         <%= render partial: 'terms/term_form', locals: { term: term } %>
       <% end %>
     </div>

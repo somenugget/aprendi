@@ -51,7 +51,10 @@ class TermsController < ApplicationController
   # DELETE /terms/1
   def destroy
     @term.destroy!
-    redirect_to terms_url, notice: 'Term was successfully destroyed.', status: :see_other
+
+    render turbo_stream: [
+      turbo_stream.remove(dom_id(@term, 'form'))
+    ]
   end
 
   private
