@@ -9,6 +9,8 @@ class TestSteps::WriteTermComponent < ApplicationComponent
     @result = result
   end
 
+  private
+
   def error?
     result == 'error'
   end

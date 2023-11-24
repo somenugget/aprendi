@@ -3,7 +3,7 @@ module Users
     skip_before_action :verify_authenticity_token
 
     def google_oauth2 # rubocop:disable Metrics/AbcSize
-      @user = User.from_omniauth(request.env['omniauth.auth'])
+      @user = Users::SaveFromOmniauth.call(auth: request.env['omniauth.auth']).output
 
       if @user.persisted?
         flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'

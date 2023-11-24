@@ -1,4 +1,4 @@
-class TestStepsController < ApplicationController
+class TestStepsController < ApplicationController # rubocop:disable Metrics/ClassLength
   include ActionView::RecordIdentifier
 
   before_action :set_test
@@ -32,10 +32,10 @@ class TestStepsController < ApplicationController
   end
 
   # PATCH/PUT /test_steps/1
-  def update
+  def update # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/MethodLength
     streams = []
 
-    Test.transaction do
+    Test.transaction do # rubocop:disable Metrics/BlockLength
       @test.touch
 
       if @test_step.pick_term?
@@ -45,9 +45,12 @@ class TestStepsController < ApplicationController
         if correct_term.id == answer_term.id
           @test_step.update!(status: :successful)
 
-          streams << turbo_stream.replace(dom_id(answer_term, 'answer'),
-                                          render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term,
-                                                                                               label: answer_term.term, result: 'success')))
+          streams << turbo_stream.replace(
+            dom_id(answer_term, 'answer'),
+            render_to_string(
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'success')
+            )
+          )
         else
           @test_step.register_failure!
 
@@ -71,18 +74,27 @@ class TestStepsController < ApplicationController
         if correct_term.id == answer_term.id
           @test_step.update!(status: :successful)
 
-          streams << turbo_stream.replace(dom_id(answer_term, 'answer'),
-                                          render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition,
-                                                                                               result: 'success')))
+          streams << turbo_stream.replace(
+            dom_id(answer_term, 'answer'),
+            render_to_string(
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition, result: 'success')
+            )
+          )
         else
           @test_step.register_failure!
 
-          streams << turbo_stream.replace(dom_id(answer_term, 'answer'),
-                                          render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition,
-                                                                                               result: 'error')))
-          streams << turbo_stream.replace(dom_id(correct_term, 'answer'),
-                                          render_to_string(TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.definition,
-                                                                                               result: 'success')))
+          streams << turbo_stream.replace(
+            dom_id(answer_term, 'answer'),
+            render_to_string(
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.definition, result: 'error')
+            )
+          )
+          streams << turbo_stream.replace(
+            dom_id(correct_term, 'answer'),
+            render_to_string(
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.definition, result: 'success')
+            )
+          )
         end
       elsif @test_step.letters?
         failed = ActiveModel::Type::Boolean.new.cast(params[:test_step][:failed])

@@ -24,7 +24,7 @@ class TestsController < ApplicationController
   def edit; end
 
   # POST /tests
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     # TODO: show flash message instead
 
     if params[:study_set_id].present?

@@ -9,6 +9,8 @@ class TestSteps::AnswerLabelComponent < ApplicationComponent
     @result = result
   end
 
+  private
+
   def modifier_class
     if result == 'success'
       '!bg-green-50 !border-green-600 !text-green-600'

@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-  def index
+  # rubocop:disable Layout/LineLength
+  def index # rubocop:disable Metrics/AbcSize
     terms_base = Term.where(study_set_id: current_user.study_sets)
                      .joins(term_progresses_join_sql)
                      .select('terms.*, term_progresses.tests_count, term_progresses.success_percentage, term_progresses.next_test_date')
@@ -20,6 +21,7 @@ class DashboardController < ApplicationController
     @ripe_terms_to_learn = ripe_terms_to_learn_base.limit(5).load
     @latest_folders = current_user.folders.order(created_at: :desc).limit(3).load
   end
+  # rubocop:enable Layout/LineLength
 
   private
 

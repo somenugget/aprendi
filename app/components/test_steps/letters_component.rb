@@ -7,6 +7,8 @@ class TestSteps::LettersComponent < ApplicationComponent
     @test_step = test_step
   end
 
+  private
+
   def chars
     test_step.term.term.downcase.chars
   end

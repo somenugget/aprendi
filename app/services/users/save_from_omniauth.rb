@@ -8,19 +8,24 @@ class Users::SaveFromOmniauth < BaseService
     if authorization
       update_authorization_tokens(authorization)
     else
-      user = User.find_or_initialize_by(email: auth.info.email)
-      authorization = create_authorization(user)
+      authorization = create_authorization
     end
-
-    authorization.user.update!(
-      first_name: auth.info.first_name,
-      last_name: auth.info.last_name
-    )
 
     authorization.user
   end
 
   private
+
+  def user
+    @user ||=
+      User.find_or_initialize_by(email: auth.info.email).tap do |user|
+        user.update!(
+          first_name: auth.info.first_name,
+          last_name: auth.info.last_name,
+          **(user.new_record? ? { password: Devise.friendly_token[0, 10] } : {})
+        )
+      end
+  end
 
   def find_authorization
     Authorization.find_by(
@@ -29,7 +34,7 @@ class Users::SaveFromOmniauth < BaseService
     )
   end
 
-  def create_authorization(user)
+  def create_authorization
     Authorization.create!(
       provider: auth.provider,
       uid: auth.uid.to_s,

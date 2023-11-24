@@ -22,7 +22,7 @@ class TermsController < ApplicationController
   def edit; end
 
   # POST /terms
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     @term = @study_set.terms.build(term_params.merge(folder_id: @folder.id))
 
     if @term.save

@@ -23,17 +23,20 @@ class TermProgress::DashboardRowComponent < ApplicationComponent
 
   private
 
-  def has_progress?
+  def progress?
     tests_count.to_i.positive?
   end
 
   def progress_badge_class
     if success_percentage >= TermProgress::PERCENTAGE_THRESHOLD[:good]
-      'ml-1 bg-green-100 text-green-800 text-xs font-medium me-2 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-green-400 border border-green-400'
+      'ml-1 bg-green-100 text-green-800 text-xs font-medium me-2 px-1.5 py-0.5 rounded ' \
+        'dark:bg-gray-700 dark:text-green-400 border border-green-400'
     elsif success_percentage >= TermProgress::PERCENTAGE_THRESHOLD[:medium]
-      'ml-1 bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300'
+      'ml-1 bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-1.5 py-0.5 rounded ' \
+        'dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300'
     else
-      'ml-1 bg-red-100 text-red-800 text-xs font-medium me-2 px-1.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400'
+      'ml-1 bg-red-100 text-red-800 text-xs font-medium me-2 px-1.5 py-0.5 rounded ' \
+        'dark:bg-gray-700 dark:text-red-400 border border-red-400'
     end
   end
 
