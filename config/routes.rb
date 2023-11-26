@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'error/index'
   root 'home#index'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
