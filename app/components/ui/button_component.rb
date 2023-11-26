@@ -63,7 +63,7 @@ class UI::ButtonComponent < ApplicationComponent
   end
 
   def html_class
-    class_names(color_class, layout_class, size_class, class_override)
+    class_names(color_class, layout_class, size_class, options[:class])
   end
 
   def size_class
@@ -76,10 +76,6 @@ class UI::ButtonComponent < ApplicationComponent
 
   def color_class
     COLOR_CLASSES[variant.to_sym]
-  end
-
-  def class_override
-    options[:class_override]
   end
 
   def icon_class
