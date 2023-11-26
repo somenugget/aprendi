@@ -42,6 +42,14 @@ class UI::ButtonComponent < ApplicationComponent
     xl: 'gap-2 px-6 py-3.5 text-lg'
   }.freeze
 
+  ICON_SIZE_CLASSES = {
+    xs: '!w-3 !h-3',
+    sm: '!w-4 !h-4',
+    md: '!w-4 !h-4',
+    lg: '!w-6 !h-6',
+    xl: '!w-7 !h-7'
+  }.freeze
+
   private
 
   def render?
@@ -63,7 +71,7 @@ class UI::ButtonComponent < ApplicationComponent
   end
 
   def layout_class
-    class_names('rounded-lg text-center inline-flex', 'flex-row-reverse' => icon_position == :right)
+    class_names('rounded-lg text-center inline-flex items-center', 'flex-row-reverse' => icon_position == :right)
   end
 
   def color_class
@@ -72,5 +80,11 @@ class UI::ButtonComponent < ApplicationComponent
 
   def class_override
     options[:class_override]
+  end
+
+  def icon_class
+    return '' unless icon.present?
+
+    class_names(ICON_SIZE_CLASSES[size.to_sym])
   end
 end
