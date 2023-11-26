@@ -34,6 +34,10 @@ class StudySetsController < ApplicationController
     end
   end
 
+  def import
+
+  end
+
   # PATCH/PUT /study_sets/1
   def update
     if @study_set.update(study_set_params)

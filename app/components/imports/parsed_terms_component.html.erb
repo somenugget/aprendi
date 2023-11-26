@@ -1,0 +1,28 @@
+<%= form_with url: folder_study_set_import_path(study_set.folder, study_set),
+              method: :post,
+              id: 'parsed-terms' do |form| %>
+  <%- terms.each_with_index do |term, i| %>
+    <div class="flex gap-4 mt-4">
+      <div class="w-full">
+        <%= render(UI::Form::InputComponent.new(
+          form: form,
+          label: 'Term',
+          attribute: "terms[#{i}]term",
+          errors: term.errors[:term],
+          options: { value: term.term }
+        )) %>
+      </div>
+      <div class="w-full">
+        <%= render(UI::Form::InputComponent.new(
+          form: form,
+          label: 'Definition',
+          attribute: "terms[#{i}]definition",
+          errors: term.errors[:definition],
+          options: { value: term.definition }
+        )) %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render(UI::ButtonComponent.new(text: 'Import terms', options: { type: :submit, class: 'mt-4', disabled: submit_disabled? })) %>
+<% end %>

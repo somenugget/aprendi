@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   resources :folders do
     resources :study_sets do
+      resource :import, only: %i[show create] do
+        post :parse
+      end
+
       resources :terms
     end
   end

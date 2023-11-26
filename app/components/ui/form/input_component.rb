@@ -13,6 +13,10 @@ class UI::Form::InputComponent < ApplicationComponent
   #  @return [Symbol]
   option :attribute
 
+  # @!method label
+  # @return [String]
+  option :label, default: proc { nil }
+
   # @!method options
   #  @return [Hash]
   option :options, default: proc { {} }
@@ -43,5 +47,9 @@ class UI::Form::InputComponent < ApplicationComponent
 
   def error_class
     'mt-1 text-sm text-red-600 dark:text-red-500'
+  end
+
+  def errors
+    @errors ||= Array.wrap(@errors).compact
   end
 end

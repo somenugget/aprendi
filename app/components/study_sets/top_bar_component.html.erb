@@ -1,0 +1,55 @@
+<div class="flex items-center justify-between">
+  <div class="flex items-center gap-4">
+    <h3 class="">
+      <%= @study_set.name %>
+    </h3>
+
+    <div class="flex gap-2 mt-1">
+
+      <div class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+        <%= @study_set.study_config.term_lang %> /
+        <%= @study_set.study_config.definition_lang %>
+      </div>
+
+      <span class="bg-green-100 text-green-800 text-sm font-medium px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+          <%= pluralize(@study_set.terms.count, 'term') %>
+        </span>
+    </div>
+  </div>
+
+  <div class="flex gap-2">
+    <%= form_with url: tests_path, method: :post do |form| %>
+      <%= form.hidden_field :study_set_id, value: @study_set.id %>
+      <%= render(UI::ButtonComponent.new(text: 'Learn this set', options: { type: :submit })) %>
+    <% end %>
+    <%= render(UI::ButtonComponent.new(text: 'Back to folder',
+                                       variant: 'neutral',
+                                       options: {
+                                         as: :a,
+                                         href: folder_path(@study_set.folder)
+                                       })) %>
+
+    <%= render(UI::ButtonComponent.new(variant: :neutral, options: { 'data-dropdown-toggle' => 'dropdownDots' })) do %>
+      <%= heroicon 'ellipsis-vertical' %>
+    <% end %>
+
+    <div id="dropdownDots" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+      <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
+        <li>
+          <%= link_to 'Import', folder_study_set_import_path(@study_set.folder, @study_set), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
+        </li>
+        <li>
+          <%= link_to 'Edit', edit_folder_study_set_path(@study_set.folder, @study_set), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
+        </li>
+        <li>
+        </li>
+      </ul>
+      <div class="py-2">
+        <%= link_to 'Delete',
+                    folder_study_set_path(@study_set.folder, @study_set),
+                    class: 'block px-4 py-2 text-red-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white',
+                    data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+      </div>
+    </div>
+  </div>
+</div>
