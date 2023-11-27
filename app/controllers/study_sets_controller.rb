@@ -34,9 +34,7 @@ class StudySetsController < ApplicationController
     end
   end
 
-  def import
-
-  end
+  def import; end
 
   # PATCH/PUT /study_sets/1
   def update

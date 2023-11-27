@@ -15,7 +15,7 @@ class UI::Form::InputComponent < ApplicationComponent
 
   # @!method label
   # @return [String]
-  option :label, default: proc { nil }
+  option :label, default: proc {}
 
   # @!method options
   #  @return [Hash]

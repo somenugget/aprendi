@@ -71,7 +71,8 @@ class UI::ButtonComponent < ApplicationComponent
   end
 
   def layout_class
-    class_names('rounded-lg text-center inline-flex items-center disabled:pointer-events-none disabled:opacity-50', 'flex-row-reverse' => icon_position == :right)
+    class_names('rounded-lg text-center inline-flex items-center disabled:pointer-events-none disabled:opacity-50',
+                'flex-row-reverse' => icon_position == :right)
   end
 
   def color_class
