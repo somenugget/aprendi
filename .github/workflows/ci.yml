@@ -50,6 +50,7 @@ jobs:
       - name: Run tests
         run: |
           cp config/database.github.yml config/database.yml
+          cp .env.example .env
           bundle exec rails db:setup
           bundle exec rails assets:precompile
           bundle exec rspec
