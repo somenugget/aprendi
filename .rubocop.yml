@@ -50,3 +50,6 @@ Style/FetchEnvVar:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
