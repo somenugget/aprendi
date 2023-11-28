@@ -54,7 +54,7 @@ ENV OPENAI_ACCESS_TOKEN=dummy \
     SMTP_PORT=dummy \
     SMTP_USERNAME=dummy \
     SMTP_PASSWORD=dummy \
-    SMTP_AUTHENTICATION=dummy \
+    SMTP_AUTHENTICATION=dummy
 RUN bundle exec rails assets:precompile
 
 # Final stage for app image
