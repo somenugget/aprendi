@@ -17,7 +17,7 @@ class DashboardController < ApplicationController
                                 .limit(5)
                                 .load
 
-    @new_terms_to_learn = new_terms_to_learn_base.order(created_at: :desc).limit(5).load
+    @new_terms_to_learn = new_terms_to_learn_base.order(:created_at).limit(5).load
     @ripe_terms_to_learn = ripe_terms_to_learn_base.limit(5).load
     @latest_folders = current_user.folders.order(created_at: :desc).limit(3).load
   end
