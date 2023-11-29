@@ -7,6 +7,6 @@ class ReminderMailer < ApplicationMailer
 
     return if @new_terms_to_learn.empty? && @ripe_terms_to_learn.empty?
 
-    mail(to: user.email, subject: "Adrendí: Daily reminder #{DateTime.current}")
+    mail(to: user.email, subject: 'Adrendí: Daily reminder')
   end
 end
