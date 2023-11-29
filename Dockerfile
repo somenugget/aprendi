@@ -49,12 +49,7 @@ COPY --link . .
 ENV OPENAI_ACCESS_TOKEN=dummy \
     OPENAI_ORGANIZATION_ID=dummy \
     SECRET_KEY_BASE=dummy \
-    SMTP_ADDRESS=dummy \
-    SMTP_HOST=dummy \
-    SMTP_PORT=dummy \
-    SMTP_USERNAME=dummy \
-    SMTP_PASSWORD=dummy \
-    SMTP_AUTHENTICATION=dummy
+    MAILTRAP_API_KEY=dummy
 RUN bundle exec rails assets:precompile
 
 # Final stage for app image
