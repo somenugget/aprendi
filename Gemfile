@@ -38,6 +38,10 @@ gem 'dry-initializer'
 gem 'good_job'
 gem 'service_actor'
 
+gem 'actionmailer-balancer'
+gem 'mailjet'
+gem 'mailtrap'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

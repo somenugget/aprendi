@@ -27,6 +27,8 @@ GEM
       net-pop
       net-smtp
       rails-dom-testing (~> 2.2)
+    actionmailer-balancer (1.0.0)
+      actionmailer (> 4.0, < 8.0)
     actionpack (7.1.1)
       actionview (= 7.1.1)
       activesupport (= 7.1.1)
@@ -105,6 +107,7 @@ GEM
     diff-lcs (1.5.0)
     dockerfile-rails (1.5.12)
       rails (>= 3.0.0)
+    domain_name (0.6.20231109)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -143,6 +146,9 @@ GEM
       rails (>= 5.2)
     htmlbeautifier (1.4.2)
     htmlentities (4.3.4)
+    http-accept (1.7.0)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     io-console (0.6.0)
@@ -172,8 +178,16 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailjet (1.7.3)
+      activesupport (>= 3.1.0)
+      rack (>= 1.4.0)
+      rest-client (>= 2.0.0)
+    mailtrap (1.2.2)
     marcel (1.0.2)
     method_source (1.0.0)
+    mime-types (3.5.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2023.1003)
     mini_mime (1.1.5)
     minitest (5.20.0)
     multi_xml (0.6.0)
@@ -187,6 +201,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
+    netrc (0.11.0)
     nio4r (2.5.9)
     nokogiri (1.15.4-aarch64-linux)
       racc (~> 1.4)
@@ -299,6 +314,11 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    rest-client (2.1.0)
+      http-accept (>= 1.7.0, < 2.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rexml (3.2.6)
     rouge (4.2.0)
     rspec-core (3.12.2)
@@ -402,6 +422,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  actionmailer-balancer
   bundle-audit
   debug
   devise
@@ -412,6 +433,8 @@ DEPENDENCIES
   good_job
   heroicon
   lookbook
+  mailjet
+  mailtrap
   omniauth
   omniauth-facebook
   omniauth-google-oauth2

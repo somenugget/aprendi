@@ -46,17 +46,5 @@ module Aprendi
                        helper_specs: false,
                        routing_specs: false
     end
-
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.raise_delivery_errors = true
-    config.action_mailer.smtp_settings = {
-      address: ENV.fetch('SMTP_ADDRESS'),
-      host: ENV.fetch('SMTP_HOST'),
-      port: ENV.fetch('SMTP_PORT'),
-      user_name: ENV.fetch('SMTP_USERNAME'),
-      password: ENV.fetch('SMTP_PASSWORD'),
-      authentication: ENV.fetch('SMTP_AUTHENTICATION').to_sym,
-    }
-    config.action_mailer.smtp_settings[:ssl] = true if ENV.fetch('SMTP_SSL', nil) == 'true'
   end
 end
