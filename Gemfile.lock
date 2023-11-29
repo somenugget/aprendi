@@ -27,8 +27,6 @@ GEM
       net-pop
       net-smtp
       rails-dom-testing (~> 2.2)
-    actionmailer-balancer (1.0.0)
-      actionmailer (> 4.0, < 8.0)
     actionpack (7.1.1)
       actionview (= 7.1.1)
       activesupport (= 7.1.1)
@@ -422,7 +420,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  actionmailer-balancer
   bundle-audit
   debug
   devise

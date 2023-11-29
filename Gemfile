@@ -38,7 +38,6 @@ gem 'dry-initializer'
 gem 'good_job'
 gem 'service_actor'
 
-gem 'actionmailer-balancer'
 gem 'mailjet'
 gem 'mailtrap'
 
