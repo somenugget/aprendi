@@ -15,7 +15,9 @@ class TermsWithProgressQuery < ApplicationQuery
 
   def relation
     super.joins(term_progresses_join_sql)
-         .select('terms.*, term_progresses.tests_count, term_progresses.success_percentage, term_progresses.next_test_date')
+         .select(
+           'terms.*, term_progresses.tests_count, term_progresses.success_percentage, term_progresses.next_test_date'
+         )
   end
 
   private
