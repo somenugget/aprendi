@@ -15,6 +15,7 @@
               <%= form.hidden_field 'terms_ids[]', value: term.id %>
               <%= render(TermProgress::DashboardRowComponent.new(
                 term: term.term,
+                definition: term.definition,
                 success_percentage: term.success_percentage,
                 tests_count: term.tests_count
               )) %>
@@ -37,6 +38,7 @@
               <%= form.hidden_field 'terms_ids[]', value: term.id %>
               <%= render(TermProgress::DashboardRowComponent.new(
                 term: term.term,
+                definition: term.definition,
                 success_percentage: term.success_percentage,
                 tests_count: term.tests_count
               )) %>
