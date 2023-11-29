@@ -1,3 +1,22 @@
-<h3>Your daily reminder</h3>
+<h3>Hi <%= @user.first_name %></h3>
+<p>A few words are waiting to be learnt:</p>
 
-<%= link_to 'Your dashboard', dashboard_url %>
+<ul>
+  <% @new_terms_to_learn.each do |term| %>
+    <li>
+      <%= term.term %> - <%= term.definition %>
+    </li>
+  <% end %>
+</ul>
+
+<ul>
+  <% @ripe_terms_to_learn.each do |term|  %>
+    <li>
+      <%= term.term %> - <%= term.definition %>
+    </li>
+  <% end %>
+</ul>
+
+<p>
+  Go to <%= link_to 'your dashboard', dashboard_url %> to start learning!
+</p>

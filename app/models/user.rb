@@ -8,4 +8,10 @@ class User < ApplicationRecord
   has_many :folders, dependent: :destroy
   has_many :tests, dependent: :destroy
   has_many :term_progresses, dependent: :destroy
+  has_one :settings, class_name: 'UserSettings', touch: true
+
+  # @return [UserSettings]
+  def settings
+    super || create_settings!
+  end
 end

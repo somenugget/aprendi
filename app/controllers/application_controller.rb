@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :update_user_timezone
+
   def recent_test_in_progress
     @recent_test_in_progress ||= current_user.tests.in_progress.order(:id).first
   end
@@ -21,5 +23,15 @@ class ApplicationController < ActionController::Base
     else
       folders_path
     end
+  end
+
+  private
+
+  def update_user_timezone
+    return unless current_user
+    return if request.headers['HTTP_X_TIME_ZONE'].blank?
+    return if current_user.updated_at.after?(1.day.ago)
+
+    current_user.settings.update(tz: request.headers['HTTP_X_TIME_ZONE'])
   end
 end

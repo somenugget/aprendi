@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   mount Lookbook::Engine, at: '/lookbook' if Rails.env.development?
 
+  authenticate :user, ->(user) { user.email == 'some.nugget@gmail.com' } do
+    mount GoodJob::Engine => '/good_job'
+  end
+
   get :auth, to: 'auth#index'
   get :dashboard, to: 'dashboard#index'
 
