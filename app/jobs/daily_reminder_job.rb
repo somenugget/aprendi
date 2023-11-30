@@ -1,7 +1,7 @@
 class DailyReminderJob < ApplicationJob
   queue_as :default
 
-  SENDING_HOUR = 10
+  SENDING_HOUR = ENV.fetch('DAILY_REMINDER_SENDING_HOUR', 9).to_i
   SENDING_THRESHOLD = 20.minutes
 
   # check if it's time to send user a reminder
