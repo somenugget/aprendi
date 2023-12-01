@@ -14,7 +14,7 @@ class TestSteps::LettersComponent < ApplicationComponent
   end
 
   def words
-    test_step.term.term.downcase.split(' ').map(&:chars)
+    test_step.term.term.downcase.split.map(&:chars)
   end
 
   def char_to_guess?(char)
