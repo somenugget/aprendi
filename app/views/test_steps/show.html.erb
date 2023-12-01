@@ -27,7 +27,7 @@
 <!--  </p>-->
 <!--</div>-->
 
-<div class="flex flex-col h-full justify-center pb-44">
+<div class="flex flex-col min-h-full justify-center pb-4">
   <% if @test_step.pick_term? %>
     <%= render(TestSteps::PickTermComponent.new(test_step: @test_step)) %>
   <% end %>

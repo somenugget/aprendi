@@ -12,19 +12,25 @@
   </h1>
 
   <div class="mt-10">
-    <div class="flex justify-center gap-2">
-      <% chars.each_with_index do |char, i| %>
-        <% if char_to_guess?(char) %>
-          <div data-letters-target="cell"
-               class="border w-12 h-12 border-zinc-600 text-xl font-bold rounded flex items-center justify-center"
-          ></div>
-        <% else %>
-          <div class="mx-2"><%= char %></div>
-        <% end %>
+    <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 w-full">
+      <% words.each do |word| %>
+        <div class="inline-flex justify-center gap-2 break-after-auto ">
+          <% word.each do |char| %>
+            <% if char_to_guess?(char) %>
+              <div data-letters-target="cell"
+                   class="border w-12 h-12 border-zinc-600 text-xl font-bold rounded flex items-center justify-center"
+              ></div>
+            <% else %>
+              <div class="w-6 h-12 text-xl font-bold flex items-center justify-center">
+                <%= char %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
 
-    <div class="flex gap-2 justify-center mt-9 mb-3">
+    <div class="flex flex-wrap gap-2 justify-center mt-9 mb-3 w-full">
       <% chars_to_guess.shuffle.each do |char| %>
         <button
           data-action="letters#select"
@@ -32,7 +38,7 @@
           data-letters-char-param="<%= char %>"
           data-char="<%= char %>"
           type="button"
-          class="flex justify-center items-center w-10 h-10 m-1 text-xl font-bold text-center border border-zinc-700 rounded transition hover:bg-zinc-100 disabled:pointer-events-none disabled:opacity-25 disabled:select-none"
+          class="flex break-after-auto justify-center items-center w-10 shrink-0 h-10 m-1 text-xl font-bold text-center border border-zinc-700 rounded transition hover:bg-zinc-100 disabled:pointer-events-none disabled:opacity-25 disabled:select-none"
         >
           <span class="pb-0.5"><%= char.downcase %></span>
         </button>
@@ -42,7 +48,7 @@
 
   <div class="justify-end flex h-9">
     <%= f.submit 'Next step',
-                 'data-letters-target'=>"nextStep",
+                 'data-letters-target' => "nextStep",
                  class: 'hidden text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer',
                  id: 'next-step-button'
     %>
