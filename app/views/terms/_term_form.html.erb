@@ -1,33 +1,38 @@
+<% invalid_term = term.errors[:term].present? || term.errors[:definition].present? %>
+
 <turbo-frame id=<%= dom_id(term, 'form') %>>
   <div class="flex gap-3 mb-2 items-end">
 
-    <%= form_with(model: term, url: [term.study_set.folder, term.study_set, term], data: { controller: 'autosave' }) do |form| %>
+    <%= form_with(model: term, url: [term.study_set.folder, term.study_set, term], html: { class: ' w-full' }, data: { controller: 'autosave' }) do |form| %>
       <div class="flex gap-3 items-end">
-        <div>
-          <%= render(UI::Form::InputComponent.new(
-            form: form,
-            attribute: :term,
-            errors: term.errors[:term],
-            options: {
-              **(local_assigns[:autofocus] ? { 'data-controller' => 'autofocus' } : {}),
-              **(term.persisted? ? { 'data-action': 'autosave#save' } : {})
-            }
-          )) %>
-        </div>
+        <div class="flex w-full gap-3">
 
-        <div>
-          <%= render(UI::Form::InputComponent.new(
-            form: form,
-            attribute: :definition,
-            errors: term.errors[:definition],
-            options: {
-              **(term.persisted? ? { 'data-action': 'autosave#save' } : {})
-            }
-          )) %>
+          <div class="w-1/2">
+            <%= render(UI::Form::InputComponent.new(
+              form: form,
+              attribute: :term,
+              errors: term.errors[:term],
+              options: {
+                **(local_assigns[:autofocus] ? { 'data-controller' => 'autofocus' } : {}),
+                **(term.persisted? ? { 'data-action': 'autosave#save' } : {})
+              }
+            )) %>
+          </div>
+
+          <div class="w-1/2">
+            <%= render(UI::Form::InputComponent.new(
+              form: form,
+              attribute: :definition,
+              errors: term.errors[:definition],
+              options: {
+                **(term.persisted? ? { 'data-action': 'autosave#save' } : {})
+              }
+            )) %>
+          </div>
         </div>
 
         <% if term.new_record? %>
-          <div>
+          <div class="<%= invalid_term ? 'mb-6' : '' %>">
             <%= render(UI::ButtonComponent.new(
               text: 'Create',
               variant: :success,
@@ -37,19 +42,16 @@
         <% end %>
       </div>
     <% end %>
-
     <% if term.persisted? %>
-      <div>
-        <%= form_with url: [term.study_set.folder, term.study_set, term], method: :delete, class: '' do %>
-          <%= render(UI::ButtonComponent.new(
-            as: :button,
-            text: 'Delete',
-            type: :submit,
-            variant: :danger,
-            options: { 'data-turbo-confirm': 'Are you sure?' }
-          )) %>
-        <% end %>
-      </div>
+      <%= form_with url: [term.study_set.folder, term.study_set, term], method: :delete, class: invalid_term ? 'mb-6' : '' do %>
+        <%= render(UI::ButtonComponent.new(
+          as: :button,
+          text: 'Delete',
+          type: :submit,
+          variant: :danger,
+          options: { 'data-turbo-confirm': 'Are you sure?' }
+        )) %>
+      <% end %>
     <% end %>
   </div>
 

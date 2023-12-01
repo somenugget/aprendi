@@ -52,4 +52,8 @@ class UI::Form::InputComponent < ApplicationComponent
   def errors
     @errors ||= Array.wrap(@errors).compact
   end
+
+  def input_id
+    dom_id(form.object, attribute)
+  end
 end
