@@ -1,9 +1,9 @@
 <%= form_with model: [test_step.test, test_step],
               id: 'write-term',
               data: { controller: 'write-term', action: 'keydown.enter@window->write-term#submit' } do |f| %>
-  <h1 class="text-3xl font-bold text-center">
+  <h3 class="text-4xl text-center font-semibold mt-5">
     <%= test_step.term.definition %>
-  </h1>
+  </h3>
 
   <div class="flex justify-center mt-6">
     <%= f.text_field :answer_term,

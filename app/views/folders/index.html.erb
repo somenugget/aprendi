@@ -6,9 +6,9 @@
   <%= render(UI::ButtonComponent.new(text: "New folder", options: { as: :a, href: new_folder_path })) %>
 </div>
 
-<div id="folders" class="grid grid-cols-4 gap-3 mt-4">
+<div id="folders" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
   <% @folders.each do |folder| %>
-    <%= render(UI::CardComponent.new(as: :a, href: folder_path(folder))) do %>
+    <%= render(UI::CardComponent.new(as: :a, href: folder_path(folder), class: 'truncate')) do %>
       <%= folder.name %>
     <% end %>
   <% end %>
