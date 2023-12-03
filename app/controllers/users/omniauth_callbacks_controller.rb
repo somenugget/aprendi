@@ -18,7 +18,7 @@ module Users
     private
 
     def after_omniauth_failure_path_for(_scope)
-      auth_path
+      new_user_session_path
     end
   end
 end

@@ -2,7 +2,7 @@
   <% if current_user.present? %>
     <%= link_to 'Go to the app', folders_path, class: "text-sm font-semibold leading-6 text-gray-900" %>
   <% else %>
-    <%= link_to auth_path, class: 'text-sm font-semibold leading-6 text-gray-900' do %>
+    <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6 text-gray-900' do %>
       Log in <span aria-hidden="true">&rarr;</span>
     <% end %>
   <% end %>
