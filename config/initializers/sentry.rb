@@ -11,6 +11,7 @@ if ENV['SENTRY_DSN']
     config.traces_sampler = lambda do |context|
       rack_env = context[:env]
 
+      next 0.05 if rack_env.blank?
       next 0.0 if rack_env['PATH_INFO'].starts_with?('/up')
 
       0.05
