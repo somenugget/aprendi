@@ -26,6 +26,8 @@ class TermsController < ApplicationController
     @term = @study_set.terms.build(term_params.merge(folder_id: @folder.id))
 
     if @term.save
+      GenerateTermExamplesJob.set(wait: 2.minutes).perform_later(@term.id)
+
       new_term = @study_set.terms.build
       render turbo_stream: [
         turbo_stream.append('study-set_terms', partial: 'terms/term_form', locals: { term: @term }),

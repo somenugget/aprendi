@@ -1,7 +1,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['failed', 'cell', 'letter', 'nextStep']
+  static targets = ['failed', 'cell', 'letter', 'nextStep', 'termExamples']
 
   static classes = ['wrongLetter', 'correctLetter']
 
@@ -30,9 +30,10 @@ export default class extends Controller {
       currentCell.innerHTML = currentChar
       this.selectedChars.push(currentChar)
 
-      if (this.stepCompleted()) {
+      if (this.isStepCompleted()) {
         this.nextStepTarget.classList.remove('hidden')
         this.nextStepTarget.classList.add('flex')
+        this.termExamplesTarget.classList.remove('hidden')
       }
 
       successCallback()
@@ -54,12 +55,12 @@ export default class extends Controller {
     return this.termValue[this.selectedChars.length]
   }
 
-  stepCompleted() {
+  isStepCompleted() {
     return this.termValue.length === this.selectedChars.length
   }
 
   goToNextStep() {
-    if (this.stepCompleted()) {
+    if (this.isStepCompleted()) {
       document.getElementById('next-step-button').click()
     }
   }

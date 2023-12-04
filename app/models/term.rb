@@ -9,4 +9,9 @@ class Term < ApplicationRecord
   validates :definition, presence: true
 
   normalizes :term, :definition, with: -> { _1.downcase.strip.squish }
+
+  # @return [Boolean]
+  def long_phrase?
+    term.split.count >= 5
+  end
 end

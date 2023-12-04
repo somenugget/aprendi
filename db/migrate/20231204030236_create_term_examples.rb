@@ -9,6 +9,11 @@ class CreateTermExamples < ActiveRecord::Migration[7.1]
       t.string :definition_example, null: false
 
       t.timestamps
+
+      t.index :term
+      t.index :definition
+      t.index :term_lang
+      t.index :definition_lang
     end
   end
 end

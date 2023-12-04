@@ -1,11 +1,11 @@
 class UpdateTermProgressAfterTestJob < ApplicationJob
   queue_as :default
 
+  discard_on ActiveRecord::RecordNotFound
+
   # @param [Integer] test_id
   def perform(test_id)
-    test = Test.find_by(id: test_id)
-
-    return unless test
+    test = Test.find(test_id)
 
     test.terms.pluck(:id).each do |term_id|
       term_progress = TermProgress.find_or_create_by!(user_id: test.user_id, term_id: term_id)

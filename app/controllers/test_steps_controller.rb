@@ -37,10 +37,19 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
 
     Test.transaction do # rubocop:disable Metrics/BlockLength
       @test.touch
+      correct_term = @test_step.term
+
+      if @test_step.exercise.in? %w[pick_term pick_definition]
+        streams << turbo_stream.update(
+          'term_examples',
+          render_to_string(
+            TestSteps::ExamplesComponent.new(term: correct_term)
+          )
+        )
+      end
 
       if @test_step.pick_term?
         answer_term = Term.find(params[:answer_term_id])
-        correct_term = @test_step.term
 
         if correct_term.id == answer_term.id
           @test_step.update!(status: :successful)
@@ -69,7 +78,6 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
         end
       elsif @test_step.pick_definition?
         answer_term = Term.find(params[:answer_term_id])
-        correct_term = @test_step.term
 
         if correct_term.id == answer_term.id
           @test_step.update!(status: :successful)

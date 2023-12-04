@@ -17,11 +17,11 @@
 
   <%= fields_for :study_config, @study_set.study_config do |study_config_fields| %>
     <div class="w-1/2">
-      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :term_lang, values: StudyConfig::LANGUAGES)) %>
+      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :term_lang, values: StudyConfig::LANGUAGES.invert)) %>
     </div>
 
     <div class="w-1/2">
-      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :definition_lang, values: StudyConfig::LANGUAGES)) %>
+      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :definition_lang, values: StudyConfig::LANGUAGES.invert)) %>
     </div>
   <% end %>
 

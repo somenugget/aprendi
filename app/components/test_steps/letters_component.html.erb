@@ -46,11 +46,17 @@
     </div>
   </div>
 
-  <div class="justify-end flex h-9">
-    <%= f.submit 'Next step',
-                 'data-letters-target' => "nextStep",
-                 class: 'hidden text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer',
-                 id: 'next-step-button'
-    %>
+  <div class="flex justify-between h-36 gap-4">
+    <div id="term_examples" class="hidden" data-letters-target="termExamples">
+      <%= render(TestSteps::ExamplesComponent.new(term: test_step.term)) %>
+    </div>
+
+    <div class="justify-end flex h-9">
+      <%= f.submit 'Next step',
+                   'data-letters-target' => "nextStep",
+                   class: 'hidden text-white rounded-md px-3 py-2 text-sm font-medium bg-green-700 hover:bg-green-500 cursor-pointer',
+                   id: 'next-step-button'
+      %>
+    </div>
   </div>
 <% end %>

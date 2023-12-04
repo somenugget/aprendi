@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_29_191554) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_030426) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -131,6 +131,30 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_191554) do
     t.index ["user_id"], name: "index_study_sets_on_user_id"
   end
 
+  create_table "term_example_terms", force: :cascade do |t|
+    t.bigint "term_example_id", null: false
+    t.bigint "term_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["term_example_id"], name: "index_term_example_terms_on_term_example_id"
+    t.index ["term_id"], name: "index_term_example_terms_on_term_id"
+  end
+
+  create_table "term_examples", force: :cascade do |t|
+    t.string "term", null: false
+    t.string "definition", null: false
+    t.string "term_lang", null: false
+    t.string "definition_lang", null: false
+    t.string "term_example", null: false
+    t.string "definition_example", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["definition"], name: "index_term_examples_on_definition"
+    t.index ["definition_lang"], name: "index_term_examples_on_definition_lang"
+    t.index ["term"], name: "index_term_examples_on_term"
+    t.index ["term_lang"], name: "index_term_examples_on_term_lang"
+  end
+
   create_table "term_progresses", force: :cascade do |t|
     t.bigint "term_id", null: false
     t.bigint "user_id", null: false
@@ -210,6 +234,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_29_191554) do
   add_foreign_key "folders", "users"
   add_foreign_key "study_sets", "folders"
   add_foreign_key "study_sets", "users"
+  add_foreign_key "term_example_terms", "term_examples"
+  add_foreign_key "term_example_terms", "terms"
   add_foreign_key "term_progresses", "terms"
   add_foreign_key "term_progresses", "users"
   add_foreign_key "terms", "folders"
