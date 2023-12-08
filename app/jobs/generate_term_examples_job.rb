@@ -3,7 +3,7 @@ class GenerateTermExamplesJob < ApplicationJob
 
   retry_on StandardError, wait: 5.minutes, attempts: 3
 
-  discard_on ActiveRecord::RecordNotFound
+  discard_on ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid
 
   # @param [String] term_id
   def perform(term_id)
