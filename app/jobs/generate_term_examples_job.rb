@@ -1,9 +1,9 @@
 class GenerateTermExamplesJob < ApplicationJob
   queue_as :generate_terms
 
-  retry_on StandardError, wait: 5.minutes, attempts: 3
+  retry_on StandardError, wait: 5.minutes, attempts: 2
 
-  discard_on ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid
+  discard_on ActiveRecord::RecordNotFound
 
   # @param [String] term_id
   def perform(term_id)
