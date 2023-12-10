@@ -52,7 +52,8 @@ class StudySetsController < ApplicationController
   # DELETE /study_sets/1
   def destroy
     @study_set.destroy!
-    redirect_to @folder ? folder_path(@folder) : study_sets_path, notice: 'Study set was successfully destroyed.', status: :see_other
+    redirect_to @folder ? folder_path(@folder) : study_sets_path,
+                notice: 'Study set was successfully destroyed.', status: :see_other
   end
 
   private
