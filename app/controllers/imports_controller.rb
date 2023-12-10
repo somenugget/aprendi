@@ -1,15 +1,15 @@
 class ImportsController < ApplicationController
-  before_action :set_folder
   before_action :set_study_set, only: %i[show create parse]
 
   def show; end
 
   def create
     terms_params.each do |term_params|
-      @study_set.terms.create(term_params.merge(folder: @folder))
+      @study_set.terms.create(term_params)
     end
 
-    redirect_to folder_study_set_path(@folder, @study_set), notice: 'Terms imported successfully'
+    redirect_to @study_set.folder ? folder_study_set_path(@study_set.folder, @study_set) : study_set_path(@study_set),
+                notice: 'Terms imported successfully'
   end
 
   def parse
@@ -28,12 +28,8 @@ class ImportsController < ApplicationController
 
   private
 
-  def set_folder
-    @folder = current_user.folders.find(params[:folder_id])
-  end
-
   def set_study_set
-    @study_set = @folder.study_sets.find(params[:study_set_id])
+    @study_set = current_user.study_sets.find(params[:study_set_id])
   end
 
   def terms_params

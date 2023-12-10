@@ -1,7 +1,6 @@
 class TermsController < ApplicationController
   include ActionView::RecordIdentifier
 
-  before_action :set_folder
   before_action :set_study_set
   before_action :set_term, only: %i[show edit update destroy]
 
@@ -23,7 +22,7 @@ class TermsController < ApplicationController
 
   # POST /terms
   def create # rubocop:disable Metrics/AbcSize
-    @term = @study_set.terms.build(term_params.merge(folder_id: @folder.id))
+    @term = @study_set.terms.build(term_params)
 
     if @term.save
       GenerateTermExamplesJob.set(wait: 2.minutes).perform_later(@term.id)
@@ -68,14 +67,10 @@ class TermsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def term_params
-    params.require(:term).permit(:folder_id, :study_set_id, :term, :definition)
-  end
-
-  def set_folder
-    @folder = current_user.folders.find(params[:folder_id])
+    params.require(:term).permit(:study_set_id, :term, :definition)
   end
 
   def set_study_set
-    @study_set = @folder.study_sets.find(params[:study_set_id])
+    @study_set = current_user.study_sets.find(params[:study_set_id])
   end
 end

@@ -3,7 +3,7 @@
     Import terms to the "<%= @study_set.name %>" study set
   </h3>
 
-  <%= form_with url: parse_folder_study_set_import_path, method: :post, html: { 'data-controller' => 'import' } do %>
+  <%= form_with url: parse_study_set_import_path, method: :post, html: { 'data-controller' => 'import' } do %>
     <div class="mt-4" data-import-parsing-value="false">
       <label for="terms-list" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Terms list</label>
       <textarea

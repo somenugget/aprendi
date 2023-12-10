@@ -4,7 +4,7 @@ class StudySetsController < ApplicationController
 
   # GET /study_sets
   def index
-    @study_sets = current_user.study_sets
+    @study_sets = (@folder || current_user).study_sets.order(created_at: :desc)
   end
 
   # GET /study_sets/1
@@ -12,7 +12,7 @@ class StudySetsController < ApplicationController
 
   # GET /study_sets/new
   def new
-    @study_set = @folder.study_sets.build
+    @study_set = current_user.study_sets.build(folder: @folder)
   end
 
   # GET /study_sets/1/edit
@@ -21,14 +21,14 @@ class StudySetsController < ApplicationController
   # POST /study_sets
   def create
     StudySet.transaction do
-      @study_set = @folder.study_sets.build(study_set_params)
+      @study_set = current_user.study_sets.build({ **study_set_params, folder: @folder })
       @study_set.user = current_user
       @study_set.build_study_config(study_config_params)
       @study_set.save
     end
 
     if @study_set.persisted?
-      redirect_to [@folder, @study_set], notice: 'Study set was successfully created.'
+      redirect_to [@folder, @study_set].compact, notice: 'Study set was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -41,8 +41,9 @@ class StudySetsController < ApplicationController
     if @study_set.update(study_set_params)
       @study_set.study_config.update(study_config_params)
 
-      redirect_to folder_study_set_path(@folder, @study_set), notice: 'Study set was successfully updated.',
-                                                              status: :see_other
+      redirect_to [@folder, @study_set].compact,
+                  notice: 'Study set was successfully updated.',
+                  status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
@@ -51,17 +52,17 @@ class StudySetsController < ApplicationController
   # DELETE /study_sets/1
   def destroy
     @study_set.destroy!
-    redirect_to folder_path(@folder), notice: 'Study set was successfully destroyed.', status: :see_other
+    redirect_to @folder ? folder_path(@folder) : study_sets_path, notice: 'Study set was successfully destroyed.', status: :see_other
   end
 
   private
 
   def set_folder
-    @folder = current_user.folders.find(params[:folder_id])
+    @folder = current_user.folders.find_by(id: params[:folder_id])
   end
 
   def set_study_set
-    @study_set = @folder.study_sets.find(params[:id])
+    @study_set = current_user.study_sets.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

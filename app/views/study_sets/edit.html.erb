@@ -2,7 +2,11 @@
   <h3>Editing study set</h3>
 
   <div>
-    <%= render(UI::ButtonComponent.new(text: 'Back to this study set', variant: :neutral, options: { as: :a, href: folder_study_set_path(@folder, @study_set) })) %>
+    <%= render(UI::ButtonComponent.new(
+      text: 'Back to this study set',
+      variant: :neutral,
+      options: { as: :a, href: @study_set.folder ? folder_study_set_path(@study_set.folder, @study_set) : study_set_path(@study_set) }
+    )) %>
   </div>
 </div>
 

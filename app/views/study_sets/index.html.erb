@@ -1,14 +1,19 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Study sets</h1>
-
-<div id="study_sets">
-  <% @study_sets.each do |study_set| %>
-    <%= render study_set %>
-    <p>
-      <%= link_to "Show this study set", study_set %>
-    </p>
-  <% end %>
+<div class="flex justify-end">
+  <%= render(UI::ButtonComponent.new(text: 'Add study set', options: { as: :a, href: new_study_set_path })) %>
 </div>
 
-<%= link_to "New study set", new_folder_study_set_path(@folder), class: 'btn-success' %>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+  <% @study_sets.each do |study_set| %>
+    <%= render(UI::CardComponent.new(as: :a, href: study_set_path(study_set), class: 'truncate')) do %>
+      <%= study_set.name %>
+
+      <% if study_set.folder_id.present? %>
+        <div class="truncate text-sm mt-2 text-gray-500">
+          <%= study_set.folder.name %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

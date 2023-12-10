@@ -5,6 +5,7 @@
         <div class="hidden md:block">
           <div class="flex items-baseline space-x-4">
             <%= link_to 'Dashboard', dashboard_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'dashboard', action: 'index')) %>
+            <%= link_to 'Study sets', study_sets_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'study_sets')) %>
             <%= link_to 'Folders', folders_path, class: class_names('text-white rounded-md px-3 py-2 text-sm font-medium', 'bg-indigo-700' => current_page?(controller: 'folders')) %>
           </div>
         </div>

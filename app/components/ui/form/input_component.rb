@@ -54,6 +54,6 @@ class UI::Form::InputComponent < ApplicationComponent
   end
 
   def input_id
-    dom_id(form.object, attribute)
+    form.object ? dom_id(form.object, attribute) : attribute
   end
 end

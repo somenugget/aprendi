@@ -1,5 +1,4 @@
 class Term < ApplicationRecord
-  belongs_to :folder
   belongs_to :study_set
 
   has_many :term_example_terms, dependent: :destroy

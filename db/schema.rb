@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_030426) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_10_045021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,7 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_030426) do
 
   create_table "study_sets", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "folder_id", null: false
+    t.bigint "folder_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -169,13 +169,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_030426) do
   end
 
   create_table "terms", force: :cascade do |t|
-    t.bigint "folder_id", null: false
     t.bigint "study_set_id", null: false
     t.string "term", null: false
     t.string "definition", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["folder_id"], name: "index_terms_on_folder_id"
     t.index ["study_set_id"], name: "index_terms_on_study_set_id"
   end
 
@@ -238,7 +236,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_030426) do
   add_foreign_key "term_example_terms", "terms"
   add_foreign_key "term_progresses", "terms"
   add_foreign_key "term_progresses", "users"
-  add_foreign_key "terms", "folders"
   add_foreign_key "terms", "study_sets"
   add_foreign_key "test_steps", "terms"
   add_foreign_key "test_steps", "tests"

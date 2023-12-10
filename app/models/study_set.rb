@@ -1,6 +1,6 @@
 class StudySet < ApplicationRecord
   belongs_to :user
-  belongs_to :folder
+  belongs_to :folder, optional: true
 
   has_one :study_config, as: :configurable, dependent: :destroy
 

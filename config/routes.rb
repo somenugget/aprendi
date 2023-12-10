@@ -9,10 +9,9 @@ Rails.application.routes.draw do
     mount GoodJob::Engine => '/good_job'
   end
 
-  get :auth, to: 'auth#index'
   get :dashboard, to: 'dashboard#index'
 
-  resources :folders do
+  study_sets = proc do
     resources :study_sets do
       resource :import, only: %i[show create] do
         post :parse
@@ -20,6 +19,12 @@ Rails.application.routes.draw do
 
       resources :terms
     end
+  end
+
+  study_sets.call
+
+  resources :folders do
+    study_sets.call
   end
 
   resources :tests do

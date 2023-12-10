@@ -1,4 +1,4 @@
-<%= form_with url: folder_study_set_import_path(study_set.folder, study_set),
+<%= form_with url: study_set_import_path(study_set),
               method: :post,
               id: 'parsed-terms' do |form| %>
   <%- terms.each_with_index do |term, i| %>

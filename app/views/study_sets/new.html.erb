@@ -1,9 +1,14 @@
-<h2><%= @study_set.folder.name %>: New study set</h2>
+<h2>
+  <% if @study_set.folder.present? %>
+    <%= @study_set.folder.name %>:
+  <% end %>
+  New study set
+</h2>
 
 <%= render "form", study_set: @study_set %>
 
 <br>
 
 <div>
-  <%= link_to "Back to study sets", folder_study_sets_path(@folder) %>
+  <%= link_to "Back to study sets", @folder ? folder_study_sets_path(@folder) : study_sets_path %>
 </div>
