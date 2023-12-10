@@ -1,0 +1,7 @@
+<div class="pb-4">
+  <h3 class="">
+    Import terms to the "<%= @study_set.name %>" study set
+  </h3>
+
+  <%= render(JSONImports::FormComponent.new(study_set: @study_set)) %>
+</div>

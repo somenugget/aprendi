@@ -38,6 +38,9 @@
           <%= link_to 'Import', study_set_import_path(study_set, folder_id: study_set.folder_id), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
         </li>
         <li>
+          <%= link_to 'JSON Import', study_set_json_import_path(study_set, folder_id: study_set.folder_id), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
+        </li>
+        <li>
           <%= link_to 'Edit', edit_study_set_path(study_set, folder_id: study_set.folder_id), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
         </li>
         <li>

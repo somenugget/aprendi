@@ -13,6 +13,10 @@ class UI::Form::InputComponent < ApplicationComponent
   #  @return [Symbol]
   option :attribute
 
+  # @!method textarea
+  #  @return [Boolean]
+  option :textarea, default: proc { false }
+
   # @!method label
   # @return [String]
   option :label, default: proc {}

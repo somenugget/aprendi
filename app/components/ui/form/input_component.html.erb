@@ -1,5 +1,5 @@
-<%= form.label attribute, label, class: label_class, for: input_id %>
-<%= form.text_field attribute, { **options, class: input_class, id: input_id } %>
+<%= form.label(attribute, label, class: label_class, for: input_id) if label.present? %>
+<%= form.send(textarea ? :text_area : :text_field, attribute, { **options, class: input_class, id: input_id }) %>
 
 <% if errors.any? %>
   <div class="<%= error_class %>">
