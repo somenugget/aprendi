@@ -1,0 +1,39 @@
+<div class="mt-4" data-accordion="open" data-active-classes="-">
+  <button
+    class="rounded underline hover:no-underline"
+    id="accordion-button"
+    data-accordion-target="#accordion-body"
+    aria-expanded="false"
+    aria-controls="accordion-body"
+    title="You can use this prompt to generate a JSON required for the import"
+  >
+    Show AI prompt example
+  </button>
+  <div id="accordion-body" class="hidden" aria-labelledby="accordion-button">
+    <pre class="border px-4 py-2">
+Generate 5 examples for each of provided <%= @study_set.study_config.term_lang %> Spanish words.
+Translation should be in <%= @study_set.study_config.definition_lang %> language.
+Return result in a JSON format. Here is example:
+
+```json
+[{
+  "word":  "Ir",
+  "translation": "to go",
+  "examples": [
+   {
+      "example": "necesito ir a mi casa",
+      "translation": "I need to go home"
+  }
+}]
+```
+
+Words:
+Comprar
+Beber
+Comer
+Correr
+Nadar
+Jugar
+</pre>
+  </div>
+</div>
