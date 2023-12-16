@@ -7,6 +7,7 @@ class TestStep < ApplicationRecord
 
   scope :finished, -> { where(status: %i[successful failed]) }
   scope :not_finished, -> { where.not(id: finished) }
+  scope :for_term, ->(term) { where(term: term) }
 
   # @return [Array<Term>]
   def terms_to_pick

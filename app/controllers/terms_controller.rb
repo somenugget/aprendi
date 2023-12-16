@@ -51,7 +51,10 @@ class TermsController < ApplicationController
 
   # DELETE /terms/1
   def destroy
-    @term.destroy!
+    Term.transaction do
+      current_user.term_progresses.for_term(@term).for_user(current_user).destroy_all
+      @term.destroy!
+    end
 
     render turbo_stream: [
       turbo_stream.remove(dom_id(@term, 'form'))
