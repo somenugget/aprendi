@@ -65,7 +65,7 @@ class UpdateTermProgressAfterTestJob < ApplicationJob
     elsif success_percentage > 30
       3.days.from_now
     else
-      2.day.from_now
+      2.days.from_now
     end
   end
 end

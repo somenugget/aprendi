@@ -1,3 +1,8 @@
+require:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
   DisplayStyleGuide: true
@@ -27,6 +32,9 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Max: 15
+
+Rails/I18nLocaleTexts:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false

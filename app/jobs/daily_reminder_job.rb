@@ -24,7 +24,7 @@ class DailyReminderJob < ApplicationJob
   private
 
   def each_user_with_daily_reminder(&)
-    User.joins(:settings).where(user_settings: { daily_reminder: true }).each(&)
+    User.joins(:settings).where(user_settings: { daily_reminder: true }).find_each(&)
   end
 
   def time_to_send?(current_time_in_user_tz)

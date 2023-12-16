@@ -80,7 +80,7 @@ class UI::ButtonComponent < ApplicationComponent
   end
 
   def icon_class
-    return '' unless icon.present?
+    return '' if icon.blank?
 
     class_names(ICON_SIZE_CLASSES[size.to_sym])
   end

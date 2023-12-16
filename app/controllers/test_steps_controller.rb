@@ -36,7 +36,7 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
     streams = []
 
     Test.transaction do # rubocop:disable Metrics/BlockLength
-      @test.touch
+      @test.touch # rubocop:disable Rails/SkipsModelValidations
       correct_term = @test_step.term
 
       if @test_step.exercise.in? %w[pick_term pick_definition]

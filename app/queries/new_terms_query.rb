@@ -7,6 +7,6 @@ class NewTermsQuery < ApplicationQuery
   option :user
 
   def relation
-    TermsWithProgressQuery.new(scope, user: user).relation.where('term_progresses.success_percentage IS NULL')
+    TermsWithProgressQuery.new(scope, user: user).relation.where(term_progresses: { success_percentage: nil })
   end
 end

@@ -23,7 +23,7 @@ class TermsWithProgressQuery < ApplicationQuery
   private
 
   def term_progresses_join_sql
-    <<~SQL
+    <<~SQL.squish
       LEFT JOIN term_progresses ON terms.id = term_progresses.term_id AND term_progresses.user_id = #{user.id}
     SQL
   end
