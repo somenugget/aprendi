@@ -20,11 +20,13 @@ class UpdateTermProgressAfterTestJob < ApplicationJob
     current_term_success_percentage = test_term_success_percentage(test, term_progress.term_id)
     new_tests_count = term_progress.tests_count + 1
     new_success_percentage = (prev_weighted_success_percentage + current_term_success_percentage) / new_tests_count
+    learnt = new_success_percentage >= 80 && new_tests_count > 4
 
     term_progress.update!(
       tests_count: new_tests_count,
       success_percentage: new_success_percentage,
-      next_test_date: next_test_date(new_tests_count, new_success_percentage)
+      learnt: learnt,
+      next_test_date: learnt ? nil : next_test_date(new_tests_count, new_success_percentage)
     )
   end
 
