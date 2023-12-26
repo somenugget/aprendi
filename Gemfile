@@ -72,6 +72,12 @@ group :development do
   # gem "rack-mini-profiler"
 end
 
+group :test do
+  gem 'capybara'
+  gem 'cuprite'
+  gem 'site_prism'
+end
+
 gem 'dockerfile-rails', '>= 1.5', :group => :development
 
 gem 'sentry-ruby', '~> 5.13'
