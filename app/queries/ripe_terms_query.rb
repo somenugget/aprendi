@@ -4,6 +4,7 @@ class RipeTermsQuery < ApplicationQuery
   param :scope, default: -> { Term.all }
 
   # @!method user
+  # @return [User]
   option :user
 
   def relation
