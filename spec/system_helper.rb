@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'capybara'
+require 'capybara/rspec'
 
 Dir[File.join(__dir__, 'system/support/**/*.rb')].each { |file| require file }
 

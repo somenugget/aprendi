@@ -6,12 +6,15 @@ class GenerateTermExamples < BaseService
   # @!method term
   input :term, type: Term
 
+  EXAMPLES_COUNT_TO_GENERATE = 8
+  EXAMPLES_COUNT_TO_SKIP = 5
+
   HEADERS = %w[term definition term_lang definition_lang term_example definition_example].freeze
 
   # @return [Array<TermExample>]
   def call
     return if term.long_phrase?
-    return if term.term_examples.count > 3
+    return if term.term_examples.count > EXAMPLES_COUNT_TO_SKIP
 
     chat_response.each { save_example(_1) }
   end
@@ -45,7 +48,7 @@ class GenerateTermExamples < BaseService
 
   def prompt_template
     Langchain::Prompt::FewShotPromptTemplate.new(
-      prefix: 'Generate 5 usage examples for the term and provide its translation. ',
+      prefix: "Generate #{EXAMPLES_COUNT_TO_GENERATE} usage examples for the term and provide its translation. ",
       suffix: '"{term}" in {term_lang} in meaning "{definition}" in {definition_lang}. ' \
               'Do not conjugate the term, keep it as it is. ' \
               'Translate it into {definition_lang}. ' \
