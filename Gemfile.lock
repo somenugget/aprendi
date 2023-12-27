@@ -470,6 +470,7 @@ DEPENDENCIES
   cuprite
   debug
   devise
+  diff-lcs
   dockerfile-rails (>= 1.5)
   dotenv-rails
   dry-initializer

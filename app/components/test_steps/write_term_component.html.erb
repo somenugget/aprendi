@@ -17,9 +17,9 @@
     %>
   </div>
 
-  <div class="text-green-800 text-center text-xl my-3 h-10">
+  <div class="text-green-800 text-center text-2xl my-3 h-10">
     <% if error? %>
-      <%= test_step.term.term %>
+      <%= render(TestSteps::AnswerDiffComponent.new(correct: test_step.term.term, wrong: answer_term)) %>
     <% end %>
   </div>
 
