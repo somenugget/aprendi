@@ -32,7 +32,7 @@ class TestSteps::AnswerDiffComponent < ApplicationComponent
 
   def render_groups(groups)
     groups.map do |group|
-      concat content_tag(:span, group.join, class: group.is_a?(WrongLetters) && 'font-extrabold')
+      concat content_tag(:span, group.join, class: group.is_a?(WrongLetters) && 'font-bold')
     end
   end
 

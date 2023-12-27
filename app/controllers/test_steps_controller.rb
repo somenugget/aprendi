@@ -152,6 +152,7 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
         TestSteps::NextStepComponent.new(test_step: next_step)
       ))
     else
+      @test.update!(status: :completed)
       UpdateTermProgressAfterTestJob.perform_later(@test.id)
 
       return redirect_to result_test_path(@test)

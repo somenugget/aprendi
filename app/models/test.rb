@@ -5,6 +5,8 @@ class Test < ApplicationRecord
 
   enum status: { in_progress: 0, completed: 1 }
 
+  scope :recent_in_progress, -> { in_progress.where(created_at: 2.days.ago..) }
+
   class << self
     # @param [StudySet] study_set
     # @param [User] user

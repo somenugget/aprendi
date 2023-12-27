@@ -2,21 +2,24 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!, if: :should_authenticate?
   before_action :update_user_timezone
 
-  def recent_test_in_progress
-    @recent_test_in_progress ||= current_user.tests.in_progress.order(:id).first
+  def unfinished_test
+    @unfinished_test ||= current_user.tests.recent_in_progress.first.then do |test|
+      test && test.id.to_s == params[:test_id] ? nil : test
+    end
   end
-  helper_method :recent_test_in_progress
+  helper_method :unfinished_test
 
-  def recent_test_step_in_progress
-    @recent_test_step_in_progress ||= if recent_test_in_progress
-                                        recent_test_in_progress
-                                          .test_steps
-                                          .not_finished
-                                          .order(:id)
-                                          .first
-                                      end
+  def unfinished_test_step
+    @unfinished_test_step ||= if unfinished_test.present?
+                                unfinished_test
+                                  .test_steps
+                                  .not_finished
+                                  .order(:id)
+                                  .first
+                              end
   end
-  helper_method :recent_test_step_in_progress
+
+  helper_method :unfinished_test_step
 
   def after_sign_in_path_for(user)
     if user.term_progresses.any?
