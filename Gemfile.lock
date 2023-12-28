@@ -432,7 +432,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
     version_gem (1.1.3)
-    view_component (3.0.0.rc4)
+    view_component (3.8.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -502,7 +502,7 @@ DEPENDENCIES
   site_prism
   stimulus-rails
   turbo-rails
-  view_component
+  view_component (>= 3.8.0)
   vite_rails
   web-console
 

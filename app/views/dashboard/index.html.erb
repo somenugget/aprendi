@@ -9,7 +9,10 @@
                                          class: 'text-left flex flex-col w-full !max-w-full text-blue-900',
                                          title: 'Learn new words',
                                          variant: :secondary)) do %>
-          <h6 class="mb-3">New words to learn</h6>
+          <%= render UI::CardHeader.new(
+            header: 'New words to learn',
+            right_header: "#{@new_terms_to_learn_count} total")
+          %>
           <div class="flex flex-col gap-1">
             <% @new_terms_to_learn.each do |term| %>
               <%= form.hidden_field 'terms_ids[]', value: term.id %>
@@ -32,7 +35,10 @@
                                          class: 'text-left flex flex-col w-full !max-w-full text-green-900',
                                          title: 'Review the words',
                                          variant: :success)) do %>
-          <h6 class="mb-3">Ready for review</h6>
+          <%= render UI::CardHeader.new(
+            header: 'Ready for review',
+            right_header: "#{@ripe_terms_to_learn_count} total")
+          %>
           <div class="flex flex-col gap-1">
             <% @ripe_terms_to_learn.each do |term| %>
               <%= form.hidden_field 'terms_ids[]', value: term.id %>
@@ -69,7 +75,10 @@
 
 <% if @ripening_terms.any? %>
   <%= render(UI::CardComponent.new(class: '!w-full !max-w-full opacity-75')) do %>
-    <h6 class="mb-3">Ripening</h6>
+    <%= render UI::CardHeader.new(
+      header: 'Ripening',
+      right_header: "#{@ripening_terms_count} total")
+    %>
     <div class="flex flex-col gap-1">
       <% @ripening_terms.each do |term| %>
         <%= render(TermProgress::DashboardRowComponent.new(

@@ -18,7 +18,7 @@ gem 'turbo-rails'
 gem 'stimulus-rails'
 
 gem 'heroicon'
-gem 'view_component'
+gem 'view_component', '>= 3.8.0'
 gem 'vite_rails'
 
 # Use Redis adapter to run Action Cable in production

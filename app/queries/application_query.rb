@@ -14,6 +14,10 @@ class ApplicationQuery
   end
   alias result relation
 
+  def count
+    relation.reselect('id').count
+  end
+
   def to_sql
     relation.to_sql.tr('\"', '')
   end
