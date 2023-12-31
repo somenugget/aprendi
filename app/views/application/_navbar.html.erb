@@ -59,6 +59,9 @@
         <%= render(UI::ButtonComponent.new(text: 'Dashboard', options: { as: :a, href: dashboard_path, class: '!block' })) %>
       </li>
       <li>
+        <%= render(UI::ButtonComponent.new(text: 'Study sets', options: { as: :a, href: study_sets_path, class: '!block' })) %>
+      </li>
+      <li>
         <%= render(UI::ButtonComponent.new(text: 'Folders', options: { as: :a, href: folders_path, class: '!block' })) %>
       </li>
       <li class="border-t"></li>
