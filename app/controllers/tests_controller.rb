@@ -35,7 +35,11 @@ class TestsController < ApplicationController
       return redirect_back fallback_location: root_path, alert: 'Can\'t create a test'
     end
 
-    redirect_to test_test_step_path(@test, @test.test_steps.order(:id).first), notice: 'Test was successfully created.'
+    first_step = @test.test_steps.order(:id).first.tap do |step|
+      step.update!(status: :in_progress)
+    end
+
+    redirect_to test_test_step_path(@test, first_step), notice: 'Test was successfully created.'
   end
 
   # DELETE /tests/1
