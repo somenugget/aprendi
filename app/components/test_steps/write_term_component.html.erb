@@ -23,7 +23,7 @@
     <% end %>
   </div>
 
-  <div class="flex justify-between h-36 gap-4">
+  <div class="flex justify-between h-36 gap-4 lg:w-3/4 lg:mx-auto">
     <div id="term_examples">
       <%= render(TestSteps::ExamplesComponent.new(term: test_step.term)) if result.present? %>
     </div>
