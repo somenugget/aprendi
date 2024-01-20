@@ -1,4 +1,4 @@
-ActionMailer::MailDeliveryJob.retry_on StandardError, wait: :exponentially_longer, attempts: Float::INFINITY
+ActionMailer::MailDeliveryJob.retry_on StandardError, wait: :polynomially_longer, attempts: 10
 
 Rails.application.configure do
   config.good_job = {

@@ -9,7 +9,7 @@ gem 'rails', '~> 7.1.1'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '>= 5.0'
+gem 'puma', '>= 6.4.2'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
@@ -18,7 +18,7 @@ gem 'turbo-rails'
 gem 'stimulus-rails'
 
 gem 'heroicon'
-gem 'view_component', '>= 3.8.0'
+gem 'view_component', '>= 3.9.0'
 gem 'vite_rails'
 
 # Use Redis adapter to run Action Cable in production
@@ -78,6 +78,8 @@ group :test do
   gem 'capybara'
   gem 'cuprite'
   gem 'site_prism'
+
+  gem 'simplecov', require: false
 end
 
 gem 'dockerfile-rails', '>= 1.5', :group => :development
