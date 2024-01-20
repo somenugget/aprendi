@@ -1,7 +1,7 @@
 <%= form_with model: [test_step.test, test_step],
               id: 'write-term',
               data: { controller: 'write-term', action: 'keydown.enter@window->write-term#submit' } do |f| %>
-  <h3 class="text-4xl text-center font-semibold mt-5">
+  <h3 class="text-4xl text-center font-semibold mt-5" data-testid="step_title">
     <%= test_step.term.definition %>
   </h3>
 
@@ -10,6 +10,7 @@
                      value: answer_term,
                      autofocus: result.blank?,
                      disabled: result.present?,
+                     data: { 'result' => result },
                      class: class_names('rounded w-64', {
                        'border-red-600 text-red-600' => error?,
                        'border-green-500 text-green-500' => success?
