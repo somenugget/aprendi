@@ -33,10 +33,14 @@ class ApplicationController < ActionController::Base
 
   def update_user_timezone
     return unless current_user
-    return if request.headers['HTTP_X_TIME_ZONE'].blank?
-    return if current_user.updated_at.after?(1.day.ago)
+    return if browser_timezone.blank?
+    return if current_user.settings.updated_at.after?(1.day.ago)
 
-    current_user.settings.update(tz: request.headers['HTTP_X_TIME_ZONE'])
+    current_user.settings.update(tz: browser_timezone)
+  end
+
+  def browser_timezone
+    request.headers['HTTP_X_TIME_ZONE']
   end
 
   def should_authenticate?
