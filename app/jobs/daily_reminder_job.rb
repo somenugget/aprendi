@@ -13,7 +13,7 @@ class DailyReminderJob < ApplicationJob
 
       current_time_in_user_tz = job_start_time.in_time_zone(user.settings.tz)
 
-      # TODO: extract to the method all the criterias for the reminder to be sent
+      # TODO: extract to the method all the criteria for the reminder to be sent
       # timezone
       # correct time
       # presence of words to learn # extract from mailer
