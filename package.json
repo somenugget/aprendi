@@ -30,5 +30,8 @@
     "lint": "eslint app/frontend/** --ext .js --ignore-path .gitignore",
     "lintFix": "eslint app/frontend/** --ext .js --ignore-path .gitignore --fix",
     "build": "vite build --outDir public"
+  },
+  "engines": {
+    "node": ">=21.6"
   }
 }
