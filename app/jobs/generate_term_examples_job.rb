@@ -1,7 +1,7 @@
 class GenerateTermExamplesJob < ApplicationJob
   queue_as :generate_terms
 
-  retry_on StandardError, wait: 5.minutes, attempts: 2
+  retry_on StandardError, wait: :polynomially_longer, attempts: 2
 
   discard_on ActiveRecord::RecordNotFound
 
