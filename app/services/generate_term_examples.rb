@@ -6,8 +6,6 @@ class GenerateTermExamples < BaseService
   # @!method term
   input :term, type: Term
 
-  retry_on StandardError, wait: :polynomially_longer, attempts: 2
-
   EXAMPLES_COUNT_TO_GENERATE = 8
   EXAMPLES_COUNT_TO_SKIP = 5
 
