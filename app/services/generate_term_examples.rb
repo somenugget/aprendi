@@ -23,16 +23,16 @@ class GenerateTermExamples < BaseService
 
   def chat_response
     @chat_response ||= begin
-      llm = Langchain::LLM::OpenAI.new(api_key: ENV['OPENAI_ACCESS_TOKEN'])
+      llm = Langchain::LLM::OpenAI.new(api_key: ENV['OPENAI_ACCESS_TOKEN'], default_options: { temperature: 0.3 })
 
       # TODO: set Sentry breadcrumbs
       Rails.logger.info("Sending prompt: #{prompt}")
 
-      chat_response = llm.chat(prompt: prompt)
+      chat_response = llm.complete(prompt: prompt)
 
       Rails.logger.info("Chat response: #{chat_response}")
 
-      output_parser.parse(chat_response)
+      output_parser.parse(chat_response.completion)
     end
   end
 
@@ -55,7 +55,7 @@ class GenerateTermExamples < BaseService
               "\n{format_instructions}",
       example_prompt: '',
       examples: [],
-      input_variables: %w[term term_lang definition definition_lang]
+      input_variables: %w[term term_lang definition definition_lang format_instructions]
     )
   end
 
