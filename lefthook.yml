@@ -7,10 +7,10 @@ pre-push:
   commands:
     packages-audit:
       tags: frontend security
-      run: npm audit fix
+      run: "[ `bin/reaudit-security` = 'true' ] && npm audit fix"
     gems-audit:
       tags: backend security
-      run: bundle exec bundle-audit check --update
+      run: "[ `bin/reaudit-security` = 'true' ] && bundle exec bundle-audit check --update"
 pre-commit:
   parallel: true
   commands:

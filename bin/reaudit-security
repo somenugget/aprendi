@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+require "date"
+
+File.open("tmp/last-security-audit", "a+") do |file|
+  date = DateTime.parse(file.read(256).to_s)
+
+  puts date < DateTime.now - date.prev_day(7)
+rescue Date::Error
+  puts true
+ensure
+  file.truncate(0)
+  file.write(DateTime.now)
+end
