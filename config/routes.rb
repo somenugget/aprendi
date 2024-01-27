@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get :dashboard, to: 'dashboard#index'
 
+  get 'service-worker.js', to: 'service_worker#index', format: 'js'
+
   study_sets = proc do
     resources :study_sets do
       resource :json_import, only: %i[show create]

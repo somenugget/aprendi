@@ -20,8 +20,28 @@ document.addEventListener('turbo:before-fetch-request', (event) => {
   }
 })
 
-// import ActiveStorage from '@rails/activestorage'
-// ActiveStorage.start()
-//
-// // Import all channels.
-// const channels = import.meta.globEager('./**/*_channel.js')
+const registerServiceWorker = async () => {
+  if ('serviceWorker' in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register(
+        '/service-worker.js',
+        {
+          scope: '/',
+        },
+      )
+      if (registration.installing) {
+        console.log('Service worker installing')
+      } else if (registration.waiting) {
+        console.log('Service worker installed')
+      } else if (registration.active) {
+        console.log('Service worker active')
+      }
+    } catch (error) {
+      console.error(`Registration failed with ${error}`)
+    }
+  }
+}
+
+// …
+
+registerServiceWorker()
