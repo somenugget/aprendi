@@ -11,7 +11,6 @@ class UI::AlertComponent < ApplicationComponent
   # @return [String]
   option :message, default: proc {}
 
-
   private
 
   def render?
