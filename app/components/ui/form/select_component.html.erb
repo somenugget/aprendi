@@ -1,6 +1,12 @@
 <%= form.label attribute, class: label_class %>
 <%= form.select attribute, values, { **options }, { class: input_class } %>
 
+<% if hint.present? %>
+  <div class="<%= hint_class %>">
+    <%= hint %>
+  </div>
+<% end %>
+
 <% if errors.any? %>
   <div class="<%= error_class %>">
     <%= errors.join(', ') %>

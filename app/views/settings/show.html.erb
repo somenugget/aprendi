@@ -1,0 +1,29 @@
+<%= render(UI::AlertComponent.new(variant: :success, message: notice)) %>
+
+<%= form_with model: @settings, url: settings_path do |f| %>
+  <div class="flex gap-4 mb-4">
+    <div class="w-1/2">
+      <%= render(UI::Form::SelectComponent.new(
+        form: f,
+        attribute: :term_lang,
+        values: StudyConfig::LANGUAGES.invert,
+        hint: I18n.t('user_settings.term_lang_hint')
+      )) %>
+    </div>
+
+    <div class="w-1/2">
+      <%= render(UI::Form::SelectComponent.new(
+        form: f,
+        attribute: :definition_lang,
+        values: StudyConfig::LANGUAGES.invert,
+        hint: I18n.t('user_settings.definition_lang_hint')
+      )) %>
+    </div>
+  </div>
+
+  <%= render(UI::ButtonComponent.new(
+    text: I18n.t('helpers.submit.user_settings'),
+    variant: :success,
+    options: { type: :submit }
+  )) %>
+<% end %>

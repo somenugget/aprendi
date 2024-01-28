@@ -29,6 +29,10 @@ class UI::Form::SelectComponent < ApplicationComponent
   #  @return [Array<String>]
   option :errors, default: proc { [] }
 
+  # @!method hint
+  # @return [String]
+  option :hint, default: proc {}
+
   private
 
   def label_class
@@ -47,5 +51,9 @@ class UI::Form::SelectComponent < ApplicationComponent
 
   def error_class
     'mt-1 text-sm text-red-600 dark:text-red-500'
+  end
+
+  def hint_class
+    'mt-1 text-sm text-gray-500 dark:text-gray-400'
   end
 end

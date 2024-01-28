@@ -66,7 +66,7 @@
       </li>
       <li class="border-t"></li>
       <li>
-        <%= render(UI::ButtonComponent.new(text: 'Settings', variant: :secondary, options: { as: :a, href: '#', class: '!block' })) %>
+        <%= render(UI::ButtonComponent.new(text: 'Settings', variant: :secondary, options: { as: :a, href: settings_path, class: '!block' })) %>
       </li>
       <li>
         <%= form_with(url: destroy_user_session_path, method: :delete) do %>

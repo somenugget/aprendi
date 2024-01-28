@@ -29,3 +29,15 @@
 
 en:
   hello: "Hello world"
+
+  user_settings:
+    term_lang_hint: 'The language in which you prefer to see terms in the application'
+    definition_lang_hint: 'The language in which you prefer to see definitions in the application'
+
+  helpers:
+    label:
+      user_settings:
+        term_lang: 'Preferred term language'
+        definition_lang: 'Preferred definition language'
+    submit:
+      user_settings: 'Update settings'
