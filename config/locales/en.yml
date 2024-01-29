@@ -33,6 +33,11 @@ en:
   user_settings:
     term_lang_hint: 'The language in which you prefer to see terms in the application'
     definition_lang_hint: 'The language in which you prefer to see definitions in the application'
+    daily_reminder: 'Daily reminder'
+    weekly_reminder: 'Weekly reminder'
+    push_notifications: 'Push notifications'
+    push_notifications_hint: 'The setting is relevant only for this devise/browser. You will need to set is separately on any other.'
+    push_notifications_disabled_hint: 'The notifications are disabled in your browser. Please enable them to receive notifications.'
 
   helpers:
     label:

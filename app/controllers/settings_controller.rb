@@ -16,6 +16,8 @@ class SettingsController < ApplicationController
   private
 
   def settings_params
-    params.require(:user_settings).permit(:term_lang, :definition_lang)
+    params
+      .require(:user_settings)
+      .permit(:term_lang, :definition_lang, :daily_reminder, :weekly_reminder, :push_notifications)
   end
 end

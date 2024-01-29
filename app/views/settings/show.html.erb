@@ -1,7 +1,7 @@
 <%= render(UI::AlertComponent.new(variant: :success, message: notice)) %>
 
 <%= form_with model: @settings, url: settings_path do |f| %>
-  <div class="flex gap-4 mb-4">
+  <div class="flex gap-4 mb-4 mt-4">
     <div class="w-1/2">
       <%= render(UI::Form::SelectComponent.new(
         form: f,
@@ -18,6 +18,46 @@
         values: StudyConfig::LANGUAGES.invert,
         hint: I18n.t('user_settings.definition_lang_hint')
       )) %>
+    </div>
+  </div>
+
+  <div class="mt-10">
+    <div class="mb-4">
+      <%= render(UI::Form::ToggleComponent.new(
+        form: f,
+        attribute: :daily_reminder,
+        label: I18n.t('user_settings.daily_reminder')
+      )) %>
+    </div>
+
+    <div class="mb-4">
+      <%= render(UI::Form::ToggleComponent.new(
+        form: f,
+        attribute: :weekly_reminder,
+        label: I18n.t('user_settings.weekly_reminder')
+      )) %>
+    </div>
+
+    <div class="mb-4" data-controller="push-notifications">
+      <%= render(UI::Form::ToggleComponent.new(
+        form: f,
+        attribute: :push_notifications,
+        label: I18n.t('user_settings.push_notifications'),
+        options: {
+          'data-push-notifications-target' => 'toggleable',
+        },
+        checkbox_options: {
+          'data-action' => 'push-notifications#toggle',
+          'data-push-notifications-target' => 'checkbox',
+        }
+      )) %>
+      <div class="text-sm text-gray-500 dark:text-gray-400 hidden" data-push-notifications-target="disabledHint">
+        <%= I18n.t('user_settings.push_notifications_disabled_hint') %>
+      </div>
+
+      <div class="text-sm text-gray-500 dark:text-gray-400">
+        <%= I18n.t('user_settings.push_notifications_hint') %>
+      </div>
     </div>
   </div>
 
