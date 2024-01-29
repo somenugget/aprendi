@@ -11,10 +11,13 @@ const registerServiceWorker = async (onActive) => {
       },
     )
     if (registration.installing) {
+      // eslint-disable-next-line no-console
       console.log('Service worker installing')
     } else if (registration.waiting) {
+      // eslint-disable-next-line no-console
       console.log('Service worker installed')
     } else if (registration.active) {
+      // eslint-disable-next-line no-console
       console.log('Service worker active')
 
       if (onActive) {
@@ -22,6 +25,7 @@ const registerServiceWorker = async (onActive) => {
       }
     }
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(`Registration failed with ${error}`)
   }
 }

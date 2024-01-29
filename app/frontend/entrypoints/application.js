@@ -18,6 +18,7 @@ document.addEventListener('turbo:before-fetch-request', (event) => {
     event.detail.fetchOptions.headers['X-Time-Zone'] =
       Intl.DateTimeFormat().resolvedOptions().timeZone
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error(e)
   }
 })
