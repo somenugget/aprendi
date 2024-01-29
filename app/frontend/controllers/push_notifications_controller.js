@@ -12,8 +12,7 @@ export default class extends Controller {
   toggle() {
     if (this.checkboxTarget.checked) {
       window.Notification.requestPermission().then((permission) => {
-        if (permission === 'granted') {
-        } else {
+        if (permission === 'denied') {
           this.showDisabledNotification()
         }
       })
