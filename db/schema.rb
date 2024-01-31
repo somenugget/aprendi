@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_29_033548) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_31_011137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,6 +110,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_033548) do
     t.index ["priority", "created_at"], name: "index_good_jobs_jobs_on_priority_created_at_when_unfinished", order: { priority: "DESC NULLS LAST" }, where: "(finished_at IS NULL)"
     t.index ["queue_name", "scheduled_at"], name: "index_good_jobs_on_queue_name_and_scheduled_at", where: "(finished_at IS NULL)"
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
+  end
+
+  create_table "push_subscriptions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "user_agent", null: false
+    t.string "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
+    t.datetime "last_seen_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["endpoint", "user_id"], name: "index_endpoint_user_id", unique: true
+    t.index ["user_agent", "user_id"], name: "index_user_agent_user_id", unique: true
+    t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
   end
 
   create_table "study_configs", force: :cascade do |t|
@@ -232,6 +246,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_29_033548) do
 
   add_foreign_key "authorizations", "users"
   add_foreign_key "folders", "users"
+  add_foreign_key "push_subscriptions", "users"
   add_foreign_key "study_sets", "folders"
   add_foreign_key "study_sets", "users"
   add_foreign_key "term_example_terms", "term_examples"

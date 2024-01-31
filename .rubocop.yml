@@ -36,6 +36,10 @@ Metrics/MethodLength:
 Rails/I18nLocaleTexts:
   Enabled: false
 
+Rails/UniqueValidationWithoutIndex:
+  Exclude:
+    - 'app/models/push_subscription.rb'
+
 Style/ClassAndModuleChildren:
   Enabled: false
 

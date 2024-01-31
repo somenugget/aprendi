@@ -19,7 +19,7 @@
     <meta name="theme-color" content="#242061" media="(prefers-color-scheme: dark)">
   </head>
 
-  <body class="h-full">
+  <body data-controller="push" data-push-server-key-value="<%= ENV['VAPID_APPLICATION_SERVER_KEY'] %>">
     <%= render('application/navbar') %>
     <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 md:pt-20 md:h-full">
       <%= yield %>

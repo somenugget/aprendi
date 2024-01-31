@@ -38,20 +38,20 @@
       )) %>
     </div>
 
-    <div class="mb-4" data-controller="push-notifications">
+    <div class="mb-4" data-controller="push-notifications-editor">
       <%= render(UI::Form::ToggleComponent.new(
         form: f,
         attribute: :push_notifications,
         label: I18n.t('user_settings.push_notifications'),
         options: {
-          'data-push-notifications-target' => 'toggleable',
+          'data-push-notifications-editor-target' => 'toggleable',
         },
         checkbox_options: {
-          'data-action' => 'push-notifications#toggle',
-          'data-push-notifications-target' => 'checkbox',
+          'data-action' => 'push-notifications-editor#toggle',
+          'data-push-notifications-editor-target' => 'checkbox',
         }
       )) %>
-      <div class="text-sm text-gray-500 dark:text-gray-400 hidden" data-push-notifications-target="disabledHint">
+      <div class="text-sm text-gray-500 dark:text-gray-400 hidden" data-push-notifications-editor-target="disabledHint">
         <%= I18n.t('user_settings.push_notifications_disabled_hint') %>
       </div>
 

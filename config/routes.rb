@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   study_sets.call
 
+  resources :push_subscriptions, only: %i[create]
+
   resources :folders do
     study_sets.call
   end
