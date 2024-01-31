@@ -1,7 +1,7 @@
 class PushNotification
   # Send push notification to user
   def self.send(subscription:, title:, body:)
-    Webpush.payload_send(
+    WebPush.payload_send(
       message: JSON.generate({ title:, body: }),
       endpoint: subscription.endpoint,
       p256dh: subscription.p256dh,

@@ -163,7 +163,6 @@ GEM
     hashie (5.0.0)
     heroicon (1.0.0)
       rails (>= 5.2)
-    hkdf (0.3.0)
     htmlbeautifier (1.4.2)
     htmlentities (4.3.4)
     http-accept (1.7.0)
@@ -280,6 +279,7 @@ GEM
     omniauth-twitter (1.4.0)
       omniauth-oauth (~> 1.1)
       rack
+    openssl (3.2.0)
     orm_adapter (0.5.0)
     parallel (1.24.0)
     parser (3.3.0.4)
@@ -469,9 +469,9 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webpush (1.1.0)
-      hkdf (~> 0.2)
+    web-push (3.0.1)
       jwt (~> 2.0)
+      openssl (~> 3.0)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -528,7 +528,7 @@ DEPENDENCIES
   view_component (>= 3.9.0)
   vite_rails
   web-console
-  webpush
+  web-push
 
 RUBY VERSION
    ruby 3.2.2p53
