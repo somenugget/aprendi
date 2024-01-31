@@ -15,4 +15,9 @@ class User < ApplicationRecord
   def settings
     super || create_settings!
   end
+
+  # @return [PushSubscription, nil]
+  def recent_subscription
+    push_subscriptions.recent.order(last_seen_at: :desc).first
+  end
 end

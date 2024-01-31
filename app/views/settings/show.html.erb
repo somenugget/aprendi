@@ -38,7 +38,7 @@
       )) %>
     </div>
 
-    <div class="mb-4" data-controller="push-notifications-editor">
+    <div class="mb-4" data-controller="push-notifications-editor" data-push-notifications-editor-server-key-value="<%= ENV['VAPID_APPLICATION_SERVER_KEY'] %>">
       <%= render(UI::Form::ToggleComponent.new(
         form: f,
         attribute: :push_notifications,

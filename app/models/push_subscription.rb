@@ -6,4 +6,6 @@ class PushSubscription < ApplicationRecord
   validates :p256dh, presence: true
   validates :auth, presence: true
   validates :last_seen_at, presence: true
+
+  scope :recent, -> { where('last_seen_at > ?', 5.days.ago) }
 end

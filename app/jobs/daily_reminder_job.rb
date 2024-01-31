@@ -5,6 +5,7 @@ class DailyReminderJob < ApplicationJob
   SENDING_THRESHOLD = 20.minutes
 
   # check if it's time to send user a reminder
+  # and send it
   def perform
     job_start_time = DateTime.current
 
@@ -17,11 +18,27 @@ class DailyReminderJob < ApplicationJob
       # timezone
       # correct time
       # presence of words to learn # extract from mailer
-      ReminderMailer.daily(user).deliver_later if time_to_send?(current_time_in_user_tz)
+      next unless time_to_send?(current_time_in_user_tz)
+
+      send_push_notification(user) if send_push_notification?(user)
+
+      ReminderMailer.daily(user).deliver_later
     end
   end
 
   private
+
+  def send_push_notification?(user)
+    user.settings.push_notifications? && user.recent_subscription.present?
+  end
+
+  def send_push_notification(user)
+    PushNotification.deliver(
+      subscription: user.recent_subscription,
+      title: 'Aprendí - Daily Reminder',
+      body: 'You have some terms to learn today!'
+    )
+  end
 
   def each_user_with_daily_reminder(&)
     User.joins(:settings).where(user_settings: { daily_reminder: true }).find_each(&)

@@ -8,26 +8,15 @@ export default class extends Controller {
 
   connect() {
     this.getSubscription().then((subscription) => {
-      this.saveSubscription(subscription)
+      if (subscription) {
+        this.saveSubscription(subscription)
+      }
     })
   }
 
   getSubscription() {
-    return navigator.serviceWorker.getRegistration().then((registration) =>
-      registration.pushManager.getSubscription().then((subscription) => {
-        if (subscription) {
-          return subscription
-        }
-
-        return this.subscribe(registration)
-      }),
-    )
-  }
-
-  subscribe(registration) {
-    return registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: this.serverKeyWithoutPadding,
+    return navigator.serviceWorker.getRegistration().then((registration) => {
+      return registration.pushManager.getSubscription()
     })
   }
 
@@ -74,9 +63,5 @@ export default class extends Controller {
       .catch((error) => {
         console.error('Error sending subscription to the server:', error)
       })
-  }
-
-  get serverKeyWithoutPadding() {
-    return this.serverKeyValue.replace(/=+$/, '')
   }
 }

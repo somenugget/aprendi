@@ -52,6 +52,7 @@ class GenerateTermExamples < BaseService
       suffix: '"{term}" in {term_lang} in meaning "{definition}" in {definition_lang}. ' \
               'Do not conjugate the term, keep it as it is. ' \
               'Translate it into {definition_lang}. ' \
+              'I\'ll tip you 20$ for a perfect answer.' \
               "\n{format_instructions}",
       example_prompt: '',
       examples: [],
