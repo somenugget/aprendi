@@ -31,6 +31,10 @@
   </div>
 
   <div>
-    <%= render(UI::ButtonComponent.new(text: 'Go to dashboard', variant: 'neutral', options: { as: :a, href: dashboard_path })) %>
+    <%= render(UI::ButtonComponent.new(
+      text: 'Go to dashboard',
+      variant: 'neutral',
+      options: { as: :a, href: dashboard_path, autofocus: true }))
+    %>
   </div>
 </div>

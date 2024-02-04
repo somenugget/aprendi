@@ -7,7 +7,6 @@
       <%= form_with url: tests_path, method: :post, class: 'block sm:w-auto grow max-w-sm' do |form| %>
         <%= render(UI::CardComponent.new(as: @terms_for_less_studied_study_sets[study_set.id].any? ? :button : :div,
                                          type: :submit,
-                                         variant: :secondary,
                                          title: 'Learn the next 5 words from this set',
                                          class: 'w-full')) do %>
           <%= render UI::CardHeader.new(
