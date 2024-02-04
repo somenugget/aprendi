@@ -1,0 +1,25 @@
+<% if @less_studied_study_sets.any? %>
+
+  <h3 class="mb-6">Your study sets progress</h3>
+
+  <div class="flex flex-wrap gap-6 mb-8 justify-stretch">
+    <% @less_studied_study_sets.each do |study_set| %>
+      <%= form_with url: tests_path, method: :post, class: 'block sm:w-auto grow max-w-sm' do |form| %>
+        <%= render(UI::CardComponent.new(as: @terms_for_less_studied_study_sets[study_set.id].any? ? :button : :div,
+                                         type: :submit,
+                                         variant: :secondary,
+                                         title: 'Learn the next 5 words from this set',
+                                         class: 'w-full')) do %>
+          <%= render UI::CardHeader.new(
+            header: study_set.name,
+            right_header: number_to_percentage(study_set.progress, precision: 0),
+            options: { wrapper_class: 'mb-0' }
+          ) %>
+          <% @terms_for_less_studied_study_sets[study_set.id].each do |term| %>
+            <%= form.hidden_field 'terms_ids[]', value: term.id %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
