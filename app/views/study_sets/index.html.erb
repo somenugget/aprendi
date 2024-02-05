@@ -6,14 +6,6 @@
 
 <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
   <% @study_sets.each do |study_set| %>
-    <%= render(UI::CardComponent.new(as: :a, href: study_set_path(study_set), class: 'truncate')) do %>
-      <%= study_set.name %>
-
-      <% if study_set.folder_id.present? %>
-        <div class="truncate text-sm mt-2 text-gray-500">
-          <%= study_set.folder.name %>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render(StudySets::CardComponent.new(study_set: study_set)) %>
   <% end %>
 </div>

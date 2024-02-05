@@ -1,6 +1,4 @@
 class TestStepsController < ApplicationController # rubocop:disable Metrics/ClassLength
-  include ActionView::RecordIdentifier
-
   before_action :set_test
   before_action :set_test_step, only: %i[show edit update destroy]
 

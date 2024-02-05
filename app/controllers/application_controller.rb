@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include ActionView::RecordIdentifier
+
   before_action :authenticate_user!, if: :should_authenticate?
   before_action :update_user_timezone
 
@@ -48,5 +50,9 @@ class ApplicationController < ActionController::Base
     return false if controller_name == 'home'
 
     true
+  end
+
+  def to_bool(value)
+    ActiveModel::Type::Boolean.new.cast(value)
   end
 end

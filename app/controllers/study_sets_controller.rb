@@ -4,7 +4,7 @@ class StudySetsController < ApplicationController
 
   # GET /study_sets
   def index
-    @study_sets = (@folder || current_user).study_sets.order(created_at: :desc)
+    @study_sets = (@folder || current_user).study_sets.includes(:folder).order(pinned: :desc, created_at: :desc)
   end
 
   # GET /study_sets/1
@@ -39,11 +39,16 @@ class StudySetsController < ApplicationController
   # PATCH/PUT /study_sets/1
   def update
     if @study_set.update(study_set_params)
-      @study_set.study_config.update(study_config_params)
+      @study_set.study_config.update(study_config_params) if params.key?(:study_config)
 
-      redirect_to [@folder, @study_set].compact,
-                  notice: 'Study set was successfully updated.',
-                  status: :see_other
+      if to_bool(params[:update_card])
+        replace_study_set_card(@study_set)
+      else
+        redirect_to [@folder, @study_set].compact,
+                    notice: 'Study set was successfully updated.',
+                    status: :see_other
+
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -68,10 +73,19 @@ class StudySetsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def study_set_params
-    params.require(:study_set).permit(:name)
+    params.require(:study_set).permit(:name, :pinned)
   end
 
   def study_config_params
     params.require(:study_config).permit(:term_lang, :definition_lang)
+  end
+
+  def replace_study_set_card(study_set)
+    render turbo_stream: turbo_stream.replace(
+      dom_id(study_set, 'card'),
+      render_to_string(
+        StudySets::CardComponent.new(study_set: study_set)
+      )
+    )
   end
 end

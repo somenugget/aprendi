@@ -18,6 +18,7 @@ gem 'turbo-rails'
 gem 'stimulus-rails'
 
 gem 'heroicon'
+gem 'tailwind_merge'
 gem 'view_component', '>= 3.9.0'
 gem 'vite_rails'
 

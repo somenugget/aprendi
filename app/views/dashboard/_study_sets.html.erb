@@ -8,11 +8,15 @@
         <%= render(UI::CardComponent.new(as: @terms_for_less_studied_study_sets[study_set.id].any? ? :button : :div,
                                          type: :submit,
                                          title: 'Learn the next 5 words from this set',
-                                         class: 'w-full')) do %>
+                                         class: 'w-full relative')) do %>
+          <% if study_set.pinned %>
+            <span class="absolute right-1.5 top-1.5 text-xs">📌</span>
+          <% end %>
+
           <%= render UI::CardHeader.new(
             header: study_set.name,
             right_header: number_to_percentage(study_set.progress, precision: 0),
-            options: { wrapper_class: 'mb-0' }
+            options: { wrapper_class: 'mb-0', header_class: 'font-medium' }
           ) %>
           <% @terms_for_less_studied_study_sets[study_set.id].each do |term| %>
             <%= form.hidden_field 'terms_ids[]', value: term.id %>

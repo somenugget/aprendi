@@ -1,6 +1,4 @@
 class TermsController < ApplicationController
-  include ActionView::RecordIdentifier
-
   before_action :set_study_set
   before_action :set_term, only: %i[show edit update destroy]
 

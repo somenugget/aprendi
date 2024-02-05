@@ -1,0 +1,22 @@
+<%= render(UI::CardComponent.new(class: 'truncate', id: dom_id(study_set, 'card'))) do %>
+  <div class="flex items-center justify-between">
+    <%= link_to study_set.name, study_set_path(study_set), class: 'hover:underline' %>
+
+    <%= form_with model: study_set, method: :put do |f| %>
+      <%= f.hidden_field :pinned, value: !study_set.pinned %>
+      <%= f.hidden_field :update_card, name: 'update_card', value: true %>
+      <%= f.submit '📌',
+                   class: class_names(
+                     'block w-full text-left cursor-pointer hover:opacity-50 dark:hover:bg-gray-600 dark:hover:text-white',
+                     'opacity-10' => !study_set.pinned
+                   )
+      %>
+    <% end %>
+  </div>
+
+  <% if study_set.folder_id.present? %>
+    <div class="truncate text-sm mt-2 text-gray-500">
+      <%= study_set.folder.name %>
+    </div>
+  <% end %>
+<% end %>

@@ -9,11 +9,26 @@ class DashboardController < ApplicationController
     @ripe_terms_to_learn_count = RipeTermsQuery.new(user: current_user).count
     @latest_folders = current_user.folders.order(created_at: :desc).limit(3).load
 
-    @less_studied_study_sets = StudySetsWithProgressQuery
-                               .new(user: current_user).relation.order(:progress, :created_at).limit(5).load
-    @terms_for_less_studied_study_sets = LessLearntTermsQuery
-                                         .new(Term.where(study_set_id: @less_studied_study_sets.pluck(:id)))
-                                         .relation
-                                         .group_by(&:study_set_id)
+    @less_studied_study_sets = less_studied_study_sets
+    @terms_for_less_studied_study_sets = terms_for_less_studied_study_sets(@less_studied_study_sets)
+  end
+
+  private
+
+  def less_studied_study_sets
+    StudySetsWithProgressQuery
+      .new(user: current_user)
+      .relation
+      .order(pinned: :desc, progress: :asc, created_at: :asc)
+      .limit(6)
+      .load
+  end
+
+  # @param [ActiveRecord::Relation<StudySet>] less_studied_study_sets
+  def terms_for_less_studied_study_sets(less_studied_study_sets)
+    LessLearntTermsQuery
+      .new(Term.where(study_set_id: less_studied_study_sets.pluck(:id)))
+      .relation
+      .group_by(&:study_set_id)
   end
 end
