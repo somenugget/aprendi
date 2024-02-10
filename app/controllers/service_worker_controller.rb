@@ -5,7 +5,7 @@ class ServiceWorkerController < ApplicationController
   skip_after_action :verify_same_origin_request, only: :index
 
   def index
-    response = Rails.cache.fetch('service-worker', expires_in: 5.seconds) do
+    response = Rails.cache.fetch('service-worker', expires_in: Rails.env.development? ? 1.second : 5.minutes) do
       Faraday.get(vite_asset_url('service-worker.js'))
     end
 

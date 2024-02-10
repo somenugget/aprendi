@@ -6,7 +6,7 @@ self.addEventListener('push', (event) => {
   const options = {
     title: notificationData.title,
     body: notificationData.body,
-    icon: notificationData.icon,
+    icon: 'http://localhost:3000/pwa-maskable-512x512.png',
   }
 
   console.log(options)
@@ -14,4 +14,24 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(notificationData.title, options),
   )
+})
+
+self.addEventListener('notificationclick', (event) => {
+  // eslint-disable-next-line no-undef
+  const promiseChain = clients
+    .matchAll({
+      type: 'window',
+      includeUncontrolled: true,
+    })
+    .then((windowClients) => {
+      event.notification.close()
+
+      if (windowClients.length) {
+        return windowClients[0].focus()
+      }
+      // eslint-disable-next-line no-undef
+      return clients.openWindow('/dashboard')
+    })
+
+  event.waitUntil(promiseChain)
 })

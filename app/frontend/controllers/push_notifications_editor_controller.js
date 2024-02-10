@@ -1,11 +1,8 @@
 import { Controller } from '@hotwired/stimulus'
+import { serverKeyWithoutPadding } from '../helpers/serverKey'
 
 export default class extends Controller {
   static targets = ['checkbox', 'toggleable', 'disabledHint']
-
-  static values = {
-    serverKey: String,
-  }
 
   connect() {
     if (window.Notification.permission === 'denied') {
@@ -52,6 +49,6 @@ export default class extends Controller {
   }
 
   get serverKeyWithoutPadding() {
-    return this.serverKeyValue.replace(/=+$/, '')
+    return serverKeyWithoutPadding()
   }
 }

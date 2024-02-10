@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { Controller } from '@hotwired/stimulus'
+import { serverKeyWithoutPadding } from '../helpers/serverKey'
 
 export default class extends Controller {
   static values = {
@@ -16,7 +17,24 @@ export default class extends Controller {
 
   getSubscription() {
     return navigator.serviceWorker.getRegistration().then((registration) => {
-      return registration.pushManager.getSubscription()
+      return registration.pushManager.getSubscription().then((subscription) => {
+        if (subscription) {
+          return subscription
+        }
+
+        return registration.pushManager
+          .permissionState({
+            userVisibleOnly: true,
+          })
+          .then((permissionState) => {
+            if (permissionState === 'granted') {
+              registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: this.serverKeyWithoutPadding,
+              })
+            }
+          })
+      })
     })
   }
 
@@ -63,5 +81,9 @@ export default class extends Controller {
       .catch((error) => {
         console.error('Error sending subscription to the server:', error)
       })
+  }
+
+  get serverKeyWithoutPadding() {
+    return serverKeyWithoutPadding()
   }
 }
