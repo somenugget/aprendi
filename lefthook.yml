@@ -4,16 +4,17 @@
 #   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
 #
 assert_lefthook_installed: true
+rc: ~/.zshrc
 pre-push:
   commands:
     packages-audit:
       files: git ls-files
       tags: frontend security
-      run: "[ `bin/reaudit-security` = 'true' ] && npm audit fix || exit 0"
+      run: npm audit fix
     gems-audit:
       files: git ls-files
       tags: backend security
-      run: "[ `bin/reaudit-security` = 'true' ] && bundle exec bundle-audit check --update || exit 0"
+      run: bundle exec bundle-audit check --update
 pre-commit:
   parallel: true
   commands:
