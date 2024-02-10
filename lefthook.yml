@@ -3,12 +3,15 @@
 #   Refer for explanation to following link:
 #   https://github.com/evilmartians/lefthook/blob/master/docs/configuration.md
 #
+assert_lefthook_installed: true
 pre-push:
   commands:
     packages-audit:
+      files: git ls-files
       tags: frontend security
       run: "[ `bin/reaudit-security` = 'true' ] && npm audit fix || exit 0"
     gems-audit:
+      files: git ls-files
       tags: backend security
       run: "[ `bin/reaudit-security` = 'true' ] && bundle exec bundle-audit check --update || exit 0"
 pre-commit:
