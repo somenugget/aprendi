@@ -7,7 +7,7 @@
         <%= render(UI::CardComponent.new(as: @terms_for_less_studied_study_sets[study_set.id].any? ? :button : :div,
                                          type: :submit,
                                          title: 'Learn the next 5 words from this set',
-                                         class: 'w-full relative')) do %>
+                                         class: 'w-full relative z-0')) do %>
           <% if study_set.pinned %>
             <span class="absolute right-1.5 top-1.5 text-xs">📌</span>
           <% end %>
