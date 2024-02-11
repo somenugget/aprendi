@@ -11,6 +11,12 @@ class User < ApplicationRecord
   has_many :push_subscriptions, dependent: :destroy
   has_one :settings, class_name: 'UserSettings', touch: true, dependent: :destroy
 
+  # Fake email for users who sign up via OAuth
+  # @return [String]
+  def self.email_placeholder
+    "email_placeholder+#{SecureRandom.hex(4)}@example.com"
+  end
+
   # @return [UserSettings]
   def settings
     super || create_settings!

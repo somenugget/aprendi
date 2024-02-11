@@ -4,11 +4,11 @@
     <%= form_with(url: user_google_oauth2_omniauth_authorize_path, method: :post, class: 'mt-10 mx-auto flex items-center justify-center w-36') do |f| %>
       <%= f.button "Google", class: 'w-full rounded-md bg-red-600 px-3.5 py-2.5 text-sm font-semibold text-white transition shadow-sm hover:bg-red-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
     <% end %>
+    <%= form_with(url: user_facebook_omniauth_authorize_path, method: :post, class: 'mt-4 mx-auto flex items-center justify-center w-36') do |f| %>
+      <%= f.button "Facebook", class: 'w-full rounded-md bg-blue-700 px-3.5 py-2.5 text-sm font-semibold text-white transition shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
+    <% end %>
 
     <div class="pointer-events-none opacity-25">
-      <%= form_with(url: user_facebook_omniauth_authorize_path, method: :post, class: 'mt-4 mx-auto flex items-center justify-center w-36') do |f| %>
-        <%= f.button "Facebook", class: 'w-full rounded-md bg-blue-700 px-3.5 py-2.5 text-sm font-semibold text-white transition shadow-sm hover:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
-      <% end %>
       <%= form_with(url: user_twitter_omniauth_authorize_path, method: :post, class: 'mt-4 mx-auto flex items-center justify-center w-36') do |f| %>
         <%= f.button "Twitter", class: 'w-full rounded-md bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white transition shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' %>
       <% end %>

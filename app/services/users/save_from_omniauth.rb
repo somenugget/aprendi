@@ -1,14 +1,23 @@
 class Users::SaveFromOmniauth < BaseService
-  input :auth, type: OmniAuth::AuthHash
+  input :provider, type: String
+  input :uid, type: String
+  input :first_name, type: String, allow_nil: true
+  input :last_name, type: String, allow_nil: true
+  input :email, type: String, allow_nil: true
 
   # @return [User]
   def call
     authorization = find_authorization
 
-    if authorization
-      update_authorization_tokens(authorization)
-    else
-      authorization = create_authorization
+    authorization ||= User.transaction do
+      create_authorization(
+        User.create!(
+          first_name: first_name,
+          last_name: last_name,
+          password: password,
+          email: email || User.email_placeholder
+        )
+      )
     end
 
     authorization.user
@@ -16,32 +25,12 @@ class Users::SaveFromOmniauth < BaseService
 
   private
 
-  def user
-    @user ||=
-      User.find_or_initialize_by(email: auth.info.email).tap do |user|
-        user.update!(
-          first_name: auth.info.first_name,
-          last_name: auth.info.last_name,
-          **(user.new_record? ? { password: Devise.friendly_token[0, 10] } : {})
-        )
-      end
-  end
-
   def find_authorization
-    Authorization.find_by(
-      provider: auth.provider,
-      uid: auth.uid.to_s
-    )
+    Authorization.find_by(provider: provider, uid: uid)
   end
 
-  def create_authorization
-    Authorization.create!(
-      provider: auth.provider,
-      uid: auth.uid.to_s,
-      user: user,
-      token: auth.credentials.token,
-      refresh_token: auth.credentials.refresh_token
-    )
+  def create_authorization(user)
+    Authorization.create!(provider: provider, uid: uid, user: user)
   end
 
   def update_authorization_tokens(authorization)
@@ -49,5 +38,9 @@ class Users::SaveFromOmniauth < BaseService
       token: auth.credentials.token,
       refresh_token: auth.credentials.refresh_token
     )
+  end
+
+  def password
+    Devise.friendly_token[0, 20]
   end
 end
