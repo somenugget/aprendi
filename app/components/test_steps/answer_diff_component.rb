@@ -1,8 +1,9 @@
 class TestSteps::AnswerDiffComponent < ApplicationComponent
+  include NormalizeWord
+
   attr_reader :correct, :wrong, :diff
 
   class CorrectLetters < Array; end
-
   class WrongLetters < Array; end
 
   # @param [String] correct
@@ -10,7 +11,7 @@ class TestSteps::AnswerDiffComponent < ApplicationComponent
   def initialize(correct:, wrong:)
     @correct = correct
     @wrong = wrong
-    @diff = Diff::LCS.sdiff(correct, wrong)
+    @diff = Diff::LCS.sdiff(normalize_word(correct), normalize_word(wrong))
   end
 
   # @return [String]

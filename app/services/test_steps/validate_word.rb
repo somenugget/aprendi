@@ -1,5 +1,7 @@
 module TestSteps
   class ValidateWord < BaseService
+    include NormalizeWord
+
     # @!method test_step
     #   @return [TestStep]
     input :test_step, type: TestStep
@@ -16,7 +18,7 @@ module TestSteps
     private
 
     def words_match?
-      I18n.transliterate(answer.strip).downcase == I18n.transliterate(test_step.term.term.strip).downcase
+      normalize_word(answer) == normalize_word(test_step.term.term)
     end
   end
 end
