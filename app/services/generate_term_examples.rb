@@ -30,9 +30,9 @@ class GenerateTermExamples < BaseService
 
       chat_response = llm.complete(prompt: prompt)
 
-      Rails.logger.info("Chat response: #{chat_response}")
-
-      output_parser.parse(chat_response.completion)
+      output_parser.parse(chat_response.completion).tap do |parsed_response|
+        Rails.logger.info("Chat response: #{parsed_response}")
+      end
     end
   end
 
