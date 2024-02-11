@@ -33,6 +33,12 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def cached(key, **cache_options, &block)
+    default_expiration = Rails.env.development? ? 1.second : 5.minutes
+
+    Rails.cache.fetch(key, { expires_in: default_expiration, **cache_options }, &block)
+  end
+
   def update_user_timezone
     return unless current_user
     return if browser_timezone.blank?

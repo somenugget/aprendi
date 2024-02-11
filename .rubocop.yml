@@ -34,6 +34,9 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 15
 
+Naming/BlockForwarding:
+  Enabled: false
+
 Rails/I18nLocaleTexts:
   Enabled: false
 
