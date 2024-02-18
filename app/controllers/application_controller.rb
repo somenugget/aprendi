@@ -23,12 +23,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :unfinished_test_step
 
-  def after_sign_in_path_for(user)
-    if user.term_progresses.any?
-      dashboard_path
-    else
-      folders_path
-    end
+  def after_sign_in_path_for
+    dashboard_path
   end
 
   private
