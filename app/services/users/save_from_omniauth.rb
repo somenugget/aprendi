@@ -10,14 +10,7 @@ class Users::SaveFromOmniauth < BaseService
     authorization = find_authorization
 
     authorization ||= User.transaction do
-      create_authorization(
-        User.create!(
-          first_name: first_name,
-          last_name: last_name,
-          password: password,
-          email: email || User.email_placeholder
-        )
-      )
+      create_authorization
     end
 
     authorization.user
@@ -29,14 +22,16 @@ class Users::SaveFromOmniauth < BaseService
     Authorization.find_by(provider: provider, uid: uid)
   end
 
-  def create_authorization(user)
-    Authorization.create!(provider: provider, uid: uid, user: user)
+  def create_authorization
+    Authorization.create!(provider: provider, uid: uid, user: find_or_create_user)
   end
 
-  def update_authorization_tokens(authorization)
-    authorization.update!(
-      token: auth.credentials.token,
-      refresh_token: auth.credentials.refresh_token
+  def find_or_create_user
+    User.find_by(email: email) || User.create!(
+      first_name: first_name,
+      last_name: last_name,
+      password: password,
+      email: email || User.email_placeholder
     )
   end
 
