@@ -1,0 +1,36 @@
+<div id="custom-controls-gallery" class="relative w-full" data-carousel="slide">
+  <!-- Carousel wrapper -->
+  <div class="relative h-56 overflow-hidden md:h-[26rem]">
+    <!-- Item 1 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <%= vite_image_tag 'images/landing/dashboard.png' %>
+    </div>
+    <!-- Item 2 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
+      <%= vite_image_tag 'images/landing/select_word.png' %>
+    </div>
+    <!-- Item 3 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <%= vite_image_tag 'images/landing/letters.png' %>
+    </div>
+    <!-- Item 4 -->
+    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+      <%= vite_image_tag 'images/landing/write_word.png' %>
+    </div>
+  </div>
+
+  <div class="flex justify-center items-center my-8 gap-4">
+    <button type="button" class="flex justify-center items-center me-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev>
+      <span class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+        <%= heroicon 'arrow-left' %>
+        <span class="sr-only">Previous</span>
+      </span>
+    </button>
+    <button type="button" class="flex justify-center items-center h-full cursor-pointer group focus:outline-none" data-carousel-next>
+      <span class="text-gray-400 hover:text-gray-900 dark:hover:text-white group-focus:text-gray-900 dark:group-focus:text-white">
+        <%= heroicon 'arrow-right' %>
+        <span class="sr-only">Next</span>
+      </span>
+    </button>
+  </div>
+</div>
