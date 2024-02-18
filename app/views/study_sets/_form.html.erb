@@ -17,7 +17,12 @@
 
   <%= fields_for :study_config, @study_set.study_config do |study_config_fields| %>
     <div class="w-1/2">
-      <%= render(UI::Form::SelectComponent.new(form: study_config_fields, attribute: :term_lang, values: StudyConfig::LANGUAGES.invert)) %>
+      <%= render(UI::Form::SelectComponent.new(
+        form: study_config_fields,
+        attribute: :term_lang,
+        values: StudyConfig::LANGUAGES.invert,
+        options: { selected: study_config_fields.object&.term_lang || current_user.settings.term_lang }
+      )) %>
     </div>
 
     <div class="w-1/2">
