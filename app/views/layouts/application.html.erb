@@ -22,6 +22,8 @@
   <body class="min-h-full" data-controller="push" data-vapid-application-server-key="<%= ENV['VAPID_APPLICATION_SERVER_KEY'] %>">
     <%= render('application/navbar') %>
     <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 md:pt-20 md:h-full">
+      <%= render(UI::AlertComponent.new(variant: :success, message: notice)) %>
+
       <%= yield %>
     </main>
   </body>

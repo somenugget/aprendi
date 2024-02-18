@@ -38,10 +38,6 @@ h6 {
   @apply text-lg text-zinc-800 font-bold dark:text-white;
 }
 
-.format {
-  @apply max-w-full;
-}
-
 .turbo-progress-bar {
   @apply bg-violet-950;
 }
