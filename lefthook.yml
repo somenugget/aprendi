@@ -22,4 +22,9 @@ pre-commit:
       tags: backend style
       glob: "*.rb"
       exclude: '(^|/)(application|routes)\.rb$'
-      run: bundle exec rubocop --force-exclusion {all_files}
+      run: bundle exec rubocop -A --force-exclusion {staged_files}
+    eslint:
+      tags: frontend style
+      glob: "*.js"
+      exclude: '(^|/)(application)\.js'
+      run: npm run lintFix {staged_files}
