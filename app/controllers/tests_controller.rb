@@ -39,13 +39,13 @@ class TestsController < ApplicationController
       step.update!(status: :in_progress)
     end
 
-    redirect_to test_test_step_path(@test, first_step), notice: 'Test was successfully created.'
+    redirect_to test_test_step_path(@test, first_step)
   end
 
   # DELETE /tests/1
   def destroy
     @test.destroy!
-    redirect_to tests_url, notice: 'Test was successfully destroyed.', status: :see_other
+    redirect_to tests_url, notice: 'Test was stopped.', status: :see_other
   end
 
   private
