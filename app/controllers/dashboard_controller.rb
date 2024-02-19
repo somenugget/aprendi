@@ -25,7 +25,7 @@ class DashboardController < ApplicationController
     StudySetsWithProgressQuery
       .new(user: current_user)
       .relation
-      .order(pinned: :desc, progress: :asc, created_at: :asc)
+      .order(pinned: :desc, progress: :asc, updated_at: :asc)
       .limit(6)
       .load
   end
