@@ -1,5 +1,5 @@
 class Term < ApplicationRecord
-  belongs_to :study_set
+  belongs_to :study_set, touch: true
 
   has_many :term_example_terms, dependent: :destroy
   has_many :term_examples, through: :term_example_terms
