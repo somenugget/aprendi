@@ -17,6 +17,6 @@ class Term < ApplicationRecord
 
   # @return [Boolean]
   def long_phrase?
-    term.split.count >= 5
+    term.split.count >= 6
   end
 end
