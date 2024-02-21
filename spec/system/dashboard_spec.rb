@@ -7,7 +7,7 @@ describe 'Dashboard' do
 
   it 'shows empty page' do
     # Visit the home page
-    visit root_path
+    visit dashboard_path
 
     expect(page).to have_content('It looks like you\'re starting fresh with us')
   end
