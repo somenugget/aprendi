@@ -44,7 +44,7 @@ Rails/UniqueValidationWithoutIndex:
   Exclude:
     - 'app/models/push_subscription.rb'
 
-Style/ArgumentForwarding:
+Style/ArgumentsForwarding:
   Enabled: false
 
 Style/ClassAndModuleChildren:
