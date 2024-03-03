@@ -3,6 +3,11 @@ module Users
     skip_before_action :verify_authenticity_token
 
     def google_oauth2
+      if request.env['omniauth.auth']['extra']['aud'] != ENV['GOOGLE_CLIENT_ID']
+        Rails.logger.info "Omniauth AUD error: #{request.env['omniauth.auth'].inspect}"
+        return redirect_to new_user_session_url
+      end
+
       login_using('google_oauth2')
     end
 
@@ -12,12 +17,19 @@ module Users
 
     private
 
-    def login_using(provider)
+    def login_using(provider) # rubocop:disable Metrics/AbcSize
       @user = login_user_using(provider)
 
       if @user.persisted?
         flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: provider
-        sign_in_and_redirect @user, event: :authentication
+
+        if ENV['APP_URL'].present?
+          UserAuthToken.create_for_user(@user).tap do |token|
+            return redirect_to dashboard_url(host: ENV['APP_URL'], token: token), allow_other_host: true
+          end
+        else
+          sign_in_and_redirect @user, event: :authentication
+        end
       else
         redirect_to new_user_session_url, alert: @user.errors.full_messages.join("\n")
       end

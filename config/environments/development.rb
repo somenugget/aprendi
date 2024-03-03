@@ -87,4 +87,6 @@ Rails.application.configure do
   config.lookbook.preview_paths = ['spec/components/previews']
 
   config.view_component.default_preview_layout = 'component_preview'
+
+  config.hosts << 'hexhealth.info:3000'
 end

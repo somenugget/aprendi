@@ -37,6 +37,10 @@ Metrics/MethodLength:
 Naming/BlockForwarding:
   Enabled: false
 
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_token
+
 Rails/I18nLocaleTexts:
   Enabled: false
 
