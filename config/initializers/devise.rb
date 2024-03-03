@@ -275,7 +275,8 @@ Devise.setup do |config|
   config.omniauth :google_oauth2,
                   ENV['GOOGLE_APP_ID'],
                   ENV['GOOGLE_APP_SECRET'],
-                  scope: 'https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/userinfo.profile'
+                  scope: 'https://www.googleapis.com/auth/userinfo.email,https://www.googleapis.com/auth/userinfo.profile',
+                  redirect_uri: Rails.env.production? ? 'https://aprendi.fly.dev/users/auth/google_oauth2/callback' : 'http://localhost:3000/users/auth/google_oauth2/callback'
 
   config.omniauth :facebook,
                   ENV['FACEBOOK_APP_ID'],
