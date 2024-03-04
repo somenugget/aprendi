@@ -88,5 +88,5 @@ Rails.application.configure do
 
   config.view_component.default_preview_layout = 'component_preview'
 
-  config.hosts << 'hexhealth.info:3000'
+  config.hosts << 'aprendi.home:3000'
 end
