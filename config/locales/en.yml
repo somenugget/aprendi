@@ -30,6 +30,14 @@
 en:
   hello: "Hello world"
 
+  account_deletion_requests:
+    confirmation_sent: 'Account deletion confirmation have been sent. Please check you email.'
+    success: 'All data related to "%{email}" had been deleted'
+    errors:
+      email: 'The email is invalid'
+      no_account: 'There is no account with the email "%{email}" in our app'
+      confirmation: 'Your confirmation link seems to be invalid. You can request account deletion again to get a valid link'
+
   user_settings:
     term_lang_hint: 'The language in which you prefer to see terms in the application'
     definition_lang_hint: 'The language in which you prefer to see definitions in the application'
@@ -46,3 +54,4 @@ en:
         definition_lang: 'Preferred definition language'
     submit:
       user_settings: 'Update settings'
+      account_deletion_requests: 'Request account deletion'

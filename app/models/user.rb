@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :tests, dependent: :destroy
   has_many :term_progresses, dependent: :destroy
   has_many :push_subscriptions, dependent: :destroy
+  has_many :account_deletion_requests, dependent: :destroy
+  has_many :user_auth_tokens, dependent: :destroy
   has_one :settings, class_name: 'UserSettings', touch: true, dependent: :destroy
 
   # Fake email for users who sign up via OAuth

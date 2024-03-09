@@ -22,8 +22,8 @@ class UI::AlertComponent < ApplicationComponent
   end
 
   def alert_variant_class
-    case @variant
-    when :info
+    case @variant.to_sym
+    when :info, :notice
       'text-blue-800 bg-blue-50 dark:bg-gray-800 dark:text-blue-400'
     when :success
       'text-green-800 bg-green-50 dark:bg-gray-800 dark:text-green-400'

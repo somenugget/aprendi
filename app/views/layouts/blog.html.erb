@@ -4,7 +4,7 @@
   <title>Aprendi</title>
   <meta name="description" content="Straightforward words memorisation">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="facebook-domain-verification" content="1hhng03klzf08gyfhftmlfxmij4b9v" />
+  <meta name="facebook-domain-verification" content="1hhng03klzf08gyfhftmlfxmij4b9v"/>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= vite_client_tag %>
@@ -19,8 +19,12 @@
   <meta name="theme-color" content="#242061" media="(prefers-color-scheme: dark)">
 </head>
 
-<body>
-<main class="format py-10 mx-auto md:h-full">
+<body class="md:min-h-full flex flex-col justify-stretch">
+<main class="container format py-10 mx-auto grow shrink-0 basis-auto">
+  <%- flash.each do |variant, message| %>
+    <%= render(UI::AlertComponent.new(variant:, message:)) %>
+  <% end %>
+
   <%= yield %>
 </main>
 <%= render('common/footer') %>

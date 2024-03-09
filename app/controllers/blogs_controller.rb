@@ -1,4 +1,6 @@
 class BlogsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   layout 'blog'
 
   def privacy_policy; end
