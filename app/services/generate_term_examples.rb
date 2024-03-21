@@ -6,8 +6,8 @@ class GenerateTermExamples < BaseService
   # @!method term
   input :term, type: Term
 
-  EXAMPLES_COUNT_TO_GENERATE = 8
-  EXAMPLES_COUNT_TO_SKIP = 5
+  EXAMPLES_COUNT_TO_GENERATE = 10
+  EXAMPLES_COUNT_TO_SKIP = 8
 
   HEADERS = %w[term definition term_lang definition_lang term_example definition_example].freeze
 
