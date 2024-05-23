@@ -10,7 +10,7 @@ class LessLearntTermsQuery < ApplicationQuery
     scope
       .with(numbered: numbered_terms_subquery)
       .joins('INNER JOIN numbered ON numbered.id = terms.id')
-      .where('numbered.row_number <= ?', terms_group_limit)
+      .where(numbered: { row_number: ..terms_group_limit })
   end
 
   private
