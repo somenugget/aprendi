@@ -9,7 +9,7 @@ gem 'rails', '~> 7.1'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '>= 6.4.2'
+gem 'puma', '~> 6.4.2'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
@@ -19,11 +19,11 @@ gem 'stimulus-rails'
 
 gem 'heroicon'
 gem 'tailwind_merge'
-gem 'view_component', '>= 3.9.0'
+gem 'view_component', '~> 3.12'
 gem 'vite_rails'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '>= 4.0.1'
+gem 'redis', '~> 5.2'
 
 gem 'web-push'
 
@@ -58,7 +58,7 @@ group :development, :test do
   gem 'dotenv-rails'
 
   gem 'bundle-audit', require: false
-  gem 'rubocop'
+  gem 'rubocop', '~> 1.64'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
@@ -77,14 +77,14 @@ group :development do
 end
 
 group :test do
-  gem 'capybara'
+  gem 'capybara', '~> 3.40'
   gem 'cuprite'
   gem 'site_prism'
 
   gem 'simplecov', require: false
 end
 
-gem 'dockerfile-rails', '>= 1.5', :group => :development
+gem 'dockerfile-rails', '~> 1.5', :group => :development
 
 gem 'sentry-ruby', '~> 5.13'
 

@@ -27,6 +27,8 @@ class StudySetsController < ApplicationController
       @study_set.save
     end
 
+    generate_study_set_terms
+
     if @study_set.persisted?
       redirect_to [@folder, @study_set].compact, notice: 'Study set was successfully created.'
     else
@@ -78,6 +80,15 @@ class StudySetsController < ApplicationController
 
   def study_config_params
     params.require(:study_config).permit(:term_lang, :definition_lang)
+  end
+
+  def generate_study_set_terms
+    return if params[:study_set][:instructions].blank?
+
+    GenerateStudySetTerms.call(
+      study_set: @study_set,
+      instructions: params[:study_set][:instructions]
+    )
   end
 
   def replace_study_set_card(study_set)

@@ -1,14 +1,19 @@
-<h2>
-  <% if @study_set.folder.present? %>
-    <%= @study_set.folder.name %>:
-  <% end %>
-  New study set
-</h2>
+<div class="flex justify-between">
+  <h2>
+    <% if @study_set.folder.present? %>
+      <%= @study_set.folder.name %>:
+    <% end %>
+
+    New study set
+  </h2>
+  <div>
+    <%= render(UI::ButtonComponent.new(text: "Go back",
+                                       variant: 'neutral',
+                                       options: {
+                                         as: :a,
+                                         href: @folder ? folder_study_sets_path(@folder) : study_sets_path
+                                       })) %>
+  </div>
+</div>
 
 <%= render "form", study_set: @study_set %>
-
-<br>
-
-<div>
-  <%= link_to "Back to study sets", @folder ? folder_study_sets_path(@folder) : study_sets_path %>
-</div>

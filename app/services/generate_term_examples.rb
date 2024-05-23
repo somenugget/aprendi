@@ -26,7 +26,7 @@ class GenerateTermExamples < BaseService
       llm = Langchain::LLM::OpenAI.new(api_key: ENV['OPENAI_ACCESS_TOKEN'], default_options: { temperature: 0.3 })
 
       # TODO: set Sentry breadcrumbs
-      Rails.logger.info("Sending prompt: #{prompt}")
+      Rails.logger.info("Sending prompt: \n#{prompt}")
 
       chat_response = llm.complete(prompt: prompt)
 
