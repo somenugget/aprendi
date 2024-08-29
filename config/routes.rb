@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   study_sets = proc do
     resources :study_sets do
-      resource :json_import, only: %i[show create]
       resource :import, only: %i[show create] do
         post :parse
       end

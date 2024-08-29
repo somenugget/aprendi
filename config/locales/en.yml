@@ -52,6 +52,9 @@ en:
       user_settings:
         term_lang: 'Preferred term language'
         definition_lang: 'Preferred definition language'
+      study_config:
+        term_lang: 'Language you learn'
+        definition_lang: 'Your base language'
     submit:
       user_settings: 'Update settings'
       account_deletion_requests: 'Request account deletion'

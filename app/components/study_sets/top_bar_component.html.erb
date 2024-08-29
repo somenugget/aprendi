@@ -18,9 +18,16 @@
 
   <div class="flex gap-2">
     <%= form_with url: tests_path, method: :post do |form| %>
-      <%= form.hidden_field :study_set_id, value: @study_set.id %>
-      <%= render(UI::ButtonComponent.new(text: 'Learn this set', options: { type: :submit })) %>
+      <% less_learnt_terms.each do |term| %>
+        <%= form.hidden_field 'terms_ids[]', value: term.id %>
+      <% end %>
+      <%= render(UI::ButtonComponent.new(text: 'Learn next 5 words', options: { type: :submit })) %>
     <% end %>
+    <%= form_with url: tests_path, method: :post do |form| %>
+      <%= form.hidden_field :study_set_id, value: @study_set.id %>
+      <%= render(UI::ButtonComponent.new(text: 'Learn the whole set', options: { type: :submit })) %>
+    <% end %>
+
     <%= render(UI::ButtonComponent.new(text: "Go back #{'to folder' if @study_set.folder}",
                                        variant: 'neutral',
                                        options: {
@@ -36,9 +43,6 @@
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton">
         <li>
           <%= link_to 'Import', study_set_import_path(study_set, folder_id: study_set.folder_id), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
-        </li>
-        <li>
-          <%= link_to 'JSON Import', study_set_json_import_path(study_set, folder_id: study_set.folder_id), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
         </li>
         <li>
           <%= link_to 'Edit', edit_study_set_path(study_set, folder_id: study_set.folder_id), class: 'block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' %>
