@@ -59,6 +59,7 @@ group :development, :test do
 
   gem 'bundle-audit', require: false
   gem 'rubocop', '~> 1.65.1'
+  gem 'rubocop-capybara'
   gem 'rubocop-factory_bot'
   gem 'rubocop-performance'
   gem 'rubocop-rails'

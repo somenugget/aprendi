@@ -19,9 +19,9 @@ class AccountDeletionRequestsController < ApplicationController
     result = Users::DeleteAccountByToken.result(token: params[:token])
 
     if result.success?
-      flash[:success] = I18n.t('account_deletion_requests.success', email: result.output.email)
+      flash.now[:success] = I18n.t('account_deletion_requests.success', email: result.output.email)
     else
-      flash[:error] = result.error
+      flash.now[:error] = result.error
     end
   end
 end

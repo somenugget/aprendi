@@ -3,7 +3,7 @@ class Test < ApplicationRecord
 
   has_many :test_steps, dependent: :destroy, inverse_of: :test
 
-  enum status: { in_progress: 0, completed: 1 }
+  enum :status, { in_progress: 0, completed: 1 }
 
   scope :recent_in_progress, -> { in_progress.where(created_at: 2.days.ago..) }
 

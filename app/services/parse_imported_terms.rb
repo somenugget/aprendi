@@ -13,7 +13,7 @@ class ParseImportedTerms < BaseService
   def call
     lines = terms_list.split("\n")
 
-    lines.select(&:present?).map do |line|
+    lines.compact_blank.map do |line|
       parts = line.chomp.split(separator_to_use)
       Term.new(term: parts[0]&.strip, definition: parts[1]&.strip).tap(&:valid?)
     end
