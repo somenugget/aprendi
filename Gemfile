@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '3.2.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1.3'
+gem 'rails', '~> 7.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -38,7 +38,7 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-twitter'
 
 gem 'dry-initializer'
-gem 'good_job', '~> 4.2.0'
+gem 'good_job', '~> 4.4'
 gem 'service_actor'
 
 gem 'mailjet'
