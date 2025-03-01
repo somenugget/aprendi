@@ -11,16 +11,32 @@
         </div>
       </div>
       <div class="hidden md:block">
-        <div class="ml-4 flex items-center md:ml-6 gap-1">
+        <div class="ml-4 flex items-center md:ml-6 gap-3">
           <%- if unfinished_test_step %>
-            <%= link_to 'Test is in progress',
+            <%= link_to 'Test in progress',
                         test_test_step_path(unfinished_test, unfinished_test_step),
                         class: 'text-white rounded-md px-3 py-2 text-sm font-medium bg-indigo-700 hover:bg-indigo-500'
             %>
           <% end %>
 
+          <% if current_user.streak.present? %>
+            <% streak_today = current_user.streak.last_activity_date == Date.current %>
+            <div
+              data-tooltip-target="tooltip-streak"
+              class="<%= class_names('text-white cursor-default rounded-md px-3 py-2 text-sm font-medium bg-indigo-700', 'opacity-50' => !streak_today) %>"
+            >
+              🔥
+              <%= current_user.streak.current_streak %>
+            </div>
+
+            <div id="tooltip-streak" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+              <%= streak_today ? 'You have already completed your daily goal' : 'Exercise today to extend your streak' %>
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          <% end %>
+
           <!-- Profile dropdown -->
-          <div class="relative ml-3">
+          <div class="relative">
             <%= render(Users::DropdownComponent.new(user: current_user)) %>
           </div>
         </div>

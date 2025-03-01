@@ -9,7 +9,6 @@ class DashboardController < ApplicationController
     @new_terms_to_learn_count = NewTermsQuery.new(user: current_user).count
     @ripe_terms_to_learn = DashboardRipeTermsQuery.new(user: current_user).relation
     @ripe_terms_to_learn_count = RipeTermsQuery.new(user: current_user).count
-    @latest_folders = current_user.folders.order(created_at: :desc).limit(3).load
 
     @less_studied_study_sets = less_studied_study_sets
     @terms_for_less_studied_study_sets = terms_for_less_studied_study_sets(@less_studied_study_sets)

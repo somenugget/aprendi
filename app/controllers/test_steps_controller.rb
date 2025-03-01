@@ -1,4 +1,6 @@
 class TestStepsController < ApplicationController # rubocop:disable Metrics/ClassLength
+  add_flash_types :streak
+
   before_action :set_test
   before_action :set_test_step, only: %i[show edit update destroy]
 
@@ -151,9 +153,12 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
       ))
     else
       @test.update!(status: :completed)
+
       UpdateTermProgressAfterTestJob.perform_later(@test.id)
 
-      return redirect_to result_test_path(@test)
+      streak_result = Users::UpdateStreak.call(user: current_user)
+
+      return redirect_to(result_test_path(@test), streak: streak_result.streak_extended)
     end
 
     render(turbo_stream: streams)

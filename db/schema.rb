@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_02_073460) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_01_201832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -142,6 +142,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_073460) do
     t.index ["endpoint", "user_id"], name: "index_endpoint_user_id", unique: true
     t.index ["user_agent", "user_id"], name: "index_user_agent_user_id", unique: true
     t.index ["user_id"], name: "index_push_subscriptions_on_user_id"
+  end
+
+  create_table "streak_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "activity_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_streak_logs_on_user_id"
+  end
+
+  create_table "streaks", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "current_streak"
+    t.integer "longest_streak"
+    t.date "last_activity_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_streaks_on_user_id"
   end
 
   create_table "study_configs", force: :cascade do |t|
@@ -276,6 +294,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_02_073460) do
   add_foreign_key "authorizations", "users"
   add_foreign_key "folders", "users"
   add_foreign_key "push_subscriptions", "users"
+  add_foreign_key "streak_logs", "users"
+  add_foreign_key "streaks", "users"
   add_foreign_key "study_sets", "folders"
   add_foreign_key "study_sets", "users"
   add_foreign_key "term_example_terms", "term_examples"

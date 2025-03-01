@@ -57,16 +57,10 @@
 <% else %>
   <div class="text-lg mb-10 format max-w-full">
     <p class="mb-1">
-      You've learnt everything you had to learn for today 🎉 Good job 💪🏻
+      You've learnt everything you had to learn today 🎉 Good job 💪🏻
     </p>
     <p class="mt-1">
-      Come back tomorrow or add some new words to learn
-      <% @latest_folders.each_with_index do |folder, i| %>
-        <%= ',' if i > 0 %>
-        to <%= link_to folder.name, new_folder_study_set_path(folder) %>
-      <% end %>
-      or
-      <%= link_to 'any other folder', folders_path %>.
+      Come back tomorrow or add some new words to learn.
     </p>
   </div>
   <h6>

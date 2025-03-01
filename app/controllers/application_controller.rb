@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   def update_user_timezone
     return unless current_user
     return if browser_timezone.blank?
-    return if current_user.settings.updated_at.after?(1.day.ago)
+    return if current_user.settings.updated_at.after?(1.hour.ago)
 
     current_user.settings.update(tz: browser_timezone)
   end

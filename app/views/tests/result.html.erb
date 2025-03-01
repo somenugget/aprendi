@@ -1,1 +1,10 @@
+<% if flash[:streak].present? %>
+  <div class="my-6 w-4/5 md:w-1/2 mx-auto">
+    <%= render(UI::AlertComponent.new(
+      variant: :success,
+      message: "Your streak is #{pluralize(current_user.streak.current_streak, 'day')} now! Great gob! 🎉"
+    )) %>
+  </div>
+<% end %>
+
 <%= render(Tests::ResultComponent.new(test: @test)) %>
