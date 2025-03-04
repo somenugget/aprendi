@@ -19,21 +19,7 @@
             %>
           <% end %>
 
-          <% if current_user.streak.present? %>
-            <% streak_today = current_user.streak.last_activity_date == Date.current %>
-            <div
-              data-tooltip-target="tooltip-streak"
-              class="<%= class_names('text-white cursor-default rounded-md px-3 py-2 text-sm font-medium bg-indigo-700', 'opacity-50' => !streak_today) %>"
-            >
-              🔥
-              <%= current_user.streak.current_streak %>
-            </div>
-
-            <div id="tooltip-streak" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
-              <%= streak_today ? 'You have already completed your daily goal' : 'Exercise today to extend your streak' %>
-              <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-          <% end %>
+          <%= render(StreakComponent.new(user: current_user)) %>
 
           <!-- Profile dropdown -->
           <div class="relative">
@@ -51,25 +37,29 @@
           <% end %>
         </div>
 
-        <!-- Mobile menu button -->
-        <button
-          type="button"
-          class="relative inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
-          aria-controls="mobile-menu"
-          aria-expanded="false"
-          data-dropdown-toggle="mobile-menu"
-        >
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open main menu</span>
-          <!-- Menu open: "hidden", Menu closed: "block" -->
-          <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-          </svg>
-          <!-- Menu open: "block", Menu closed: "hidden" -->
-          <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
-        </button>
+        <div class="flex items-center gap-3">
+          <%= render(StreakComponent.new(user: current_user)) %>
+
+          <!-- Mobile menu button -->
+          <button
+            type="button"
+            class="relative inline-flex items-center justify-center rounded-md bg-indigo-600 p-2 text-indigo-200 hover:bg-indigo-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            data-dropdown-toggle="mobile-menu"
+          >
+            <span class="absolute -inset-0.5"></span>
+            <span class="sr-only">Open main menu</span>
+            <!-- Menu open: "hidden", Menu closed: "block" -->
+            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+            </svg>
+            <!-- Menu open: "block", Menu closed: "hidden" -->
+            <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>

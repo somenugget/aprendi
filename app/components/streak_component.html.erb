@@ -1,0 +1,14 @@
+<div>
+  <div
+    data-tooltip-target="tooltip-streak"
+    class="<%= class_names('text-white cursor-default rounded-md px-3 py-2 text-sm font-medium bg-indigo-700', 'opacity-50' => !streak_today?) %>"
+  >
+    🔥
+    <%= current_streak %>
+  </div>
+
+  <div id="tooltip-streak" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+    <%= streak_today? ? 'You have already completed your daily goal' : 'Exercise today to extend your streak' %>
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+</div>
