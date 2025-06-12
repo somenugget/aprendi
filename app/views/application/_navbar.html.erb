@@ -71,21 +71,21 @@
   >
     <ul class="flex flex-col gap-4 p-4 md:p-0 font-medium border bg-white shadow-lg border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
-        <%= render(UI::ButtonComponent.new(text: 'Dashboard', options: { as: :a, href: dashboard_path, class: '!block' })) %>
+        <%= render(UI::ButtonComponent.new(text: 'Dashboard', options: { as: :a, href: dashboard_path, class: 'block!' })) %>
       </li>
       <li>
-        <%= render(UI::ButtonComponent.new(text: 'Study sets', options: { as: :a, href: study_sets_path, class: '!block' })) %>
+        <%= render(UI::ButtonComponent.new(text: 'Study sets', options: { as: :a, href: study_sets_path, class: 'block!' })) %>
       </li>
       <li>
-        <%= render(UI::ButtonComponent.new(text: 'Folders', options: { as: :a, href: folders_path, class: '!block' })) %>
+        <%= render(UI::ButtonComponent.new(text: 'Folders', options: { as: :a, href: folders_path, class: 'block!' })) %>
       </li>
       <li class="border-t"></li>
       <li>
-        <%= render(UI::ButtonComponent.new(text: 'Settings', variant: :secondary, options: { as: :a, href: settings_path, class: '!block' })) %>
+        <%= render(UI::ButtonComponent.new(text: 'Settings', variant: :secondary, options: { as: :a, href: settings_path, class: 'block!' })) %>
       </li>
       <li>
         <%= form_with(url: destroy_user_session_path, method: :delete) do %>
-          <%= render(UI::ButtonComponent.new(text: 'Sign Out', variant: :neutral, options: { type: :submit, class: '!block w-full' })) %>
+          <%= render(UI::ButtonComponent.new(text: 'Sign Out', variant: :neutral, options: { type: :submit, class: 'block! w-full' })) %>
         <% end %>
       </li>
     </ul>

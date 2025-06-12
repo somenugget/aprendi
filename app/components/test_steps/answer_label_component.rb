@@ -13,9 +13,9 @@ class TestSteps::AnswerLabelComponent < ApplicationComponent
 
   def modifier_class
     if result == 'success'
-      '!bg-green-50 !border-green-600 !text-green-600'
+      'bg-green-50! border-green-600! text-green-600!'
     elsif result == 'error'
-      '!bg-red-100 !border-red-600 !text-red-600'
+      'bg-red-100! border-red-600! text-red-600!'
     else
       ''
     end
