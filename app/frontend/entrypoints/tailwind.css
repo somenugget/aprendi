@@ -1,4 +1,20 @@
 @import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+@plugin "flowbite/plugin";
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/aspect-ratio';
+@plugin 'flowbite-typography';
+
+@source "../../../node_modules/flowbite";
+
+@source "../../../public/*.html";
+@source "../../../app/frontend";
+@source "../../../app/views";
+@source "../../../app/components";
+@source "../../../node_modules/flowbite";
+@source "../../../config/initializers/heroicon.rb";
 
 /*body {*/
 /*  @apply text-gray-900;*/
