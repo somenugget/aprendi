@@ -3,17 +3,14 @@ class PushNotification
   # @param subscription [PushSubscription]
   # @param title [String]
   # @param body [String]
-  # @return [Boolean]
   def self.deliver(subscription:, title:, body:)
-    response = WebPush.payload_send(
+    WebPush.payload_send(
       message: JSON.generate({ title:, body: }),
       endpoint: subscription.endpoint,
       p256dh: subscription.p256dh,
       auth: subscription.auth,
       vapid: vapid_details
     )
-
-    response.code == '201'
   end
 
   # Vapid details for push notification

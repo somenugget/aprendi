@@ -13,7 +13,7 @@ class Term < ApplicationRecord
   scope :with_progress,
         -> { left_joins(:term_progress).select('COALESCE(term_progresses.success_percentage, 0) AS progress, terms.*') }
 
-  normalizes :term, :definition, with: -> { _1.downcase.strip.squish }
+  normalizes :term, :definition, with: -> { it.downcase.strip.squish }
 
   # @return [Boolean]
   def long_phrase?

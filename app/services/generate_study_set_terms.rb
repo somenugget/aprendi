@@ -10,7 +10,7 @@ class GenerateStudySetTerms < BaseService
   # @return [Array<Term>]
   def call
     chat_response.then do |response|
-      Term.transaction { response.map { save_term(_1) } }
+      Term.transaction { response.map { save_term(it) } }
     end
   end
 

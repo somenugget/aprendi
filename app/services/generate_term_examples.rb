@@ -16,7 +16,7 @@ class GenerateTermExamples < BaseService
     return if term.long_phrase?
     return if term.term_examples.count > EXAMPLES_COUNT_TO_SKIP
 
-    chat_response.each { save_example(_1) }
+    chat_response.each { save_example(it) }
   end
 
   private
