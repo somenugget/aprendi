@@ -58,7 +58,7 @@ group :development, :test do
   gem 'dotenv-rails'
 
   gem 'bundle-audit', require: false
-  gem 'rubocop', '~> 1.65.1'
+  gem 'rubocop', '~> 1.77'
   gem 'rubocop-capybara'
   gem 'rubocop-factory_bot'
   gem 'rubocop-performance'
