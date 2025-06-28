@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'PushNotifications' do
   describe 'POST /push_subscriptions' do
     before do
