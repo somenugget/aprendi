@@ -1,5 +1,4 @@
 require 'langchain'
-require 'csv'
 
 class GenerateTermExamples < BaseService
   # @param [Term] term
