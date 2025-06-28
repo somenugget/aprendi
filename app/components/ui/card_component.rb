@@ -53,7 +53,7 @@ class UI::CardComponent < ApplicationComponent
 
   def card_class
     class_names(
-      'block max-w-sm p-6 bg-white border rounded-lg shadow dark:bg-gray-800 dark:border-gray-700',
+      'block max-w-sm p-6 bg-white border rounded-lg shadow dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700',
       clickable_class,
       color_class,
       options[:class]

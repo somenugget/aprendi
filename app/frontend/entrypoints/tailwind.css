@@ -16,42 +16,42 @@
 @source "../../../node_modules/flowbite";
 @source "../../../config/initializers/heroicon.rb";
 
-/*body {*/
-/*  @apply text-gray-900;*/
-/*}*/
+body {
+  @apply text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-900;
+}
 
-/*a, button, input[type=submit] {*/
-/*  @apply transition;*/
-/*}*/
+a, button, input[type=submit] {
+  @apply transition;
+}
 
-/*p, li {*/
-/*  @apply text-gray-800 dark:text-gray-400;*/
-/*}*/
+p, li {
+  @apply text-gray-800 dark:text-gray-400;
+}
 
-/*h1 {*/
-/*  @apply mb-4 text-4xl text-zinc-800 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white;*/
-/*}*/
+h1 {
+  @apply mb-4 text-4xl text-zinc-800 font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white;
+}
 
-/*h2 {*/
-/*  @apply text-4xl text-zinc-800 font-extrabold dark:text-white;*/
-/*}*/
+h2 {
+  @apply text-4xl text-zinc-800 font-extrabold dark:text-white;
+}
 
-/*h3 {*/
-/*  @apply text-3xl text-zinc-800 font-bold dark:text-white;*/
-/*}*/
+h3 {
+  @apply text-3xl text-zinc-800 font-bold dark:text-white;
+}
 
-/*h4 {*/
-/*  @apply text-2xl text-zinc-800 font-bold dark:text-white;*/
-/*}*/
+h4 {
+  @apply text-2xl text-zinc-800 font-bold dark:text-white;
+}
 
-/*h5 {*/
-/*  @apply text-xl text-zinc-800 font-bold dark:text-white;*/
-/*}*/
+h5 {
+  @apply text-xl text-zinc-800 font-bold dark:text-white;
+}
 
-/*h6 {*/
-/*  @apply text-lg text-zinc-800 font-bold dark:text-white;*/
-/*}*/
+h6 {
+  @apply text-lg text-zinc-800 font-bold dark:text-white;
+}
 
-/*.turbo-progress-bar {*/
-/*  @apply bg-violet-950;*/
-/*}*/
+.turbo-progress-bar {
+  @apply bg-violet-950;
+}

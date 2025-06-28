@@ -19,19 +19,32 @@ class UI::ButtonComponent < ApplicationComponent
 
   COLOR_CLASSES = {
     primary: 'transition text-white bg-linear-to-br from-purple-600 to-blue-500 hover:bg-linear-to-bl ' \
-             'focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800',
+             'focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 ' \
+             'dark:bg-gradient-to-br dark:from-purple-800 dark:to-blue-700',
+
     secondary: 'text-white bg-linear-to-r from-cyan-500 to-blue-500 hover:bg-linear-to-bl ' \
-               'focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800',
+               'focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 ' \
+               'dark:bg-gradient-to-r dark:from-cyan-700 dark:to-blue-600',
+
     danger: 'text-white bg-linear-to-br from-pink-600 to-orange-400 hover:bg-linear-to-bl ' \
-            'focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800',
+            'focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 ' \
+            'dark:bg-gradient-to-br dark:from-pink-800 dark:to-orange-600',
+
     warning: 'text-white bg-linear-to-r from-red-500 via-red-400 to-yellow-300 hover:bg-linear-to-bl ' \
-             'focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400',
+             'focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 ' \
+             'dark:bg-gradient-to-r dark:from-red-600 dark:via-red-500 dark:to-yellow-400',
+
     success: 'text-gray-900 bg-linear-to-r from-teal-200 to-lime-200 ' \
              'hover:bg-linear-to-l hover:from-teal-200 hover:to-lime-200 ' \
-             'focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700',
+             'focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 ' \
+             'dark:text-white dark:bg-gradient-to-r dark:from-teal-700 dark:to-lime-600 ' \
+             'dark:hover:bg-gradient-to-l dark:hover:from-teal-800 dark:hover:to-lime-700',
+
     neutral: 'text-gray-900 bg-linear-to-r from-indigo-50 to-cyan-50 ' \
              'hover:bg-linear-to-l hover:from-indigo-50 hover:to-cyan-50 ' \
-             'focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-teal-700'
+             'focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-teal-700 ' \
+             'dark:text-white dark:bg-gradient-to-r dark:from-gray-800 dark:to-gray-700 ' \
+             'dark:hover:bg-gradient-to-l dark:hover:from-gray-900 dark:hover:to-gray-800'
   }.freeze
 
   SIZE_CLASSES = {
@@ -63,7 +76,7 @@ class UI::ButtonComponent < ApplicationComponent
   end
 
   def html_class
-    class_names(color_class, layout_class, size_class, options[:class])
+    class_names('cursor-pointer', color_class, layout_class, size_class, options[:class])
   end
 
   def size_class
