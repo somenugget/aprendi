@@ -1,9 +1,13 @@
-<div class="flex flex-1 justify-end">
-  <% if current_user.present? %>
-    <%= link_to 'Go to the app', dashboard_path, class: "text-sm font-semibold leading-6" %>
-  <% else %>
-    <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6' do %>
-      Log in <span aria-hidden="true">&rarr;</span>
+<div class="flex flex-1 justify-between">
+  <%= render DarkModeToggleComponent.new(classes: "ml-4") %>
+
+  <div class="flex items-center">
+    <% if current_user.present? %>
+      <%= link_to 'Go to the app', dashboard_path, class: "text-sm font-semibold leading-6" %>
+    <% else %>
+      <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6' do %>
+        Log in <span aria-hidden="true">&rarr;</span>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

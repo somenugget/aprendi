@@ -160,8 +160,9 @@ GEM
       railties (>= 6.1.0)
       thor (>= 1.0.0)
     hashie (5.0.0)
-    heroicon (1.0.0)
-      rails (>= 5.2)
+    heroicons (2.2.0)
+      nokogiri
+      railties (>= 5.2)
     htmlbeautifier (1.4.3)
     htmlentities (4.3.4)
     i18n (1.14.7)
@@ -505,7 +506,7 @@ DEPENDENCIES
   dry-initializer
   factory_bot_rails
   good_job (~> 4.4)
-  heroicon
+  heroicons
   langchainrb
   lookbook
   mailjet

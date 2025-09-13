@@ -17,7 +17,7 @@ gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
 
-gem 'heroicon'
+gem 'heroicons'
 gem 'tailwind_merge'
 gem 'view_component', '~> 3.12'
 gem 'vite_rails'

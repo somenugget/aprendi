@@ -1,0 +1,24 @@
+<%# app/components/dark_mode_toggle_component.html.erb %>
+<button
+  data-controller="dark-mode-toggle"
+  data-action="click->dark-mode-toggle#toggle"
+  data-dark-mode-toggle-theme-value="light"
+  class="relative inline-flex h-8 w-14 px-1 cursor-pointer items-center rounded-full bg-gray-200 transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-gray-600"
+  type="button"
+  role="switch"
+  aria-label="Toggle dark mode"
+>
+  <!-- Toggle circle with icons -->
+  <span
+    data-dark-mode-toggle-target="toggle"
+    class="inline-flex h-6 w-6 items-center justify-center transform rounded-full bg-white shadow-md transition-all duration-200 ease-in-out dark:bg-gray-100 dark:translate-x-6"
+  >
+    <span class="hidden dark:block">
+      <%= heroicon "moon", variant: :mini, options: { class: "h-4 w-4 text-gray-700" } %>
+    </span>
+
+    <span class="block dark:hidden">
+      <%= heroicon "sun", variant: :mini, options: { class: "h-4 w-4 text-yellow-500" } %>
+    </span>
+  </span>
+</button>

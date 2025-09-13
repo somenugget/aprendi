@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  helper Heroicon::Engine.helpers
+  helper Heroicons::Engine.helpers
 
   layout 'landing'
 
