@@ -49,3 +49,5 @@ node_modules
 .byebug_history
 
 coverage
+
+.DS_Store

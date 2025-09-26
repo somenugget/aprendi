@@ -1,19 +1,18 @@
 require 'langchain'
 
-class GenerateTermExamples < BaseService
+class GenerateTermExamples < BaseService # rubocop:disable Metrics/ClassLength
   # @param [Term] term
   # @!method term
   input :term, type: Term
 
-  EXAMPLES_COUNT_TO_GENERATE = 10
-  EXAMPLES_COUNT_TO_SKIP = 8
+  EXAMPLES_COUNT_TO_GENERATE = 20
 
   HEADERS = %w[term definition term_lang definition_lang term_example definition_example].freeze
 
   # @return [Array<TermExample>]
   def call
     return if term.long_phrase?
-    return if term.term_examples.count > EXAMPLES_COUNT_TO_SKIP
+    return if term.term_examples.count >= EXAMPLES_COUNT_TO_GENERATE
 
     chat_response.each { save_example(it) }
   end
@@ -27,7 +26,7 @@ class GenerateTermExamples < BaseService
       # TODO: set Sentry breadcrumbs
       Rails.logger.info("Sending prompt: \n#{prompt}")
 
-      chat_response = llm.complete(prompt: prompt)
+      chat_response = llm.complete(prompt:)
 
       output_parser.parse(chat_response.completion).tap do |parsed_response|
         Rails.logger.info("Chat response: #{parsed_response}")
@@ -36,23 +35,33 @@ class GenerateTermExamples < BaseService
   end
 
   def prompt
-    prompt_template.format(
-      'term' => term.term,
-      'definition' => term.definition,
-      'term_lang' => StudyConfig::LANGUAGES[term_lang],
-      'definition_lang' => StudyConfig::LANGUAGES[definition_lang],
-      'format_instructions' => output_parser.get_format_instructions
-    )
+    @prompt ||=
+      prompt_template.format(
+        'term' => term.term,
+        'definition' => term.definition,
+        'term_lang' => StudyConfig::LANGUAGES[term_lang],
+        'definition_lang' => StudyConfig::LANGUAGES[definition_lang],
+        'format_instructions' => output_parser.get_format_instructions
+      )
   end
 
-  def prompt_template
+  def prompt_template # rubocop:disable Metrics/MethodLength
     Langchain::Prompt::FewShotPromptTemplate.new(
-      prefix: "Generate #{EXAMPLES_COUNT_TO_GENERATE} usage examples for the term and provide its translation. ",
-      suffix: '"{term}" in {term_lang} in meaning "{definition}" in {definition_lang}. ' \
-              'Do not conjugate the term, keep it as it is. ' \
-              'Translate it into {definition_lang}. ' \
-              'I\'ll tip you 20$ for a perfect answer.' \
-              "\n{format_instructions}",
+      prefix: 'You are a professional language teacher and lexicographer. ' \
+              "Your task is to generate #{EXAMPLES_COUNT_TO_GENERATE} high-quality usage examples for learners. " \
+              'Focus on making the examples natural, clear, and pedagogically useful.',
+      suffix: 'The target term is "{term}" in {term_lang}, meaning "{definition}" in {definition_lang}. ' \
+              "Context: The term belongs to a study set about \"#{term.study_set.name}\". " \
+              'Generate examples that are topically relevant to this context when possible. ' \
+              "Guidelines:\n" \
+              "- Keep the target term exactly as provided (do not conjugate or inflect it).\n" \
+              "- Each example sentence must be short, natural, and something a native speaker might actually say.\n" \
+              '- Vary the contexts: everyday life, formal, informal, questions, narration. ' \
+              "Prioritize those relevant to the study set.\n" \
+              "- Provide the corresponding translation in {definition_lang}, ensuring it is accurate and idiomatic.\n" \
+              "- Avoid repeating the same sentence structure.\n" \
+              "- Return ONLY structured output following this format:\n" \
+              '{format_instructions}',
       example_prompt: '',
       examples: [],
       input_variables: %w[term term_lang definition definition_lang format_instructions]
