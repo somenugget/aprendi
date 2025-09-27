@@ -13,10 +13,5 @@ class Term < ApplicationRecord
   scope :with_progress,
         -> { left_joins(:term_progress).select('COALESCE(term_progresses.success_percentage, 0) AS progress, terms.*') }
 
-  normalizes :term, :definition, with: -> { it.downcase.strip.squish }
-
-  # @return [Boolean]
-  def long_phrase?
-    term.split.count >= 6
-  end
+  normalizes :term, :definition, with: -> { NormalizeWord.downcase_preserving_acronyms(it) }
 end

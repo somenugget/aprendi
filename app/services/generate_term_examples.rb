@@ -11,7 +11,6 @@ class GenerateTermExamples < BaseService # rubocop:disable Metrics/ClassLength
 
   # @return [Array<TermExample>]
   def call
-    return if term.long_phrase?
     return if term.term_examples.count >= EXAMPLES_COUNT_TO_GENERATE
 
     chat_response.each { save_example(it) }
