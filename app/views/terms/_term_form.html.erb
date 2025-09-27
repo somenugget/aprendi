@@ -1,10 +1,10 @@
 <% invalid_term = term.errors[:term].present? || term.errors[:definition].present? %>
 
 <turbo-frame id=<%= dom_id(term, 'form') %>>
-  <div class="flex gap-3 mb-2 items-end">
+  <div class="flex gap-3 mb-2 items-stretch">
 
     <%= form_with(model: term, url: [term.study_set.folder, term.study_set, term], html: { class: ' w-full' }, data: { controller: 'autosave' }) do |form| %>
-      <div class="flex gap-3 items-end">
+      <div class="flex gap-3 items-stretch">
         <div class="flex w-full gap-3">
 
           <div class="w-1/2">
@@ -32,31 +32,29 @@
         </div>
 
         <% if term.new_record? %>
-          <div class="<%= invalid_term ? 'mb-6' : '' %>">
-            <%= render(UI::ButtonComponent.new(
-              text: 'Create',
-              variant: :success,
-              options: { type: :submit }
-            )) %>
+          <div class="<%= class_names('flex items-stretch', 'mb-6' => invalid_term) %>">
+            <%= render(UI::ButtonComponent.new(variant: :success, options: { type: :submit })) do %>
+              <%= heroicon('plus') %>
+            <% end %>
           </div>
         <% end %>
       </div>
     <% end %>
     <% if term.persisted? %>
-      <%= form_with url: [term.study_set.folder, term.study_set, term], method: :delete, class: invalid_term ? 'mb-6' : '' do %>
+      <%= form_with url: [term.study_set.folder, term.study_set, term], method: :delete, class: class_names('flex items-stretch', 'mb-6' => invalid_term) do %>
         <%= render(UI::ButtonComponent.new(
           as: :button,
-          text: 'Delete',
           type: :submit,
           variant: :danger,
           options: { 'data-turbo-confirm': 'Are you sure?' }
-        )) %>
+        )) do %>
+          <%= heroicon('trash') %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
 
-
-  <div class="text-red-500">
+  <div class="text-red-500 mb-2">
     <% term.errors.each do |error| %>
       <% next if error.attribute.in? [:term, :definition] %>
       <%= error.full_message %>

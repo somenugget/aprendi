@@ -25,23 +25,19 @@
   </div>
 
   <div class="flex gap-2">
-    <%= form_with url: tests_path, method: :post do |form| %>
-      <% less_learnt_terms.each do |term| %>
-        <%= form.hidden_field 'terms_ids[]', value: term.id %>
+    <div class="flex items-center gap-2">
+      <span>Learn:</span>
+      <%= form_with url: tests_path, method: :post do |form| %>
+        <% less_learnt_terms.each do |term| %>
+          <%= form.hidden_field 'terms_ids[]', value: term.id %>
+        <% end %>
+        <%= render(UI::ButtonComponent.new(text: '5 words', options: { type: :submit, class: 'text-nowrap' })) %>
       <% end %>
-      <%= render(UI::ButtonComponent.new(text: 'Learn next 5 words', options: { type: :submit })) %>
-    <% end %>
-    <%= form_with url: tests_path, method: :post do |form| %>
-      <%= form.hidden_field :study_set_id, value: @study_set.id %>
-      <%= render(UI::ButtonComponent.new(text: 'Learn the whole set', options: { type: :submit })) %>
-    <% end %>
-
-    <%= render(UI::ButtonComponent.new(text: "Go back #{'to folder' if @study_set.folder}",
-                                       variant: 'neutral',
-                                       options: {
-                                         as: :a,
-                                         href: @study_set.folder ? folder_path(@study_set.folder) : study_sets_path
-                                       })) %>
+      <%= form_with url: tests_path, method: :post do |form| %>
+        <%= form.hidden_field :study_set_id, value: @study_set.id %>
+        <%= render(UI::ButtonComponent.new(text: 'Whole set', options: { type: :submit, class: 'text-nowrap' })) %>
+      <% end %>
+    </div>
 
     <%= render(UI::ButtonComponent.new(variant: :neutral, options: { 'data-dropdown-toggle' => 'dropdownDots' })) do %>
       <%= heroicon 'ellipsis-vertical' %>

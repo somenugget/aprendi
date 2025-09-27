@@ -1,8 +1,8 @@
-<%= render(UI::CardComponent.new(class: 'truncate', id: dom_id(study_set, 'card'))) do %>
-  <div class="flex items-center justify-between">
+<%= render(UI::CardComponent.new(class: '', id: dom_id(study_set, 'card'))) do %>
+  <div class="flex justify-between gap-1 items-start">
     <%= link_to study_set.name, study_set_path(study_set), class: 'hover:underline' %>
 
-    <%= form_with model: study_set, method: :put, class: 'flex items-center' do |f| %>
+    <%= form_with model: study_set, method: :put, class: 'leading-none mt-1' do |f| %>
       <%= f.hidden_field :pinned, value: !study_set.pinned %>
       <%= f.hidden_field :update_card, name: 'update_card', value: true %>
       <%= button_tag type: :submit, class: 'cursor-pointer text-yellow-500 inline-block' do %>

@@ -48,11 +48,11 @@ class UI::ButtonComponent < ApplicationComponent
   }.freeze
 
   SIZE_CLASSES = {
-    xs: 'gap-1 px-3 py-2 text-xs',
-    sm: 'gap-1 px-3 py-2 text-sm',
-    md: 'gap-1 px-5 py-2.5 text-sm',
-    lg: 'gap-2 px-5 py-3 text-base',
-    xl: 'gap-2 px-6 py-3.5 text-lg'
+    xs: 'gap-1 px-1 md:px-3 py-1 md:py-2 text-xs',
+    sm: 'gap-1 px-2 md:px-3 py-2 md:py-2 text-sm',
+    md: 'gap-1 px-3 md:px-5 py-2 md:py-2.5 text-sm',
+    lg: 'gap-2 px-3 md:px-5 py-2 md:py-3 text-base',
+    xl: 'gap-2 px-4 md:px-6 py-2 md:py-3.5 text-lg'
   }.freeze
 
   ICON_SIZE_CLASSES = {
