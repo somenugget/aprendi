@@ -2,15 +2,12 @@
   <div class="flex items-center justify-between">
     <%= link_to study_set.name, study_set_path(study_set), class: 'hover:underline' %>
 
-    <%= form_with model: study_set, method: :put do |f| %>
+    <%= form_with model: study_set, method: :put, class: 'flex items-center' do |f| %>
       <%= f.hidden_field :pinned, value: !study_set.pinned %>
       <%= f.hidden_field :update_card, name: 'update_card', value: true %>
-      <%= f.submit '📌',
-                   class: class_names(
-                     'block w-full text-left cursor-pointer hover:opacity-50 dark:hover:bg-gray-600 dark:hover:text-white',
-                     'opacity-10' => !study_set.pinned
-                   )
-      %>
+      <%= button_tag type: :submit, class: 'cursor-pointer text-yellow-500 inline-block' do %>
+        <%= heroicon('star', variant: (@study_set.pinned? ? :solid : :outline), options: { class: '' }) %>
+      <% end %>
     <% end %>
   </div>
 

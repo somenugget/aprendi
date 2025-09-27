@@ -1,7 +1,10 @@
 class DashboardController < ApplicationController
   # using .load to avoid making the second query when calling .any? in views
   def index # rubocop:disable Metrics/AbcSize
-    return render('index_no_progress') unless any_progress?
+    @less_studied_study_sets = less_studied_study_sets
+    @terms_for_less_studied_study_sets = terms_for_less_studied_study_sets(@less_studied_study_sets)
+
+    return render('index_no_progress') unless any_progress? || @less_studied_study_sets.any?
 
     @ripening_terms = RipeningTermsQuery.new(user: current_user).relation.limit(5).load
     @ripening_terms_count = RipeningTermsQuery.new(user: current_user).count
@@ -9,9 +12,6 @@ class DashboardController < ApplicationController
     @new_terms_to_learn_count = NewTermsQuery.new(user: current_user).count
     @ripe_terms_to_learn = DashboardRipeTermsQuery.new(user: current_user).relation
     @ripe_terms_to_learn_count = RipeTermsQuery.new(user: current_user).count
-
-    @less_studied_study_sets = less_studied_study_sets
-    @terms_for_less_studied_study_sets = terms_for_less_studied_study_sets(@less_studied_study_sets)
   end
 
   private
