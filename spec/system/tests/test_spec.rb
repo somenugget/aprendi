@@ -18,7 +18,7 @@ describe 'Test' do
   it 'allows to pass the test' do # rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
     visit study_set_path(study_set)
 
-    click_link_or_button('Learn the whole set')
+    click_link_or_button('Whole set')
 
     sleep 1
 
@@ -63,7 +63,7 @@ describe 'Test' do
 
     visit study_set_path(study_set)
 
-    click_link_or_button('Learn the whole set')
+    click_link_or_button('Whole set')
 
     sleep 1
 
