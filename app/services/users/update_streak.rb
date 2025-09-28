@@ -1,10 +1,8 @@
-# app/services/users/update_streak.rb
 class Users::UpdateStreak < BaseService
   input :user, type: User
 
   # @return [Boolean]
   # @!method streak_extended
-  # @!method streak_extended=(value)
   output :streak_extended
 
   # Update or create user's streak
@@ -26,11 +24,7 @@ class Users::UpdateStreak < BaseService
   end
 
   def ensure_streak_exists!
-    user.streak ||= user.create_streak!(
-      current_streak: 0,
-      longest_streak: 0,
-      last_activity_date: nil
-    )
+    user.streak ||= user.create_streak!
   end
 
   def already_logged_today?

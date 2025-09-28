@@ -35,7 +35,9 @@ class GenerateStudySetTerms < BaseService
   # @option response_row [String] :term
   # @option response_row [String] :definition
   def save_term(response_row)
-    study_set.terms.create!(response_row)
+    study_set.terms.create!(response_row).tap do |term|
+      GenerateTermExamplesJob.perform_sometime_later(term.id)
+    end
   end
 
   def prompt

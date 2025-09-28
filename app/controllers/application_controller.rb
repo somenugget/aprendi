@@ -3,7 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_with_token
   before_action :authenticate_user!, if: :should_authenticate?
-  before_action :update_user_timezone
+  before_action :update_user_timezone, if: :current_user
+  before_action :maybe_reset_streak, if: :current_user
 
   def unfinished_test
     @unfinished_test ||= current_user.tests.recent_in_progress.first.then do |test|
@@ -37,11 +38,14 @@ class ApplicationController < ActionController::Base
   end
 
   def update_user_timezone
-    return unless current_user
     return if browser_timezone.blank?
     return if current_user.settings.updated_at.after?(1.hour.ago)
 
     current_user.settings.update(tz: browser_timezone)
+  end
+
+  def maybe_reset_streak
+    Users::MaybeResetStreak.call(user: current_user) if current_user
   end
 
   def browser_timezone

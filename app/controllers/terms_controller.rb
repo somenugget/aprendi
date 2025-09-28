@@ -23,7 +23,7 @@ class TermsController < ApplicationController
     @term = @study_set.terms.build(term_params)
 
     if @term.save
-      GenerateTermExamplesJob.set(wait: rand(0..120).seconds).perform_later(@term.id)
+      GenerateTermExamplesJob.perform_sometime_later(@term.id)
 
       new_term = @study_set.terms.build
       render turbo_stream: [
