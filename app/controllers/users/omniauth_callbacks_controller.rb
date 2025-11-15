@@ -21,13 +21,7 @@ module Users
       @user = login_user_using(provider)
 
       if @user.persisted?
-        if ENV['APP_URL'].present?
-          UserAuthToken.create_for_user(@user).tap do |token|
-            return redirect_to dashboard_url(host: ENV['APP_URL'], token: token), allow_other_host: true
-          end
-        else
-          sign_in_and_redirect @user, event: :authentication
-        end
+        sign_in_and_redirect @user, event: :authentication
       else
         redirect_to new_user_session_url, alert: @user.errors.full_messages.join("\n")
       end

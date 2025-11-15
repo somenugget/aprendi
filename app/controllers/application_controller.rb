@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   include ActionView::RecordIdentifier
 
-  before_action :authenticate_with_token
   before_action :authenticate_user!, if: :should_authenticate?
   before_action :update_user_timezone, if: :current_user
   before_action :maybe_reset_streak, if: :current_user
@@ -22,7 +21,6 @@ class ApplicationController < ActionController::Base
                                   .first
                               end
   end
-
   helper_method :unfinished_test_step
 
   def after_sign_in_path_for(_user)
@@ -61,18 +59,5 @@ class ApplicationController < ActionController::Base
 
   def to_bool(value)
     ActiveModel::Type::Boolean.new.cast(value)
-  end
-
-  # TODO: move to strategy
-  def authenticate_with_token # rubocop:disable Metrics/AbcSize
-    return if params[:token].blank?
-
-    UserAuthToken.find_by_token(params[:token].to_s).tap do |token|
-      if token
-        sign_in(token.user)
-        token.destroy
-        return redirect_to url_for(params.except(:token).permit!.merge(only_path: true))
-      end
-    end
   end
 end
