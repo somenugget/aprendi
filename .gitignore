@@ -38,6 +38,8 @@
 /app/assets/builds/*
 !/app/assets/builds/.keep
 
+.ruby-lsp
+
 # Vite Ruby
 /public/vite*
 node_modules

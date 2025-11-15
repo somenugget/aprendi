@@ -1,6 +1,13 @@
-<footer class="bg-indigo-600 p-8 py-4 text-white">
-  <div class="flex gap-4 mx-auto max-w-7xl px-4 sm:px-4 lg:px-6">
-    <%= link_to 'Privacy policy', privacy_policy_blog_path, class: 'text-white hover:opacity-50' %>
-    <%= link_to 'Terms and services', terms_and_conditions_blog_path, class: 'text-white hover:opacity-50' %>
+<footer class="bg-indigo-600 dark:bg-indigo-800 py-8 text-white">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+      <%= link_to privacy_policy_blog_path, class: 'text-white hover:text-indigo-100 transition underline underline-offset-4 decoration-2 hover:decoration-indigo-200' do %>
+        Privacy policy
+      <% end %>
+      <span class="hidden sm:inline text-indigo-300">•</span>
+      <%= link_to terms_and_conditions_blog_path, class: 'text-white hover:text-indigo-100 transition underline underline-offset-4 decoration-2 hover:decoration-indigo-200' do %>
+        Terms and services
+      <% end %>
+    </div>
   </div>
 </footer>
