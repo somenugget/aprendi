@@ -1,12 +1,16 @@
-<div class="flex flex-1 justify-between">
-  <%= render DarkModeToggleComponent.new(classes: "ml-4") %>
+<div class="flex items-center gap-4">
+  <%= render DarkModeToggleComponent.new(classes: "") %>
 
   <div class="flex items-center">
     <% if current_user.present? %>
-      <%= link_to 'Go to the app', dashboard_path, class: "text-sm font-semibold leading-6" %>
+      <%= link_to dashboard_path, class: "transition rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" do %>
+        Go to Dashboard
+      <% end %>
     <% else %>
-      <%= link_to new_user_session_path, class: 'text-sm font-semibold leading-6' do %>
-        Log in <span aria-hidden="true">&rarr;</span>
+      <%= form_with(url: user_google_oauth2_omniauth_authorize_path, method: :post, class: '') do |f| %>
+        <%= f.button class: "transition rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" do %>
+          Sign in
+        <% end %>
       <% end %>
     <% end %>
   </div>

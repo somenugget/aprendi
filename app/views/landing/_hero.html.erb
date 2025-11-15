@@ -1,19 +1,25 @@
-<div class="mx-auto my-40 max-w-2xl">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Aprendí</h1>
-    <h6 class="hidden">
-      An app by
-      <a href="https://github.com/somenugget" target="_blank" rel="noreferrer nofollow">
-        Dmytro Shcherbakan
-      </a>
-    </h6>
-    <p class="mt-6 text-lg leading-8 text-gray-600">
-      Your gateway to a world of expanded knowledge. Effortlessly enhance your vocabulary and watch your language
-      skills flourish with every interaction.
+<div class="mx-auto max-w-7xl px-6 lg:px-8 pt-20 pb-16 sm:pt-32 sm:pb-24">
+  <div class="mx-auto max-w-2xl text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
+      Master vocabulary with
+      <span class="text-indigo-600 dark:text-indigo-400">smart repetition</span>
+    </h1>
+    <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+      Aprendí helps you learn and remember words through interactive exercises, 
+      spaced repetition, and personalized study sets. Build your vocabulary faster 
+      with our proven learning system.
     </p>
     <div class="mt-10 flex items-center justify-center gap-x-6">
-      <%= link_to new_user_session_path, class: 'rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' do %>
-        Start learning
+      <% if current_user.present? %>
+        <%= link_to dashboard_path, class: 'rounded-md bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition' do %>
+          Go to Dashboard
+        <% end %>
+      <% else %>
+        <%= form_with(url: user_google_oauth2_omniauth_authorize_path, method: :post, class: '') do |f| %>
+          <%= f.button class: 'rounded-md bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition' do %>
+            Start learning for free
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </div>

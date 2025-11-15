@@ -54,6 +54,10 @@ h6 {
   @apply text-lg text-zinc-800 font-bold dark:text-white;
 }
 
+button {
+  @apply cursor-pointer
+}
+
 .turbo-progress-bar {
   @apply bg-violet-950;
 }
