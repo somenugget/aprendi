@@ -1,5 +1,4 @@
 class AccountDeletionRequestsController < ApplicationController
-  skip_before_action :authenticate_with_token
   skip_before_action :authenticate_user!
 
   layout 'blog'
