@@ -31,6 +31,8 @@ module TG
       case step.exercise
       when 'pick_term'
         pick_term_message(step)
+      when 'pick_definition'
+        pick_definition_message(step)
       else
         { text: "Step type #{step.exercise} not implemented yet." }
       end
@@ -46,9 +48,29 @@ module TG
           inline_keyboard: [
             step.terms_to_pick.map do |term|
               Telegram::Bot::Types::InlineKeyboardButton.new(text: term.term, callback_data: {
-                action: 'answer_pick_term',
-                test_step_id: step.id,
-                term_id: term.id
+                a: 'pick_term',
+                ts_id: step.id,
+                tr_id: term.id
+              }.to_json)
+            end
+          ]
+        )
+      }
+    end
+
+    # send_message attributes for the pick definition step
+    # @param step [TestStep]
+    def pick_definition_message(step)
+      {
+        parse_mode: 'MarkdownV2',
+        text: "*#{step.term.term}*",
+        reply_markup: Telegram::Bot::Types::InlineKeyboardMarkup.new(
+          inline_keyboard: [
+            step.terms_to_pick.map do |term|
+              Telegram::Bot::Types::InlineKeyboardButton.new(text: term.definition, callback_data: {
+                a: 'pick_definition',
+                ts_id: step.id,
+                tr_id: term.id
               }.to_json)
             end
           ]

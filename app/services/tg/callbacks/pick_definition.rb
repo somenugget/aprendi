@@ -1,10 +1,10 @@
 module TG
   module Callbacks
-    class AnswerPickTerm < Base
+    class PickDefinition < Base
       # @return [void]
       def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-        test_step = TestStep.find(callback_payload['test_step_id'])
-        selected_term = Term.find(callback_payload['term_id'])
+        test_step = TestStep.find(callback_payload['ts_id'])
+        selected_term = Term.find(callback_payload['tr_id'])
         test = test_step.test
 
         if test_step.term == selected_term

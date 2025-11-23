@@ -49,7 +49,7 @@ module TG
 
     def resolve_callback_handler(data)
       payload = JSON.parse(data)
-      action = payload['action']
+      action = payload['a']
       class_name = action.camelize
 
       "TG::Callbacks::#{class_name}".safe_constantize

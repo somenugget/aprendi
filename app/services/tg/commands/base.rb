@@ -24,7 +24,7 @@ module TG
       def inline_keyboard_button(label:, action:, data: {})
         Telegram::Bot::Types::InlineKeyboardButton.new(
           text: label,
-          callback_data: { action: }.merge(data).to_json
+          callback_data: { a: action }.merge(data).to_json
         )
       end
     end
