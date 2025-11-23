@@ -18,4 +18,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'UI'
   inflect.acronym 'JSON'
+  inflect.acronym 'TG'
 end

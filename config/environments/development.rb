@@ -89,4 +89,10 @@ Rails.application.configure do
   config.view_component.default_preview_layout = 'component_preview'
 
   config.hosts << 'aprendi.home:3000'
+  config.hosts << ENV['TELEGRAM_TEST_HOST'] if ENV['TELEGRAM_TEST_HOST'].present?
+
+  Rails.application.routes.default_url_options = {
+    host: 'localhost',
+    port: 3000
+  }
 end

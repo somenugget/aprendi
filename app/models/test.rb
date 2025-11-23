@@ -1,7 +1,8 @@
 class Test < ApplicationRecord
   belongs_to :user
 
-  has_many :test_steps, dependent: :destroy, inverse_of: :test
+  has_many :test_steps, -> { order(:id) }, dependent: :destroy, inverse_of: :test
+  has_many :terms, through: :test_steps
 
   enum :status, { in_progress: 0, completed: 1 }
 
@@ -43,8 +44,18 @@ class Test < ApplicationRecord
     end
   end
 
-  # @return [ActiveRecord::Relation<Term>]
-  def terms
-    Term.where(id: test_steps.select(:term_id))
+  # Get the next test step to make
+  # @return [TestStep, nil]
+  def next_step
+    test_steps.where(status: :pending).order(id: :asc).first
+  end
+
+  # Finish test
+  def finish_test!
+    Test.transaction do
+      update!(status: :completed)
+      UpdateTermProgressAfterTestJob.perform_later(id)
+      Users::UpdateStreak.call(user: user)
+    end
   end
 end

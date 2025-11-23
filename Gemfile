@@ -41,6 +41,8 @@ gem 'dry-initializer'
 gem 'good_job', '~> 4.4'
 gem 'service_actor'
 
+gem 'telegram-bot-ruby'
+
 gem 'mailjet'
 gem 'mailtrap'
 

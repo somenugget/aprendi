@@ -23,8 +23,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :unfinished_test_step
 
-  def after_sign_in_path_for(_user)
-    dashboard_path
+  def after_sign_in_path_for(user)
+    stored_location_for(user) || dashboard_path
   end
 
   private

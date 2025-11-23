@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', sessions: "users/sessions" }
 
   mount Lookbook::Engine, at: '/lookbook' if Rails.env.development?
 
@@ -55,6 +55,9 @@ Rails.application.routes.draw do
       get :confirm
     end
   end
+
+  post 'telegram/webhook', to: 'telegram_webhooks#create'
+  get 'telegram/redirect', to: 'telegram_webhooks#redirect', as: :telegram_redirect
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
