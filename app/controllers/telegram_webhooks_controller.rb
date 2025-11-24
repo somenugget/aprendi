@@ -17,11 +17,11 @@ class TelegramWebhooksController < ApplicationController
     TG::Dispatcher.call(bot:, update:)
 
     head :ok
-    # rescue StandardError => e
-    #   Rails.error.report(e)
-    #   Rails.logger.error e.message
-    #   Rails.logger.error e.backtrace.join("\n")
-    #   head :ok # Always return 200 to Telegram to avoid retries
+  rescue StandardError => e
+    Rails.error.report(e)
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace.join("\n")
+    head :ok # Always return 200 to Telegram to avoid retries
   end
 
   private

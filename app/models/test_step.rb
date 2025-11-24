@@ -17,7 +17,7 @@ class TestStep < ApplicationRecord
   # @raise [ActiveRecord::RecordInvalid]
   def register_failure!
     ApplicationRecord.transaction(requires_new: true) do
-      update!(status: :failed)
+      failed!
 
       test.test_steps.create!(term: term, exercise: exercise, status: :pending)
     end

@@ -2,7 +2,6 @@ class Test < ApplicationRecord
   belongs_to :user
 
   has_many :test_steps, -> { order(:id) }, dependent: :destroy, inverse_of: :test
-  has_many :terms, through: :test_steps
 
   enum :status, { in_progress: 0, completed: 1 }
 
@@ -42,6 +41,11 @@ class Test < ApplicationRecord
         end
       end
     end
+  end
+
+  # @return [ActiveRecord::Relation<Term>]
+  def terms
+    Term.where(id: test_steps.select(:term_id))
   end
 
   # Get the next test step to make

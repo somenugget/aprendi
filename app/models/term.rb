@@ -14,4 +14,27 @@ class Term < ApplicationRecord
         -> { left_joins(:term_progress).select('COALESCE(term_progresses.success_percentage, 0) AS progress, terms.*') }
 
   normalizes :term, :definition, with: -> { NormalizeWord.downcase_preserving_acronyms(it) }
+
+  class << self
+    # is char that should be guessed
+    def char_to_guess?(char)
+      char.match?(/\p{L}/)
+    end
+  end
+
+  # term's chars
+  def chars
+    term.downcase.chars
+  end
+
+  # all chars that should be guessed
+  def chars_to_guess
+    chars.select { |char| self.class.char_to_guess?(char) }
+  end
+
+  # array of chars to guess with their indexes
+  # @return [Array<Hash{Symbol => Integer, String}>]
+  def chars_to_guess_with_indexes
+    chars_to_guess.map.with_index { |char, index| { char:, index: } }
+  end
 end

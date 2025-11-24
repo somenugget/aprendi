@@ -3,16 +3,15 @@ module TG
     class PickDefinition < Base
       # @return [void]
       def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-        test_step = TestStep.find(callback_payload['ts_id'])
         selected_term = Term.find(callback_payload['tr_id'])
         test = test_step.test
 
         if test_step.term == selected_term
-          test_step.update(status: :successful)
-          response_text = "Correct\\! The term is *#{test_step.term.term}*"
+          test_step.update!(status: :successful)
+          response_text = "Correct\\! *#{test_step.term.term}* \\- *#{test_step.term.definition}*"
         else
           test_step.register_failure!
-          response_text = "Almost there\\! The correct term is *#{test_step.term.term}*"
+          response_text = "Almost there\\! *#{test_step.term.term}* \\- *#{test_step.term.definition}*"
         end
 
         edit_message_text(

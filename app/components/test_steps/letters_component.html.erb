@@ -16,7 +16,7 @@
       <% words.each do |word| %>
         <div class="inline-flex flex-wrap justify-center gap-2 break-after-auto max-w-full ">
           <% word.each do |char| %>
-            <% if char_to_guess?(char) %>
+            <% if Term.char_to_guess?(char) %>
               <div data-letters-target="cell"
                    class="flex items-center justify-center border break-after-auto shrink-0 w-12 h-12 border-zinc-600 text-xl font-bold rounded"
               ></div>

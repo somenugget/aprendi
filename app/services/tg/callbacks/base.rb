@@ -17,6 +17,10 @@ module TG
 
       private
 
+      def test_step
+        @test_step ||= TestStep.find_by(id: callback_payload['ts_id']) # rubocop:disable Rails/FindByOrAssignmentMemoization
+      end
+
       def send_message(chat_id:, text:, parse_mode: nil, reply_markup: nil)
         bot.api.send_message(chat_id:, text:, parse_mode:, reply_markup:)
       end

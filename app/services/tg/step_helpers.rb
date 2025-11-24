@@ -33,6 +33,8 @@ module TG
         pick_term_message(step)
       when 'pick_definition'
         pick_definition_message(step)
+      when 'letters'
+        letters_message(step)
       else
         { text: "Step type #{step.exercise} not implemented yet." }
       end
@@ -76,6 +78,34 @@ module TG
           ]
         )
       }
+    end
+
+    # send_message attributes for the letters picking step
+    # @param step [TestStep]
+    def letters_message(step)
+      {
+        parse_mode: 'MarkdownV2',
+        text: "Translate \"*#{step.term.definition}*\" using the letters below:\n",
+        reply_markup: letters_sliced_keyboard(step.term.chars_to_guess_with_indexes.shuffle, { ts_id: step.id })
+      }
+    end
+
+    # inline keyboard for the letters picking step
+    # @param chars [Array<Hash>] array of chars with indexes
+    def letters_sliced_keyboard(chars, data = {})
+      Telegram::Bot::Types::InlineKeyboardMarkup.new(
+        inline_keyboard:
+          chars.each_slice(8).map do |chars_slice|
+            chars_slice.map do |char|
+              Telegram::Bot::Types::InlineKeyboardButton.new(text: char[:char], callback_data: {
+                a: 'letters',
+                lt: char[:char],
+                i: char[:index],
+                **data
+              }.to_json)
+            end.compact
+          end
+      )
     end
   end
 end

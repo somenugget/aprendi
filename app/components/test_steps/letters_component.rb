@@ -9,19 +9,11 @@ class TestSteps::LettersComponent < ApplicationComponent
 
   private
 
-  def chars
-    test_step.term.term.downcase.chars
-  end
-
   def words
     test_step.term.term.downcase.split.map(&:chars)
   end
 
-  def char_to_guess?(char)
-    char.match?(/\p{L}/)
-  end
-
   def chars_to_guess
-    chars.select { |char| char_to_guess?(char) }
+    test_step.term.chars_to_guess
   end
 end
