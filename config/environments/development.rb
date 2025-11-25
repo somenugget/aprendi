@@ -17,21 +17,9 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  # Enable/disable caching. By default caching is disabled.
-  # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
-    config.action_controller.perform_caching = true
-    config.action_controller.enable_fragment_cache_logging = true
-
-    config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
-    }
-  else
-    config.action_controller.perform_caching = false
-
-    config.cache_store = :null_store
-  end
+  config.public_file_server.headers = {
+    'Cache-Control' => "public, max-age=#{2.days.to_i}"
+  }
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
@@ -84,11 +72,16 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
+  config.action_controller.perform_caching = true
+
+  config.action_controller.enable_fragment_cache_logging = true
+
   config.lookbook.preview_paths = ['spec/components/previews']
 
   config.view_component.default_preview_layout = 'component_preview'
 
   config.hosts << 'aprendi.home:3000'
+
   config.hosts << ENV['TELEGRAM_TEST_HOST'] if ENV['TELEGRAM_TEST_HOST'].present?
 
   Rails.application.routes.default_url_options = {

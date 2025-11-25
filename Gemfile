@@ -22,8 +22,7 @@ gem 'tailwind_merge'
 gem 'view_component', '~> 3.12'
 gem 'vite_rails'
 
-# Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 5.2'
+gem 'solid_cache'
 
 gem 'web-push'
 

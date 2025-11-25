@@ -38,6 +38,8 @@ module Aprendi
 
     config.active_job.queue_adapter = :good_job
 
+    config.cache_store = :solid_cache_store
+
     config.generators do |g|
       g.helper false
       g.system_tests false

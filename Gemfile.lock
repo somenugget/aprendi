@@ -385,10 +385,6 @@ GEM
       psych (>= 4.0.0)
       tsort
     redcarpet (3.6.1)
-    redis (5.4.1)
-      redis-client (>= 0.22.0)
-    redis-client (0.26.1)
-      connection_pool
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
@@ -475,6 +471,10 @@ GEM
     snaky_hash (2.0.3)
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
+    solid_cache (1.0.10)
+      activejob (>= 7.2)
+      activerecord (>= 7.2)
+      railties (>= 7.2)
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.8)
@@ -566,7 +566,6 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 6.4.2)
   rails (~> 7.2.3)
-  redis (~> 5.2)
   rspec-rails
   rubocop (~> 1.77)
   rubocop-capybara
@@ -580,6 +579,7 @@ DEPENDENCIES
   service_actor
   simplecov
   site_prism
+  solid_cache
   stimulus-rails
   tailwind_merge
   telegram-bot-ruby
