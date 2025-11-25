@@ -35,6 +35,8 @@ module TG
         pick_definition_message(step)
       when 'letters'
         letters_message(step)
+      when 'write_term'
+        write_term_message(step)
       else
         { text: "Step type #{step.exercise} not implemented yet." }
       end
@@ -87,6 +89,15 @@ module TG
         parse_mode: 'MarkdownV2',
         text: "Translate \"*#{step.term.definition}*\" using the letters below:\n",
         reply_markup: letters_sliced_keyboard(step.term.chars_to_guess_with_indexes.shuffle, { ts_id: step.id })
+      }
+    end
+
+    # send_message attributes for the write term step
+    # @param step [TestStep]
+    def write_term_message(step)
+      {
+        parse_mode: 'MarkdownV2',
+        text: "Write the translation for the \"*#{step.term.definition}*\" by typing it below:"
       }
     end
 
