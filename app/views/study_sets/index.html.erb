@@ -1,9 +1,21 @@
+<% new_study_set_href = @folder ? new_folder_study_set_path(@folder) : new_study_set_path %>
+
 <div class="flex justify-end">
-  <%= render(UI::ButtonComponent.new(text: 'Add study set', options: { as: :a, href: new_study_set_path })) %>
+  <%= render(UI::ButtonComponent.new(text: 'Add study set', options: { as: :a, href: new_study_set_href })) %>
 </div>
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-  <% @study_sets.each do |study_set| %>
-    <%= render(StudySets::CardComponent.new(study_set: study_set)) %>
+<div id="study_sets" class="mt-4">
+  <% if @study_sets.any? %>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <% @study_sets.each do |study_set| %>
+        <%= render(StudySets::CardComponent.new(study_set: study_set)) %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render(UI::EmptyStateComponent.new(
+      message: @folder ? 'This folder does not have any study sets yet. Add one to start collecting terms and tracking progress.' : 'You have not created any study sets yet. Study sets hold the vocabulary you want to learn and practice.',
+      action_text: 'Create your first study set',
+      action_href: new_study_set_href
+    )) %>
   <% end %>
 </div>

@@ -21,8 +21,7 @@ class StudySetsController < ApplicationController
   # POST /study_sets
   def create
     StudySet.transaction do
-      @study_set = current_user.study_sets.build({ **study_set_params, folder: @folder })
-      @study_set.user = current_user
+      @study_set = current_user.study_sets.build(study_set_params)
       @study_set.build_study_config(study_config_params)
       @study_set.save
     end
@@ -30,7 +29,7 @@ class StudySetsController < ApplicationController
     generate_study_set_terms
 
     if @study_set.persisted?
-      redirect_to [@folder, @study_set].compact, notice: 'Study set was successfully created.'
+      redirect_to [@study_set.folder, @study_set].compact, notice: 'Study set was successfully created.'
     else
       render :new, status: :unprocessable_content
     end
@@ -46,7 +45,7 @@ class StudySetsController < ApplicationController
       if to_bool(params[:update_card])
         replace_study_set_card(@study_set)
       else
-        redirect_to [@folder, @study_set].compact,
+        redirect_to [@study_set.folder, @study_set].compact,
                     notice: 'Study set was successfully updated.',
                     status: :see_other
 
@@ -75,7 +74,9 @@ class StudySetsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def study_set_params
-    params.expect(study_set: %i[name pinned])
+    keys = %i[name pinned]
+    keys << :folder_id if current_user.settings.enable_folders
+    params.expect(study_set: keys)
   end
 
   def study_config_params

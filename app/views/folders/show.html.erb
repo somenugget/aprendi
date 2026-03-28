@@ -40,10 +40,20 @@
   </div>
 </div>
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-  <% @folder.study_sets.each do |study_set| %>
-    <%= render(UI::CardComponent.new(as: :a, href: folder_study_set_path(@folder, study_set), class: 'truncate')) do %>
-      <%= study_set.name %>
-    <% end %>
+<div id="folder_study_sets" class="mt-4">
+  <% if @folder.study_sets.any? %>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <% @folder.study_sets.each do |study_set| %>
+        <%= render(UI::CardComponent.new(as: :a, href: folder_study_set_path(@folder, study_set), class: 'truncate')) do %>
+          <%= study_set.name %>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render(UI::EmptyStateComponent.new(
+      message: 'This folder does not have any study sets yet. Add one to start collecting terms and tracking progress.',
+      action_text: 'Create your first study set',
+      action_href: new_folder_study_set_path(@folder)
+    )) %>
   <% end %>
 </div>

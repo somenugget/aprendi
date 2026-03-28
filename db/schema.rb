@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_25_135434) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_28_120000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -274,6 +274,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_25_135434) do
     t.datetime "created_at", null: false
     t.boolean "daily_reminder", default: false
     t.string "definition_lang"
+    t.boolean "enable_folders", default: false, null: false
     t.boolean "push_notifications", default: false, null: false
     t.string "term_lang"
     t.string "tz"

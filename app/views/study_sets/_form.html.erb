@@ -15,6 +15,17 @@
     <%= render(UI::Form::InputComponent.new(form: form, attribute: :name, label: 'Name')) %>
   </div>
 
+  <% if current_user.settings.enable_folders %>
+    <div class="w-full">
+      <%= render(UI::Form::SelectComponent.new(
+        form: form,
+        attribute: :folder_id,
+        values: current_user.folders.order(:name).map { |f| [f.name, f.id] },
+        options: { include_blank: true }
+      )) %>
+    </div>
+  <% end %>
+
   <%= fields_for :study_config, @study_set.study_config do |study_config_fields| %>
     <div class="flex gap-8">
       <div class="w-1/2">

@@ -6,10 +6,20 @@
   <%= render(UI::ButtonComponent.new(text: "New folder", options: { as: :a, href: new_folder_path })) %>
 </div>
 
-<div id="folders" class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4">
-  <% @folders.each do |folder| %>
-    <%= render(UI::CardComponent.new(as: :a, href: folder_path(folder), class: 'truncate')) do %>
-      <%= folder.name %>
-    <% end %>
+<div id="folders" class="mt-4">
+  <% if @folders.any? %>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <% @folders.each do |folder| %>
+        <%= render(UI::CardComponent.new(as: :a, href: folder_path(folder), class: 'truncate')) do %>
+          <%= folder.name %>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render(UI::EmptyStateComponent.new(
+      message: 'You have not created any folders yet. Folders help you group study sets so everything stays easy to find.',
+      action_text: 'Create your first folder',
+      action_href: new_folder_path
+    )) %>
   <% end %>
 </div>

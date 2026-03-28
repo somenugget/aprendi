@@ -1,7 +1,7 @@
 <div class="flex justify-between">
   <h2>
-    <% if @study_set.folder.present? %>
-      <%= @study_set.folder.name %>:
+    <% if @folder %>
+      <%= @folder.name %>:
     <% end %>
 
     New study set

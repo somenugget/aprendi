@@ -17,6 +17,8 @@ class SettingsController < ApplicationController
 
   def settings_params
     params
-      .expect(user_settings: %i[term_lang definition_lang daily_reminder weekly_reminder push_notifications])
+      .expect(
+        user_settings: %i[term_lang definition_lang daily_reminder weekly_reminder push_notifications enable_folders]
+      )
   end
 end

@@ -36,6 +36,14 @@
       )) %>
     </div>
 
+    <div class="mb-4">
+      <%= render(UI::Form::ToggleComponent.new(
+        form: f,
+        attribute: :enable_folders,
+        label: I18n.t('user_settings.enable_folders')
+      )) %>
+    </div>
+
     <div class="mb-4" data-controller="push-notifications-editor">
       <%= render(UI::Form::ToggleComponent.new(
         form: f,

@@ -39,6 +39,7 @@ en:
       confirmation: 'Your confirmation link seems to be invalid. You can request account deletion again to get a valid link'
 
   user_settings:
+    enable_folders: 'Enable folders'
     term_lang_hint: 'The language in which you prefer to see terms in the application'
     definition_lang_hint: 'The language in which you prefer to see definitions in the application'
     daily_reminder: 'Daily reminder'
@@ -52,6 +53,8 @@ en:
       user_settings:
         term_lang: 'Preferred term language'
         definition_lang: 'Preferred definition language'
+      study_set:
+        folder_id: 'Folder'
       study_config:
         term_lang: 'Language you learn'
         definition_lang: 'Your base language'

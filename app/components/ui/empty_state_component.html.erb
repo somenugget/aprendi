@@ -1,0 +1,6 @@
+<div class="<%= panel_class %>">
+  <p class="text-gray-600 dark:text-gray-300 max-w-md mx-auto mb-6">
+    <%= message %>
+  </p>
+  <%= render(UI::ButtonComponent.new(text: action_text, options: { as: :a, href: action_href })) %>
+</div>

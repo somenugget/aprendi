@@ -12,7 +12,7 @@
   <% end %>
 
   <div>
-    <%= render(UI::Form::InputComponent.new(form: form, attribute: :name)) %>
+    <%= render(UI::Form::InputComponent.new(form: form, attribute: :name, options: { autofocus: true })) %>
   </div>
 
   <div class="my-4">
