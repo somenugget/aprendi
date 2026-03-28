@@ -104,15 +104,17 @@ describe 'Test' do
 
     click_link_or_button('Next step')
 
-    expect(latest_test_step_in_progress).to be_letters
-
+    # Branch on DB step term_id — visible step_title text can disagree (whitespace, normalization,
+    # navigation timing) and pick the wrong pool (e.g. click "z" on the "term" letters step).
     2.times do
-      step_title = find('[data-testid="step_title"]')
+      step = latest_test_step_in_progress
+      expect(step).to be_letters
 
-      if step_title.text == term.definition
+      if step.term_id == term.id
         term.term.chars.each { |letter| click_letter_in_pool(letter) }
       else
-        # errored char
+        expect(step.term_id).to eq(term2.id)
+
         click_letter_in_pool(term2.term.chars.last)
 
         expect(page).to have_css('input[name="test_step[failed]"][value="true"]', visible: :hidden)
@@ -123,15 +125,16 @@ describe 'Test' do
       click_link_or_button('Next step')
     end
 
-    expect(latest_test_step_in_progress).to be_write_term
-
     2.times do
-      step_title = find('[data-testid="step_title"]')
+      step = latest_test_step_in_progress
+      expect(step).to be_write_term
 
-      if step_title.text == term.definition
+      if step.term_id == term.id
         fill_in('test_step_answer_term', with: term.term)
         click_link_or_button('Submit')
       else
+        expect(step.term_id).to eq(term2.id)
+
         fill_in('test_step_answer_term', with: "#{term2.term}aaa")
         click_link_or_button('Submit')
         expect(page).to have_css('#test_step_answer_term[data-result="error"]')
