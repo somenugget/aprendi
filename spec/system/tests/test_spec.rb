@@ -11,6 +11,14 @@ describe 'Test' do
     latest_test.test_steps.where(status: 'in_progress').order(:id).last
   end
 
+  # Text-based click_link_or_button(char) is flaky for single-letter labels (Capybara/Cuprite).
+  # Prefer data-char; :not([disabled]) so duplicate letters (e.g. "fizz") click the next free button.
+  def click_letter_in_pool(char)
+    within('[data-testid="letters"]') do
+      find(:css, %(button[data-char="#{char}"]:not([disabled])), match: :first).click
+    end
+  end
+
   before do
     login_as(user)
   end
@@ -39,11 +47,7 @@ describe 'Test' do
     expect(latest_test_step_in_progress).to be_letters
     expect(page).to have_current_path(test_test_step_path(latest_test, latest_test_step_in_progress))
 
-    term.term.chars.each do |letter|
-      within('[data-testid="letters"]') do
-        click_link_or_button(letter)
-      end
-    end
+    term.term.chars.each { |letter| click_letter_in_pool(letter) }
 
     click_link_or_button('Next step')
 
@@ -106,24 +110,14 @@ describe 'Test' do
       step_title = find('[data-testid="step_title"]')
 
       if step_title.text == term.definition
-        term.term.chars.each do |letter|
-          within('[data-testid="letters"]') do
-            click_link_or_button(letter, match: :first)
-          end
-        end
+        term.term.chars.each { |letter| click_letter_in_pool(letter) }
       else
         # errored char
-        within('[data-testid="letters"]') do
-          click_link_or_button(term2.term.chars.last, match: :first)
-        end
+        click_letter_in_pool(term2.term.chars.last)
 
         expect(page).to have_css('input[name="test_step[failed]"][value="true"]', visible: :hidden)
 
-        term2.term.chars.each do |letter|
-          within('[data-testid="letters"]') do
-            click_link_or_button(letter, match: :first)
-          end
-        end
+        term2.term.chars.each { |letter| click_letter_in_pool(letter) }
       end
 
       click_link_or_button('Next step')
@@ -160,11 +154,7 @@ describe 'Test' do
 
     expect(latest_test_step_in_progress).to be_letters
 
-    term2.term.chars.each do |letter|
-      within('[data-testid="letters"]') do
-        click_link_or_button(letter, match: :first)
-      end
-    end
+    term2.term.chars.each { |letter| click_letter_in_pool(letter) }
     click_link_or_button('Next step')
 
     expect(latest_test_step_in_progress).to be_write_term
