@@ -32,7 +32,7 @@ class TestsController < ApplicationController
     elsif params[:terms_ids].present?
       @test = Test.create_from_terms_ids!(params[:terms_ids].to_a, current_user)
     else
-      return redirect_back fallback_location: root_path, alert: 'Can\'t create a test'
+      return redirect_back_or_to(root_path, alert: 'Can\'t create a test')
     end
 
     first_step = @test.test_steps.order(:id).first.tap do |step|

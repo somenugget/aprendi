@@ -9,7 +9,7 @@ class SettingsController < ApplicationController
     if @settings.update(settings_params)
       redirect_to settings_path, notice: 'Settings were updated.', status: :see_other
     else
-      render :show, status: :unprocessable_entity
+      render :show, status: :unprocessable_content
     end
   end
 
@@ -17,7 +17,6 @@ class SettingsController < ApplicationController
 
   def settings_params
     params
-      .require(:user_settings)
-      .permit(:term_lang, :definition_lang, :daily_reminder, :weekly_reminder, :push_notifications)
+      .expect(user_settings: %i[term_lang definition_lang daily_reminder weekly_reminder push_notifications])
   end
 end

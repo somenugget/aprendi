@@ -68,7 +68,7 @@ class TermsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def term_params
-    params.require(:term).permit(:study_set_id, :term, :definition)
+    params.expect(term: %i[study_set_id term definition])
   end
 
   def set_study_set

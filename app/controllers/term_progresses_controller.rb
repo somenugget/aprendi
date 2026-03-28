@@ -24,7 +24,7 @@ class TermProgressesController < ApplicationController
     if @term_progress.save
       redirect_to @term_progress, notice: 'Term progress was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -33,7 +33,7 @@ class TermProgressesController < ApplicationController
     if @term_progress.update(term_progress_params)
       redirect_to @term_progress, notice: 'Term progress was successfully updated.', status: :see_other
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -52,7 +52,7 @@ class TermProgressesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def term_progress_params
-    params.require(:term_progress).permit(:term_id, :user_id, :learnt, :tests_count, :success_percentage,
-                                          :next_test_date)
+    params.expect(term_progress: %i[term_id user_id learnt tests_count success_percentage
+                                    next_test_date])
   end
 end

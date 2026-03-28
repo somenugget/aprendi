@@ -27,7 +27,7 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
     if @test_step.save
       redirect_to @test_step, notice: 'Test step was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -183,6 +183,6 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
 
   # Only allow a list of trusted parameters through.
   def test_step_params
-    params.require(:test_step).permit(:test_id, :term_id, :type, :status, :position)
+    params.expect(test_step: %i[test_id term_id type status position])
   end
 end

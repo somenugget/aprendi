@@ -32,7 +32,7 @@ class StudySetsController < ApplicationController
     if @study_set.persisted?
       redirect_to [@folder, @study_set].compact, notice: 'Study set was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -52,7 +52,7 @@ class StudySetsController < ApplicationController
 
       end
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -75,11 +75,11 @@ class StudySetsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def study_set_params
-    params.require(:study_set).permit(:name, :pinned)
+    params.expect(study_set: %i[name pinned])
   end
 
   def study_config_params
-    params.require(:study_config).permit(:term_lang, :definition_lang)
+    params.expect(study_config: %i[term_lang definition_lang])
   end
 
   def generate_study_set_terms

@@ -24,7 +24,7 @@ class FoldersController < ApplicationController
     if @folder.save
       redirect_to @folder, notice: 'Folder was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -33,7 +33,7 @@ class FoldersController < ApplicationController
     if @folder.update(folder_params)
       redirect_to @folder, notice: 'Folder was successfully updated.', status: :see_other
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -52,6 +52,6 @@ class FoldersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def folder_params
-    params.require(:folder).permit(:name)
+    params.expect(folder: [:name])
   end
 end

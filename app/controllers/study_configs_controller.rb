@@ -24,7 +24,7 @@ class StudyConfigsController < ApplicationController
     if @study_config.save
       redirect_to @study_config, notice: 'Study config was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -33,7 +33,7 @@ class StudyConfigsController < ApplicationController
     if @study_config.update(study_config_params)
       redirect_to @study_config, notice: 'Study config was successfully updated.', status: :see_other
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -52,6 +52,6 @@ class StudyConfigsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def study_config_params
-    params.require(:study_config).permit(:configurable_id, :configurable_type, :term_lang, :definition_lang)
+    params.expect(study_config: %i[configurable_id configurable_type term_lang definition_lang])
   end
 end

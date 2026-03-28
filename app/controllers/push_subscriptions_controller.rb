@@ -8,7 +8,7 @@ class PushSubscriptionsController < ApplicationController
   private
 
   def push_subscription_params
-    params.require(:push_subscription).permit(:endpoint, :p256dh, :auth, :user_agent)
+    params.expect(push_subscription: %i[endpoint p256dh auth user_agent])
   end
 
   def find_subscription
