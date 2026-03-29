@@ -1,6 +1,6 @@
 <%= form_with model: @settings, url: settings_path do |f| %>
-  <div class="flex gap-4 mb-4 mt-4">
-    <div class="w-1/2">
+  <div class="flex flex-col gap-4 mb-4 mt-4 md:flex-row">
+    <div class="w-full md:w-1/2">
       <%= render(UI::Form::SelectComponent.new(
         form: f,
         attribute: :term_lang,
@@ -9,7 +9,7 @@
       )) %>
     </div>
 
-    <div class="w-1/2">
+    <div class="w-full md:w-1/2">
       <%= render(UI::Form::SelectComponent.new(
         form: f,
         attribute: :definition_lang,

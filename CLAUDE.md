@@ -39,4 +39,4 @@ Aprendi is a Rails app for learning vocabulary: study sets, terms, folders, test
 ## General rules
 
 - Don't run `bundle exec zeitwerk:check`
-- Run `bundle exec rubocop -A` ans tests after the task is done
+- Run `bundle exec rubocop -A` and tests after the task is done
