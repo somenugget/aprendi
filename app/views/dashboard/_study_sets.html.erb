@@ -1,9 +1,9 @@
-<% if @less_studied_study_sets.any? %>
-  <div class="mb-8">
-    <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
-      Your study sets progress
-    </h2>
+<div class="mb-8">
+  <h2 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
+    Your study sets progress
+  </h2>
 
+  <% if @less_studied_study_sets.any? %>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <% @less_studied_study_sets.each do |study_set| %>
         <%= form_with url: tests_path, method: :post, class: 'block' do |form| %>
@@ -30,5 +30,11 @@
         <% end %>
       <% end %>
     </div>
-  </div>
-<% end %>
+  <% else %>
+    <%= render(UI::EmptyStateComponent.new(
+      message: 'Every study set you track is fully up to date here, or you have no sets under 100% progress yet. Open your study sets to practice or add more vocabulary.',
+      action_text: 'View study sets',
+      action_href: study_sets_path
+    )) %>
+  <% end %>
+</div>

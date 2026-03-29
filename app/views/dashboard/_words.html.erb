@@ -87,13 +87,10 @@
       <% end %>
     </div>
   <% else %>
-    <div class="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-lg p-6">
-      <p class="text-lg text-gray-900 dark:text-white mb-2">
-        You've learnt everything you had to learn today 🎉 Good job 💪🏻
-      </p>
-      <p class="text-gray-600 dark:text-gray-300">
-        Come back tomorrow or add some new words to learn.
-      </p>
-    </div>
+    <%= render(UI::EmptyStateComponent.new(
+      message: 'You have finished today\'s queue—great work. Come back tomorrow for more reviews, or add a study set with new terms to learn.',
+      action_text: 'Create a study set',
+      action_href: new_study_set_path
+    )) %>
   <% end %>
 </div>
