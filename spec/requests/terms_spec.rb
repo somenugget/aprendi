@@ -24,15 +24,15 @@ RSpec.describe 'Terms' do
   it 'enqueues audio regeneration when term text changes' do
     expect do
       update_term(text: 'adios', definition: 'bye')
-    end.to have_enqueued_job(GenerateTermAudioJob).with(term.id)
+    end.to have_enqueued_job(GenerateTermAudioJob).with(term.id, regenerate: true)
   end
 
-  it 'purges stale audio when term text changes' do
+  it 'keeps stale audio until the regeneration job runs when term text changes' do
     term.term_audio.attach(io: StringIO.new('old'), filename: 'old.mp3', content_type: 'audio/mpeg')
 
     update_term(text: 'adios', definition: 'bye')
 
-    expect(term.reload.term_audio).not_to be_attached
+    expect(term.reload.term_audio).to be_attached
   end
 
   it 'does not enqueue audio regeneration when only definition changes' do

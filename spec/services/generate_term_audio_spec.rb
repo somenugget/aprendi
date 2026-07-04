@@ -57,6 +57,13 @@ RSpec.describe GenerateTermAudio do
     expect(attached_term.term_audio.download).to eq('existing')
   end
 
+  it 'regenerates existing audio when requested' do
+    attached_term = attach_existing_audio
+    described_class.call(term: attached_term, regenerate: true)
+
+    expect(attached_term.reload.term_audio.download).to eq('mp3-bytes')
+  end
+
   def attach_existing_audio
     Term.find(term.id).tap do |attached_term|
       attached_term.term_audio.attach(io: StringIO.new('existing'), filename: 'existing.mp3',

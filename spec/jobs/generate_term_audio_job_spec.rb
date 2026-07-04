@@ -8,6 +8,14 @@ RSpec.describe GenerateTermAudioJob do
 
     described_class.perform_now(term.id)
 
-    expect(GenerateTermAudio).to have_received(:call).with(term:)
+    expect(GenerateTermAudio).to have_received(:call).with(term:, regenerate: false)
+  end
+
+  it 'passes regeneration through to the service' do
+    allow(GenerateTermAudio).to receive(:call)
+
+    described_class.perform_now(term.id, regenerate: true)
+
+    expect(GenerateTermAudio).to have_received(:call).with(term:, regenerate: true)
   end
 end

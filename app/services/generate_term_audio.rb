@@ -2,6 +2,7 @@ require 'openai'
 
 class GenerateTermAudio < BaseService
   input :term, type: Term
+  input :regenerate, type: [TrueClass, FalseClass], default: false
 
   MODEL = 'gpt-4o-mini-tts'.freeze
   DEFAULT_VOICE = 'alloy'.freeze
@@ -20,7 +21,7 @@ class GenerateTermAudio < BaseService
 
   # Generate and attach cached speech for the term text.
   def call
-    return if term.term_audio.attached?
+    return if term.term_audio.attached? && !regenerate
 
     attach_audio
   end
