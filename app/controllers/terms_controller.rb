@@ -24,6 +24,7 @@ class TermsController < ApplicationController
 
     if @term.save
       GenerateTermExamplesJob.perform_sometime_later(@term.id)
+      GenerateTermAudioJob.perform_sometime_later(@term.id)
 
       new_term = @study_set.terms.build
       render turbo_stream: [
@@ -41,6 +42,7 @@ class TermsController < ApplicationController
   # PATCH/PUT /terms/1
   def update
     @term.update(term_params)
+    regenerate_term_audio if @term.saved_change_to_term?
 
     render turbo_stream: [
       turbo_stream.replace(dom_id(@term, 'form'), partial: 'terms/term_form', locals: { term: @term })
@@ -61,17 +63,19 @@ class TermsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_term
-    @term = Term.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def term_params
-    params.expect(term: %i[study_set_id term definition])
+    @term = @study_set.terms.find(params[:id])
   end
 
   def set_study_set
     @study_set = current_user.study_sets.find(params[:study_set_id])
+  end
+
+  def term_params
+    params.expect(term: %i[study_set_id term definition])
+  end
+
+  def regenerate_term_audio
+    GenerateTermAudioJob.perform_sometime_later(@term.id, regenerate: true)
   end
 end

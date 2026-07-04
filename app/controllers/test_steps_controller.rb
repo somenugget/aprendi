@@ -57,7 +57,8 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
           streams << turbo_stream.replace(
             dom_id(answer_term, 'answer'),
             render_to_string(
-              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'success')
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'success',
+                                                  play_audio: true)
             )
           )
         else
@@ -66,13 +67,15 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
           streams << turbo_stream.replace(
             dom_id(answer_term, 'answer'),
             render_to_string(
-              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'error')
+              TestSteps::AnswerLabelComponent.new(term: answer_term, label: answer_term.term, result: 'error',
+                                                  play_audio: true)
             )
           )
           streams << turbo_stream.replace(
             dom_id(correct_term, 'answer'),
             render_to_string(
-              TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.term, result: 'success')
+              TestSteps::AnswerLabelComponent.new(term: correct_term, label: correct_term.term, result: 'success',
+                                                  play_audio: true)
             )
           )
         end
@@ -100,7 +103,7 @@ class TestStepsController < ApplicationController # rubocop:disable Metrics/Clas
           streams << turbo_stream.replace(
             dom_id(correct_term, 'answer'),
             render_to_string(
-              TestSteps::AnswerLabelComponent.new(term: answer_term, label: correct_term.definition, result: 'success')
+              TestSteps::AnswerLabelComponent.new(term: correct_term, label: correct_term.definition, result: 'success')
             )
           )
         end

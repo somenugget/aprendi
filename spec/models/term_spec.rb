@@ -1,3 +1,5 @@
 RSpec.describe Term do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'has one attached term audio' do
+    expect(described_class.reflect_on_attachment(:term_audio).macro).to eq(:has_one_attached)
+  end
 end
