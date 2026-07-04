@@ -24,6 +24,7 @@ class TermsController < ApplicationController
 
     if @term.save
       GenerateTermExamplesJob.perform_sometime_later(@term.id)
+      GenerateTermAudioJob.perform_sometime_later(@term.id)
 
       new_term = @study_set.terms.build
       render turbo_stream: [
@@ -40,7 +41,11 @@ class TermsController < ApplicationController
 
   # PATCH/PUT /terms/1
   def update
-    @term.update(term_params)
+    attributes = term_params
+    term_changed = attributes.key?(:term) && @term.term != attributes[:term]
+
+    @term.update(attributes)
+    regenerate_term_audio if term_changed && @term.errors.blank?
 
     render turbo_stream: [
       turbo_stream.replace(dom_id(@term, 'form'), partial: 'terms/term_form', locals: { term: @term })
@@ -73,5 +78,11 @@ class TermsController < ApplicationController
 
   def set_study_set
     @study_set = current_user.study_sets.find(params[:study_set_id])
+  end
+
+  def regenerate_term_audio
+    @term.term_audio.purge if @term.term_audio.attached?
+
+    GenerateTermAudioJob.perform_sometime_later(@term.id)
   end
 end

@@ -5,13 +5,17 @@
                 'pick-completed-value': false
               } do |f| %>
 
-  <h3 class="text-4xl text-center font-semibold mt-5" data-testid="step_title">
-    <%= test_step.term.term %>
-  </h3>
+  <div class="mt-5 flex items-center justify-center gap-3">
+    <h3 class="text-4xl text-center font-semibold" data-testid="step_title">
+      <%= test_step.term.term %>
+    </h3>
+
+    <%= render(UI::AudioButtonComponent.new(term: test_step.term)) %>
+  </div>
   <div class="grid grid-rows-2 grid-cols-2 gap-5 mt-6">
     <% test_step.terms_to_pick.each_with_index do |term, i| %>
       <div class="relative z-10">
-        <span class="absolute left-2 top-1 text-sm text-indigo-200"><%= i + 1 %></span>
+        <span class="absolute left-2 top-1 z-10 text-sm text-indigo-200"><%= i + 1 %></span>
 
         <input
           data-pick-target="answer"

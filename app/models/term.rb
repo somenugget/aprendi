@@ -1,6 +1,8 @@
 class Term < ApplicationRecord
   belongs_to :study_set, touch: true
 
+  has_one_attached :term_audio
+
   has_many :term_example_terms, dependent: :destroy
   has_many :term_examples, through: :term_example_terms
   has_many :test_steps, dependent: :destroy
