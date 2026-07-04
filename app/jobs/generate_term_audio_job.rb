@@ -8,7 +8,7 @@ class GenerateTermAudioJob < ApplicationJob
     set(wait: rand(0..120).seconds).perform_later(term_id)
   end
 
-  # @param [String] term_id
+  # @param [Integer] term_id
   def perform(term_id)
     term = Term.find(term_id)
 

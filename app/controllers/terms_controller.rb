@@ -66,18 +66,16 @@ class TermsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_term
-    @term = Term.find(params[:id])
-  end
-
-  # Only allow a list of trusted parameters through.
-  def term_params
-    params.expect(term: %i[study_set_id term definition])
+    @term = @study_set.terms.find(params[:term_id])
   end
 
   def set_study_set
     @study_set = current_user.study_sets.find(params[:study_set_id])
+  end
+
+  def term_params
+    params.expect(term: %i[study_set_id term definition])
   end
 
   def regenerate_term_audio

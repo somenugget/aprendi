@@ -1,4 +1,4 @@
-class CreateActiveStorageTables < ActiveRecord::Migration[7.0]
+class CreateActiveStorageTables < ActiveRecord::Migration[8.1]
   def change
     primary_key_type, foreign_key_type = primary_and_foreign_key_types
 
