@@ -9,7 +9,7 @@ gem 'rails', '~> 8.1.0'
 gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 6.4.2'
+gem 'puma', '~> 7.2.1'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'

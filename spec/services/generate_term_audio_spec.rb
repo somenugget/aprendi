@@ -67,7 +67,7 @@ RSpec.describe GenerateTermAudio do
   def expected_parameters
     {
       model: 'gpt-4o-mini-tts',
-      voice: 'coral',
+      voice: 'shimmer',
       instructions: 'Speak in Spanish. Pronounce the target word using Spanish phonology only. ' \
                     'Do not use English pronunciation, even if the word is spelled the same in English. ' \
                     'Say only the target word, naturally and clearly.',
