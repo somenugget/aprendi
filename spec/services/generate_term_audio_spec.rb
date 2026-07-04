@@ -33,34 +33,63 @@ RSpec.describe GenerateTermAudio do
     expect(audio_client).to have_received(:speech).with(parameters: expected_parameters)
   end
 
+  it 'does not send pronunciation instructions for English terms' do
+    described_class.call(term: english_term)
+
+    expect(audio_client).to have_received(:speech).with(parameters: english_expected_parameters)
+  end
+
   it 'has a voice mapping for every supported study config language' do
     expect(described_class::VOICE_BY_TERM_LANG.keys).to match_array(StudyConfig::LANGUAGES.keys)
   end
 
   it 'does not call OpenAI when audio is already attached' do
-    attach_existing_audio
-    described_class.call(term:)
+    attached_term = attach_existing_audio
+    described_class.call(term: attached_term)
 
     expect(audio_client).not_to have_received(:speech)
   end
 
   it 'keeps existing audio when audio is already attached' do
-    attach_existing_audio
-    described_class.call(term:)
+    attached_term = attach_existing_audio
+    described_class.call(term: attached_term)
 
-    expect(term.term_audio.download).to eq('existing')
+    expect(attached_term.term_audio.download).to eq('existing')
   end
 
   def attach_existing_audio
-    term.term_audio.attach(io: StringIO.new('existing'), filename: 'existing.mp3', content_type: 'audio/mpeg')
+    Term.find(term.id).tap do |attached_term|
+      attached_term.term_audio.attach(io: StringIO.new('existing'), filename: 'existing.mp3',
+                                      content_type: 'audio/mpeg')
+    end
   end
 
   def expected_parameters
     {
-      model: 'tts-1',
-      voice: 'nova',
+      model: 'gpt-4o-mini-tts',
+      voice: 'coral',
+      instructions: 'Speak in Spanish. Pronounce the target word using Spanish phonology only. ' \
+                    'Do not use English pronunciation, even if the word is spelled the same in English. ' \
+                    'Say only the target word, naturally and clearly.',
       response_format: 'mp3',
       input: 'hola'
     }
+  end
+
+  def english_expected_parameters
+    {
+      model: 'gpt-4o-mini-tts',
+      voice: 'alloy',
+      response_format: 'mp3',
+      input: 'run'
+    }
+  end
+
+  def english_term
+    create(:term, study_set: english_study_set, term: 'run')
+  end
+
+  def english_study_set
+    create(:study_set, user:, study_config: build(:study_config, term_lang: 'en', definition_lang: 'es'))
   end
 end

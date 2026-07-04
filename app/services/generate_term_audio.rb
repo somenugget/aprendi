@@ -3,15 +3,15 @@ require 'openai'
 class GenerateTermAudio < BaseService
   input :term, type: Term
 
-  MODEL = 'tts-1'.freeze
+  MODEL = 'gpt-4o-mini-tts'.freeze
   DEFAULT_VOICE = 'alloy'.freeze
   VOICE_BY_TERM_LANG = {
     'en' => 'alloy',
-    'es' => 'nova',
+    'es' => 'shimmer',
     'fr' => 'shimmer',
     'de' => 'onyx',
     'it' => 'fable',
-    'pt' => 'nova',
+    'pt' => 'coral',
     'uk' => 'shimmer',
     'ru' => 'onyx'
   }.freeze
@@ -36,14 +36,7 @@ class GenerateTermAudio < BaseService
   end
 
   def audio_response
-    client.audio.speech(
-      parameters: {
-        model: MODEL,
-        voice: voice,
-        response_format: RESPONSE_FORMAT,
-        input: term.term
-      }
-    )
+    client.audio.speech(parameters: speech_parameters)
   end
 
   def voice
@@ -52,6 +45,31 @@ class GenerateTermAudio < BaseService
 
   def term_lang
     term.study_set.study_config.term_lang
+  end
+
+  def language
+    StudyConfig::LANGUAGES.fetch(term_lang)
+  end
+
+  def instructions
+    return if term_lang == 'en'
+
+    <<~INSTRUCTIONS.squish
+      Speak in #{language}.
+      Pronounce the target word using #{language} phonology only.
+      Do not use English pronunciation, even if the word is spelled the same in English.
+      Say only the target word, naturally and clearly.
+    INSTRUCTIONS
+  end
+
+  def speech_parameters
+    {
+      voice:,
+      instructions:,
+      model: MODEL,
+      response_format: RESPONSE_FORMAT,
+      input: term.term,
+    }.compact
   end
 
   def client
