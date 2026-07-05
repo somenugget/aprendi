@@ -5,12 +5,18 @@ class GenerateTermExamples < BaseService # rubocop:disable Metrics/ClassLength
   # @!method term
   input :term, type: Term
 
-  EXAMPLES_COUNT_TO_GENERATE = 20
+  # @param [Boolean] regenerate
+  # @!method regenerate
+  input :regenerate, type: [TrueClass, FalseClass], default: false
+
+  EXAMPLES_COUNT_TO_GENERATE = 10
 
   HEADERS = %w[term definition term_lang definition_lang term_example definition_example].freeze
 
   # @return [Array<TermExample>]
   def call
+    term.term_examples.each(&:destroy) if regenerate
+
     return if term.term_examples.count >= EXAMPLES_COUNT_TO_GENERATE
 
     chat_response.each { save_example(it) }

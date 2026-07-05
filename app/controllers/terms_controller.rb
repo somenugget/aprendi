@@ -41,8 +41,13 @@ class TermsController < ApplicationController
 
   # PATCH/PUT /terms/1
   def update
-    @term.update(term_params)
-    regenerate_term_audio if @term.saved_change_to_term?
+    Term.transaction do
+      @term.update(term_params)
+      if @term.saved_change_to_term?
+        GenerateTermExamplesJob.perform_sometime_later(@term.id, regenerate: true)
+        GenerateTermAudioJob.perform_sometime_later(@term.id, regenerate: true)
+      end
+    end
 
     render turbo_stream: [
       turbo_stream.replace(dom_id(@term, 'form'), partial: 'terms/term_form', locals: { term: @term })

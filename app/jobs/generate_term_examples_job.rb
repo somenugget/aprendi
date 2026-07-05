@@ -4,9 +4,9 @@ class GenerateTermExamplesJob < ApplicationJob
   discard_on ActiveRecord::RecordNotFound
 
   # @param [Integer] term_id
-  def perform(term_id)
+  def perform(term_id, regenerate: false)
     term = Term.find(term_id)
 
-    GenerateTermExamples.call(term: term)
+    GenerateTermExamples.call(term: term, regenerate: regenerate)
   end
 end
