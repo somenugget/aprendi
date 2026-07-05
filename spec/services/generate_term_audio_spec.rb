@@ -40,7 +40,7 @@ RSpec.describe GenerateTermAudio do
   end
 
   it 'has a voice mapping for every supported study config language' do
-    expect(described_class::VOICE_BY_TERM_LANG.keys).to match_array(StudyConfig::LANGUAGES.keys)
+    expect(GenerateTextToSpeechAudio::VOICE_BY_LANG.keys).to match_array(StudyConfig::LANGUAGES.keys)
   end
 
   it 'does not call OpenAI when audio is already attached' do

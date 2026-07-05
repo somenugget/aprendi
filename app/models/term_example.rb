@@ -1,4 +1,6 @@
 class TermExample < ApplicationRecord
+  has_one_attached :term_example_audio
+
   validates :term, :definition, :term_lang, :definition_lang, :term_example, :definition_example, presence: true
 
   normalizes :term,

@@ -1,11 +1,11 @@
 <button
   type="button"
   class="inline-flex h-7 w-7 items-center justify-center rounded-full text-indigo-400 transition hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-indigo-300 dark:border-gray-600 dark:bg-gray-800/90 dark:text-indigo-200 dark:hover:bg-gray-700"
-  aria-label="Play term audio"
-  title="Play term audio"
+  aria-label="<%= label %>"
+  title="<%= label %>"
   data-controller="audio-player"
   data-action="click->audio-player#play"
-  data-audio-player-url-value="<%= term_audio_path(term) %>"
+  data-audio-player-url-value="<%= audio_path %>"
 >
   <%= heroicon('speaker-wave', options: { class: 'h-3 w-3' }) %>
 </button>

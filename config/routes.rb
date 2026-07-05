@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :push_subscriptions, only: %i[create]
 
   get 'terms/:term_id/audio', to: 'term_audios#show', as: :term_audio
+  get 'term_examples/:term_example_id/audio', to: 'term_example_audios#show', as: :term_example_audio
 
   resources :folders do
     study_sets.call

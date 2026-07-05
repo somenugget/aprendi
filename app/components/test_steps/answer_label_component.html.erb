@@ -9,7 +9,7 @@
   <%= label %>
   <% if render_audio_button? %>
     <div class="absolute right-2 top-2">
-      <%= render(UI::AudioButtonComponent.new(term: term)) %>
+      <%= render(UI::AudioButtonComponent.new(audio: term.term_audio, audio_path: term_audio_path(term), label: 'Play term audio')) %>
     </div>
   <% end %>
 </label>

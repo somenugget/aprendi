@@ -28,7 +28,7 @@ module Imports
     private
 
     def create_term_example!(example, term)
-      term.term_examples.create!(
+      term_example = term.term_examples.create!(
         term: term.term,
         definition: term.definition,
         term_example: example['example'],
@@ -36,6 +36,8 @@ module Imports
         term_lang: study_set.study_config.term_lang,
         definition_lang: study_set.study_config.definition_lang
       )
+
+      GenerateTermExampleAudioJob.perform_sometime_later(term_example.id)
     end
 
     def validate_input!

@@ -110,7 +110,7 @@ class GenerateTermExamples < BaseService # rubocop:disable Metrics/ClassLength
   end
 
   def save_example(example_row)
-    term.term_examples.create!(
+    term_example = term.term_examples.create!(
       term: example_row['term'],
       definition: example_row['definition'],
       term_example: example_row['term_example'],
@@ -118,6 +118,8 @@ class GenerateTermExamples < BaseService # rubocop:disable Metrics/ClassLength
       term_lang: lang_code(example_row['term_lang']) || term_lang,
       definition_lang: lang_code(example_row['definition_lang']) || definition_lang
     )
+
+    GenerateTermExampleAudioJob.perform_sometime_later(term_example.id)
   end
 
   def lang_code(lang)

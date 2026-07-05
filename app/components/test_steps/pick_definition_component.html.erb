@@ -10,7 +10,7 @@
       <%= test_step.term.term %>
     </h3>
 
-    <%= render(UI::AudioButtonComponent.new(term: test_step.term)) %>
+    <%= render(UI::AudioButtonComponent.new(audio: test_step.term.term_audio, audio_path: term_audio_path(test_step.term), label: 'Play term audio')) %>
   </div>
   <div class="grid grid-rows-2 grid-cols-2 gap-5 mt-6">
     <% test_step.terms_to_pick.each_with_index do |term, i| %>

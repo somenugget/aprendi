@@ -1,8 +1,11 @@
 <div class="">
   <% examples.each do |example| %>
-    <p class="font-semibold first-letter:uppercase">
-      <%= example.term_example %>
-    </p>
+    <div class="flex items-start gap-1">
+      <p class="font-semibold first-letter:uppercase">
+        <%= example.term_example %>
+      </p>
+      <%= render(UI::AudioButtonComponent.new(audio: example.term_example_audio, audio_path: term_example_audio_path(example), label: 'Play example audio')) %>
+    </div>
     <p class="text-gray-500 mb-2 first-letter:uppercase">
       <%= example.definition_example %>
     </p>

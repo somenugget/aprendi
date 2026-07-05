@@ -27,7 +27,8 @@ Aprendi is a Rails app for learning vocabulary: study sets, terms, folders, test
 
 ## Conventions
 
-- **Components**: Prefer `ApplicationComponent` subclasses; many use `extend Dry::Initializer` and `option` for constructor args. Reuse `UI::*` before adding new primitives.
+- **Components**: Prefer `ApplicationComponent` subclasses. Use `extend Dry::Initializer` and define `param` / `option` values with defaults instead of writing `def initialize`. Reuse `UI::*` before adding new primitives.
+- **Constants**: Do not redefine alias constants for another class's constant. Reference the original constant directly, e.g. `GenerateTextToSpeechAudio::VOICE_BY_LANG`.
 - **Strong params**: Controllers often use `params.expect(...)` (Rails 8 style). Keep permitted keys tight.
 - **I18n**: Copy in `config/locales/en.yml` where the app already uses `t()` / `I18n.t`.
 
