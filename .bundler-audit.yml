@@ -1,0 +1,4 @@
+# webrick is pulled in transitively by ferrum for Cuprite system tests only.
+# CVE-2026-38969 currently has no patched webrick release.
+ignore:
+  - CVE-2026-38969
