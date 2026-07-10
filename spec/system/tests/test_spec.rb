@@ -23,7 +23,7 @@ describe 'Test' do
     login_as(user)
   end
 
-  it 'allows to pass the test' do # rubocop:disable RSpec/ExampleLength, RSpec/MultipleExpectations
+  it 'allows to pass the test' do # rubocop:disable RSpec/MultipleExpectations
     visit study_set_path(study_set)
 
     click_link_or_button('Whole set')
