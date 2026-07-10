@@ -15,4 +15,16 @@ RSpec.describe TestSteps::ExamplesComponent, type: :component do
       Rails.application.routes.url_helpers.term_example_audio_path(term_example)
     )
   end
+
+  it 'autofocuses the first audio button' do
+    term_example.term_example_audio.attach(io: StringIO.new('mp3'), filename: 'example.mp3', content_type: 'audio/mpeg')
+
+    rendered = render_inline(described_class.new(term: term))
+    wrapper = rendered.at_css('[data-controller="autofocus"]')
+
+    expect(wrapper.attributes.transform_values(&:value)).to include(
+      'data-action' => 'autofocus:focus->autofocus#focus',
+      'data-autofocus-selector-value' => 'button[data-audio-player-url-value]:not(:disabled)'
+    )
+  end
 end

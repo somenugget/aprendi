@@ -48,6 +48,12 @@ Rails/UniqueValidationWithoutIndex:
   Exclude:
     - 'app/models/push_subscription.rb'
 
+RSpec/ExampleLength:
+  Max: 30
+
+RSpec/MultipleExpectations:
+  Max: 5
+
 Style/ArgumentsForwarding:
   Enabled: false
 

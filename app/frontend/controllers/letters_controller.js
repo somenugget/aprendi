@@ -34,6 +34,7 @@ export default class extends Controller {
         this.nextStepTarget.classList.remove('hidden')
         this.nextStepTarget.classList.add('flex')
         this.termExamplesTarget.classList.remove('hidden')
+        this.focusTermExampleAudioButton()
       }
 
       successCallback()
@@ -101,5 +102,11 @@ export default class extends Controller {
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
+  }
+
+  focusTermExampleAudioButton() {
+    this.termExamplesTarget
+      .querySelector('[data-controller~="autofocus"]')
+      ?.dispatchEvent(new CustomEvent('autofocus:focus'))
   }
 }

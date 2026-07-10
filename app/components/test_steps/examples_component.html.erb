@@ -1,4 +1,8 @@
-<div class="">
+<div
+  data-controller="autofocus"
+  data-action="autofocus:focus->autofocus#focus"
+  data-autofocus-selector-value="button[data-audio-player-url-value]:not(:disabled)"
+>
   <% examples.each do |example| %>
     <div class="flex items-start gap-1">
       <p class="font-semibold first-letter:uppercase">
