@@ -11,6 +11,10 @@ export default class extends Controller {
     this.constructor.stopActiveAudio()
   }
 
+  ignoreEnter(event) {
+    event.preventDefault()
+  }
+
   play(event) {
     event.preventDefault()
     event.stopPropagation()

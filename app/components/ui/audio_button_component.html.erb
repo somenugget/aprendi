@@ -4,7 +4,7 @@
   aria-label="<%= label %>"
   title="<%= label %>"
   data-controller="audio-player"
-  data-action="click->audio-player#play"
+  data-action="keydown.enter->audio-player#ignoreEnter click->audio-player#play"
   data-audio-player-url-value="<%= audio_path %>"
 >
   <%= heroicon('speaker-wave', options: { class: 'h-3 w-3' }) %>
