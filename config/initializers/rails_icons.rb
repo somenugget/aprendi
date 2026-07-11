@@ -1,0 +1,21 @@
+RailsIcons.configure do |config|
+  config.default_library = 'sidekickicons'
+  # config.default_variant = "" # Set a default variant for all libraries
+
+  # Override Sidekickicons defaults
+  # config.libraries.sidekickicons.default_variant = "" # Set a default variant for Sidekickicons
+  # config.libraries.sidekickicons.exclude_variants = [:mini, :micro] # Exclude specific variants
+
+  # config.libraries.sidekickicons.outline.default.css = "size-6"
+  # config.libraries.sidekickicons.outline.default.stroke_width = "1.5"
+  # config.libraries.sidekickicons.outline.default.data = {}
+
+  # config.libraries.sidekickicons.solid.default.css = "size-6"
+  # config.libraries.sidekickicons.solid.default.data = {}
+
+  # config.libraries.sidekickicons.mini.default.css = "size-5"
+  # config.libraries.sidekickicons.mini.default.data = {}
+
+  # config.libraries.sidekickicons.micro.default.css = "size-4"
+  # config.libraries.sidekickicons.micro.default.data = {}
+end

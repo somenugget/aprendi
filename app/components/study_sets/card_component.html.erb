@@ -2,11 +2,12 @@
   <div class="flex justify-between gap-1 items-start">
     <%= link_to study_set.name, study_set_path(study_set), class: 'hover:underline' %>
 
-    <%= form_with model: study_set, method: :put, class: 'leading-none mt-1' do |f| %>
+
+    <%= form_with model: study_set, method: :put, class: 'leading-none mt-1 relative' do |f| %>
       <%= f.hidden_field :pinned, value: !study_set.pinned %>
       <%= f.hidden_field :update_card, name: 'update_card', value: true %>
-      <%= button_tag type: :submit, class: 'cursor-pointer text-yellow-500 inline-block' do %>
-        <%= heroicon('star', variant: (@study_set.pinned? ? :solid : :outline), options: { class: '' }) %>
+      <%= button_tag type: :submit, class: 'cursor-pointer text-yellow-500 inline-block absolute -right-4 -top-5' do %>
+        <%= icon('pin', variant: (@study_set.pinned? ? 'solid' : 'outline'), class: 'h-6 w-6') %>
       <% end %>
     <% end %>
   </div>

@@ -96,3 +96,5 @@ gem 'dockerfile-rails', '~> 1.5', :group => :development
 gem 'sentry-ruby', '~> 5.13'
 
 gem 'sentry-rails', '~> 5.13'
+
+gem 'rails_icons', '~> 1.9'

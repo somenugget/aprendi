@@ -4,7 +4,7 @@
       <%= f.hidden_field :pinned, value: !@study_set.pinned %>
 
       <%= button_tag type: :submit, class: 'cursor-pointer text-yellow-500' do %>
-        <%= heroicon('star', variant: (@study_set.pinned? ? :solid : :outline)) %>
+        <%= icon('pin', variant: (@study_set.pinned? ? 'solid' : 'outline'), class: 'h-6 w-6') %>
       <% end %>
     <% end %>
 
