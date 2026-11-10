@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  prepend_before_action :sign_in_from_reminder, if: -> { params.key?(:token) }
+
   # using .load to avoid making the second query when calling .any? in views
   def index # rubocop:disable Metrics/AbcSize
     @less_studied_study_sets = less_studied_study_sets
@@ -15,6 +17,17 @@ class DashboardController < ApplicationController
   end
 
   private
+
+  def sign_in_from_reminder
+    response.headers['Cache-Control'] = 'no-store'
+    response.headers['Referrer-Policy'] = 'no-referrer'
+
+    user = UserAuthToken.consume_reminder_login(params[:token])
+    return redirect_to new_user_session_path unless user
+
+    sign_in(user)
+    redirect_to dashboard_path
+  end
 
   def any_progress?
     TermProgress.where(user: current_user).any?

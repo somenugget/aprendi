@@ -7,6 +7,8 @@ class ReminderMailer < ApplicationMailer
 
     return if @new_terms_to_learn.empty? && @ripe_terms_to_learn.empty?
 
+    @login_token = UserAuthToken.create_for_user(user, meta: { purpose: 'reminder_login' })
+
     mail(to: user.email, subject: 'Adrendí: Daily reminder')
   end
 end
