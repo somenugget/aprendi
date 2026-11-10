@@ -1,8 +1,9 @@
 class ApplicationComponent < ViewComponent::Base
   include ActionView::RecordIdentifier
   include Rails.application.routes.url_helpers
-  include Heroicons::Engine.helpers
   include ActionView::Helpers::TagHelper
+
+  delegate :heroicon, :icon, to: :helpers
 
   private
 

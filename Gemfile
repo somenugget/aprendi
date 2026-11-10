@@ -19,7 +19,7 @@ gem 'stimulus-rails'
 
 gem 'heroicons'
 gem 'tailwind_merge'
-gem 'view_component', '~> 3.12'
+gem 'view_component', '~> 4.14'
 gem 'vite_rails'
 
 gem 'solid_cache'
